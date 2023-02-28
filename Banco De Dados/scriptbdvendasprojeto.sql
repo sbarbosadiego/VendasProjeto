@@ -16,6 +16,7 @@ cliente_cidade VARCHAR(35),
 cliente_uf VARCHAR(2),
 cliente_cep VARCHAR(9),
 cliente_telefone VARCHAR(15) NOT NULL
+cliente_complemento VARCHAR(60)
 );
 
 CREATE TABLE IF NOT EXISTS tbl_usuario (

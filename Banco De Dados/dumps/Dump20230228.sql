@@ -34,6 +34,7 @@ CREATE TABLE `tbl_cliente` (
   `cliente_uf` varchar(2) DEFAULT NULL,
   `cliente_cep` varchar(9) DEFAULT NULL,
   `cliente_telefone` varchar(15) NOT NULL,
+  `cliente_complemento` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`pk_id_cliente`),
   UNIQUE KEY `pk_id_cliente` (`pk_id_cliente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
@@ -168,4 +169,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-27 10:15:41
+-- Dump completed on 2023-02-28  9:23:52
