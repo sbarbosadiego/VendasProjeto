@@ -10,7 +10,7 @@ import model.ModelProdutos;
 
 /**
  *
- * @author di_an
+ * @author Diego Barbosa
  */
 public class DaoProdutos extends ConexaoMySql {
     
@@ -118,12 +118,7 @@ public class DaoProdutos extends ConexaoMySql {
         ModelProdutos modelProdutos = new ModelProdutos();
         try {
             this.conectar();
-            this.executarSQL("SELECT "
-                    + "pk_id_produto, "
-                    + "produto_nome, "
-                    + "produto_valor, "
-                    + "produto_estoque "
-                    + "FROM tbl_produto;");
+            this.executarSQL("SELECT pk_id_produto, produto_nome, produto_valor, produto_estoque FROM tbl_produto;");
             while (this.getResultSet().next()) {
                 modelProdutos = new ModelProdutos();
                 modelProdutos.setIdProduto(this.getResultSet().getInt(1));

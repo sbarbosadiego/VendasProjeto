@@ -10,7 +10,7 @@ import model.ModelProdutos;
 
 /**
  *
- * @author di_an
+ * @author Diego Barbosa
  */
 public class ControllerProduto {
     

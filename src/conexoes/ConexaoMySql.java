@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author di_an
+ * @author Diego Barbosa
  */
 public class ConexaoMySql {
 
@@ -26,9 +26,9 @@ public class ConexaoMySql {
 
 
     private String servidor = "localhost";
-    private String nomeDoBanco = "dbvendasbl";
+    private String nomeDoBanco = "bdvendasprojeto";
     private String usuario = "root";
-    private String senha = "";
+    private String senha = "privada3";
     
     public ConexaoMySql(){}
     
@@ -46,10 +46,10 @@ public class ConexaoMySql {
     public Connection conectar(){
         try {
             //Driver do PostgreSQL
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 
             //local do banco, nome do banco, usuario e senha
-            String url = "jdbc:mysql://" + servidor + "/" + nomeDoBanco;
+            String url = "jdbc:mysql://localhost:3306/bdvendasprojeto?serverTimezone=UTC";
             this.setCon((Connection) DriverManager.getConnection(url, usuario, senha));
 
             //se ocorrer tudo bem, ou seja, se conectar a linha a segui é executada
@@ -144,122 +144,71 @@ public class ConexaoMySql {
        }
        return false;
     }
-
-    /**
-     * @return the status
-     */
+    
     public boolean isStatus() {
         return this.status;
     }
-
-    /**
-     * @return the mensagem
-     */
+    
     public String getMensagem() {
         return mensagem;
     }
-
-    /**
-     * @return the statement
-     */
+    
     public Statement getStatement() {
         return statement;
     }
-
-    /**
-     * @return the resultSet
-     */
+    
     public ResultSet getResultSet() {
         return resultSet;
     }
-
-    /**
-     * @param mensagem the mensagem to set
-     */
+    
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
     }
-
-    /**
-     * @return the con
-     */
+    
     public Connection getCon() {
         return con;
     }
-
-    /**
-     * @param con the con to set
-     */
+    
     public void setCon(Connection con) {
         this.con = con;
     }
-
-    /**
-     * @param statement the statement to set
-     */
+    
     public void setStatement(Statement statement) {
         this.statement = statement;
     }
-
-    /**
-     * @param resultSet the resultSet to set
-     */
+    
     public void setResultSet(ResultSet resultSet) {
         this.resultSet = resultSet;
     }
-
-    /**
-     * @return the servidor
-     */
+    
     public String getServidor() {
         return servidor;
     }
-
-    /**
-     * @param servidor the servidor to set
-     */
+    
     public void setServidor(String servidor) {
         this.servidor = servidor;
     }
-
-    /**
-     * @return the nomeDoBanco
-     */
+    
     public String getNomeDoBanco() {
         return nomeDoBanco;
     }
-
-    /**
-     * @param nomeDoBanco the nomeDoBanco to set
-     */
+    
     public void setNomeDoBanco(String nomeDoBanco) {
         this.nomeDoBanco = nomeDoBanco;
     }
-
-    /**
-     * @return the usuario
-     */
+    
     public String getUsuario() {
         return usuario;
     }
-
-    /**
-     * @param usuario the usuario to set
-     */
+    
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-
-    /**
-     * @return the senha
-     */
+    
     public String getSenha() {
         return senha;
     }
-
-    /**
-     * @param senha the senha to set
-     */
+    
     public void setSenha(String senha) {
         this.senha = senha;
     }

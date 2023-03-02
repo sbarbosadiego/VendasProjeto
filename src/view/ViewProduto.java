@@ -4,17 +4,26 @@
  */
 package view;
 
+import controller.ControllerProduto;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import model.ModelProdutos;
+
 /**
  *
- * @author di_an
+ * @author Diego Barbosa
  */
 public class ViewProduto extends javax.swing.JFrame {
-
+    
+    ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<ModelProdutos>();
+    ControllerProduto controllerProdutos = new ControllerProduto();
+    
     /**
      * Creates new form ViewProduto
      */
     public ViewProduto() {
         initComponents();
+        listarProdutos();
     }
 
     /**
@@ -36,12 +45,12 @@ public class ViewProduto extends javax.swing.JFrame {
         jtfValor = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtCliente = new javax.swing.JTable();
+        jtableProdutos = new javax.swing.JTable();
         btnNovo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        jtfCodigo4 = new javax.swing.JTextField();
+        jtfPesquisa = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
 
@@ -69,20 +78,17 @@ public class ViewProduto extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel4.setText("Valor:");
 
-        jtCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtCliente.setModel(new javax.swing.table.DefaultTableModel(
+        jtableProdutos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtableProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Código", "Nome", "Estoque", "Valor"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Long.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -96,7 +102,7 @@ public class ViewProduto extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jtCliente);
+        jScrollPane1.setViewportView(jtableProdutos);
 
         btnNovo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNovo.setText("Novo");
@@ -113,7 +119,7 @@ public class ViewProduto extends javax.swing.JFrame {
         btnCancelar.setForeground(new java.awt.Color(255, 0, 0));
         btnCancelar.setText("Cancelar");
 
-        jtfCodigo4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jtfPesquisa.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel5.setText("Pesquisar:");
@@ -166,7 +172,7 @@ public class ViewProduto extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfCodigo4)
+                        .addComponent(jtfPesquisa)
                         .addGap(28, 28, 28)
                         .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -197,7 +203,7 @@ public class ViewProduto extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jtfCodigo4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
@@ -262,6 +268,26 @@ public class ViewProduto extends javax.swing.JFrame {
             }
         });
     }
+    
+    /**
+     * Retorna os produtos na tabela de acordo com o que está no banco de dados
+     */
+    private void listarProdutos() {
+        listaModelProdutos = controllerProdutos.retornaListaProdutosController();
+        DefaultTableModel tabela = (DefaultTableModel) jtableProdutos.getModel();
+        tabela.setNumRows(0);
+        
+        int contador = listaModelProdutos.size();
+        for (int c = 0; c < contador; c++) {
+            tabela.addRow(new Object[]{
+            listaModelProdutos.get(c).getIdProduto(),
+            listaModelProdutos.get(c).getProdutoNome(),
+            listaModelProdutos.get(c).getProdutoEstoque(),
+            listaModelProdutos.get(c).getProdutoValor()
+            });
+            
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -276,11 +302,11 @@ public class ViewProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtCliente;
+    private javax.swing.JTable jtableProdutos;
     private javax.swing.JTextField jtfCodigo;
-    private javax.swing.JTextField jtfCodigo4;
     private javax.swing.JTextField jtfEstoque;
     private javax.swing.JTextField jtfNomeProduto;
+    private javax.swing.JTextField jtfPesquisa;
     private javax.swing.JTextField jtfValor;
     // End of variables declaration//GEN-END:variables
 }
