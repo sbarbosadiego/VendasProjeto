@@ -22,14 +22,15 @@ public class DaoProdutos extends ConexaoMySql {
     public int salvarProdutosDAO(ModelProdutos pModelProdutos) {
         try {
             this.conectar();
-            return this.insertSQL("INSERT INTO tbl_produto "
-                    + "(produto_nome,"
+            return this.insertSQL("INSERT INTO tbl_produto ("
+                    + "produto_nome,"
                     + "produto_valor,"
-                    + "produto_estoque,"
+                    + "produto_estoque"
                     + ") VALUES ("
-                    + "'" + pModelProdutos.getProdutoNome() + "',"
-                    + "'" + pModelProdutos.getProdutoValor() + "',"
-                    + "'" + pModelProdutos.getProdutoEstoque() + "');");
+                    + "'"+pModelProdutos.getProdutoNome()+"',"
+                    + "'"+pModelProdutos.getProdutoValor()+"',"
+                    + "'"+pModelProdutos.getProdutoEstoque()+"'"
+                    + ");");
         } catch (Exception e) {
             e.printStackTrace();
             return 0;

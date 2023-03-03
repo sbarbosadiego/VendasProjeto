@@ -45,14 +45,12 @@ public class ConexaoMySql {
      */
     public Connection conectar(){
         try {
-            //Driver do PostgreSQL
+            //Driver do MySQL
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 
-            //local do banco, nome do banco, usuario e senha
+            //Local do banco, nome do banco, usuario e senha
             String url = "jdbc:mysql://localhost:3306/bdvendasprojeto?serverTimezone=UTC";
             this.setCon((Connection) DriverManager.getConnection(url, usuario, senha));
-
-            //se ocorrer tudo bem, ou seja, se conectar a linha a segui é executada
             this.status = true;
         }
         catch(ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e){
