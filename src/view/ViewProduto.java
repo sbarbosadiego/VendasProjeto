@@ -15,17 +15,18 @@ import model.ModelProdutos;
  * @author Diego Barbosa
  */
 public class ViewProduto extends javax.swing.JFrame {
-    
+
     ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<ModelProdutos>();
     ControllerProduto controllerProdutos = new ControllerProduto();
     ModelProdutos modelProduto = new ModelProdutos();
-    
+
     /**
      * Creates new form ViewProduto
      */
     public ViewProduto() {
         initComponents();
-        listarProdutos();
+        this.listarProdutos();
+        this.habilitarDesabilitarCampos(false);
     }
 
     /**
@@ -132,6 +133,11 @@ public class ViewProduto extends javax.swing.JFrame {
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 0, 0));
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jtfPesquisa.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
@@ -257,45 +263,58 @@ public class ViewProduto extends javax.swing.JFrame {
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPesquisarActionPerformed
-    
-    
+
     /**
      * Cadastrar um produto na base de dados
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
         modelProduto.setProdutoNome(this.jtfNomeProduto.getText());
         modelProduto.setProdutoEstoque(Integer.parseInt(this.jtfEstoque.getText()));
         modelProduto.setProdutoValor(Double.parseDouble(this.jtfValor.getText().replace(",", ".")));
-        if (controllerProdutos.salvarProdutoController(modelProduto) > 0){
-            JOptionPane.showMessageDialog(this,"Cadastrado com sucesso!!");
+        if (controllerProdutos.salvarProdutoController(modelProduto) > 0) {
+            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!!", "ATENÇÃO",
+                    JOptionPane.INFORMATION_MESSAGE);
             this.listarProdutos();
+            this.habilitarDesabilitarCampos(false);
+            this.limparCampos();
         } else {
-            JOptionPane.showMessageDialog(this,"Produto não cadastrado, verifique as informações");
+            JOptionPane.showMessageDialog(this, "Produto não cadastrado, verifique as informações", "ERRO",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
-    
+
     /**
      * Excluir um produto da base de dados
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
         int linha = jtableProdutos.getSelectedRow();
         int codigoProduto = (int) jtableProdutos.getValueAt(linha, 0);
         if (controllerProdutos.excluirProdutoController(codigoProduto)) {
-            JOptionPane.showMessageDialog(this, "Produto excluído");
+            JOptionPane.showMessageDialog(this, "Produto excluído","ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
             this.listarProdutos();
         } else {
-            JOptionPane.showMessageDialog(this, "Erro de exclusão");
+            JOptionPane.showMessageDialog(this, "Erro de exclusão","ERRO", 
+                    JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         // TODO add your handling code here:
-        
+        this.habilitarDesabilitarCampos(true);
     }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.habilitarDesabilitarCampos(false);
+        this.limparCampos();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -331,7 +350,30 @@ public class ViewProduto extends javax.swing.JFrame {
             }
         });
     }
-    
+
+    /**
+     * Limpa os campos de texto
+     *
+     * @param condicacao
+     */
+    private void limparCampos() {
+        this.jtfNomeProduto.setText("");
+        this.jtfEstoque.setText("");
+        this.jtfValor.setText("");
+    }
+
+    /**
+     * Método que habilita (true) e desabilita (false) os campos de inserção de
+     * dados
+     *
+     * @param condicao
+     */
+    private void habilitarDesabilitarCampos(boolean condicao) {
+        this.jtfNomeProduto.setEnabled(condicao);
+        this.jtfEstoque.setEnabled(condicao);
+        this.jtfValor.setEnabled(condicao);
+    }
+
     /**
      * Retorna os produtos na tabela de acordo com o que está no banco de dados
      */
@@ -339,16 +381,16 @@ public class ViewProduto extends javax.swing.JFrame {
         listaModelProdutos = controllerProdutos.retornaListaProdutosController();
         DefaultTableModel tabela = (DefaultTableModel) jtableProdutos.getModel();
         tabela.setNumRows(0);
-        
+
         int contador = listaModelProdutos.size();
         for (int c = 0; c < contador; c++) {
             tabela.addRow(new Object[]{
-            listaModelProdutos.get(c).getIdProduto(),
-            listaModelProdutos.get(c).getProdutoNome(),
-            listaModelProdutos.get(c).getProdutoEstoque(),
-            listaModelProdutos.get(c).getProdutoValor()
+                listaModelProdutos.get(c).getIdProduto(),
+                listaModelProdutos.get(c).getProdutoNome(),
+                listaModelProdutos.get(c).getProdutoEstoque(),
+                listaModelProdutos.get(c).getProdutoValor()
             });
-            
+
         }
     }
 
