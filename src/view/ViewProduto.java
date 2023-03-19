@@ -60,8 +60,9 @@ public class ViewProduto extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de Produto");
+        setLocation(new java.awt.Point(600, 150));
         setPreferredSize(new java.awt.Dimension(800, 580));
-        setResizable(false);
 
         jtfCodigo.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jtfCodigo.setEnabled(false);
