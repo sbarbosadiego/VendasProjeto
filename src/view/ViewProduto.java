@@ -6,12 +6,15 @@ package view;
 
 import controller.ControllerProduto;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import model.ModelProdutos;
 
 /**
- *
  * @author Diego Barbosa
  */
 public class ViewProduto extends javax.swing.JFrame {
@@ -44,9 +47,7 @@ public class ViewProduto extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jtfNomeProduto = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jtfEstoque = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jtfValor = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtableProdutos = new javax.swing.JTable();
@@ -58,8 +59,10 @@ public class ViewProduto extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
+        jtfEstoque = new javax.swing.JFormattedTextField();
+        jtfValor = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Produto");
         setLocation(new java.awt.Point(600, 150));
         setPreferredSize(new java.awt.Dimension(800, 580));
@@ -75,17 +78,13 @@ public class ViewProduto extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel2.setText("Nome:");
 
-        jtfEstoque.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel3.setText("Estoque:");
-
-        jtfValor.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel4.setText("Valor:");
 
-        jtableProdutos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtableProdutos.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jtableProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -95,7 +94,7 @@ public class ViewProduto extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Long.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -110,6 +109,12 @@ public class ViewProduto extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jtableProdutos);
+        if (jtableProdutos.getColumnModel().getColumnCount() > 0) {
+            jtableProdutos.getColumnModel().getColumn(0).setPreferredWidth(30);
+            jtableProdutos.getColumnModel().getColumn(1).setPreferredWidth(200);
+            jtableProdutos.getColumnModel().getColumn(2).setPreferredWidth(60);
+            jtableProdutos.getColumnModel().getColumn(3).setPreferredWidth(60);
+        }
 
         btnNovo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNovo.setText("Novo");
@@ -168,6 +173,12 @@ public class ViewProduto extends javax.swing.JFrame {
             }
         });
 
+        jtfEstoque.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        jtfEstoque.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jtfValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        jtfValor.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -199,7 +210,7 @@ public class ViewProduto extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,15 +238,13 @@ public class ViewProduto extends javax.swing.JFrame {
                         .addGap(2, 2, 2)
                         .addComponent(jtfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(2, 2, 2)
-                        .addComponent(jtfEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(2, 2, 2)
-                        .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jtfEstoque)
+                    .addComponent(jtfValor))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -269,6 +278,15 @@ public class ViewProduto extends javax.swing.JFrame {
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel modelo = (DefaultTableModel) this.jtableProdutos.getModel();
+        final TableRowSorter<TableModel> classifica = new TableRowSorter<>(modelo);
+        this.jtableProdutos.setRowSorter(classifica);
+        String pesquisa = this.jtfPesquisa.getText();
+        if (this.testaString(pesquisa) == true) {
+            classifica.setRowFilter(RowFilter.regexFilter(pesquisa, 0));
+        } else {
+            classifica.setRowFilter(RowFilter.regexFilter(pesquisa.toUpperCase(), 1));
+        }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     /**
@@ -276,13 +294,11 @@ public class ViewProduto extends javax.swing.JFrame {
      * @param evt
      */
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
         if (editarSalvar.equals("salvar")) {
             this.salvarProduto();
         } else if (editarSalvar.equals("editar")) {
             this.editarProduto();
         }
-
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
@@ -387,7 +403,7 @@ public class ViewProduto extends javax.swing.JFrame {
      * Método para salvar um novo produto cadastrado
      */
     private void salvarProduto() {
-        modelProduto.setProdutoNome(this.jtfNomeProduto.getText());
+        modelProduto.setProdutoNome(this.jtfNomeProduto.getText().toUpperCase());
         modelProduto.setProdutoEstoque(Integer.parseInt(this.jtfEstoque.getText()));
         modelProduto.setProdutoValor(Double.parseDouble(this.jtfValor.getText().replace(",", ".")));
         if (controllerProdutos.salvarProdutoController(modelProduto) > 0) {
@@ -406,7 +422,7 @@ public class ViewProduto extends javax.swing.JFrame {
      * Método para salvar um produto que está sendo editado
      */
     private void editarProduto() {
-        modelProduto.setProdutoNome(this.jtfNomeProduto.getText());
+        modelProduto.setProdutoNome(this.jtfNomeProduto.getText().toUpperCase());
         modelProduto.setProdutoEstoque(Integer.parseInt(this.jtfEstoque.getText()));
         modelProduto.setProdutoValor(Double.parseDouble(this.jtfValor.getText().replace(",", ".")));
         if (controllerProdutos.editarProdutoController(modelProduto)) {
@@ -443,7 +459,7 @@ public class ViewProduto extends javax.swing.JFrame {
     }
 
     /**
-     * Retorna os produtos na tabela de acordo com o que está no banco de dados
+     * Retorna os produtos na modelo de acordo com o que está no banco de dados
      */
     private void listarProdutos() {
         listaModelProdutos = controllerProdutos.retornaListaProdutosController();
@@ -460,6 +476,19 @@ public class ViewProduto extends javax.swing.JFrame {
             });
 
         }
+    }
+    
+    /**
+     * Método para verificar se uma String contém valores numéricos
+     * @param texto
+     * @return boolean
+     */
+    private boolean testaString(String texto) {
+        Pattern p = Pattern.compile("[0-9]+");
+        String pesquisa;
+        pesquisa = texto;
+        boolean numerico = (pesquisa != null && p.matcher(pesquisa).find());
+        return numerico;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -478,9 +507,9 @@ public class ViewProduto extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtableProdutos;
     private javax.swing.JTextField jtfCodigo;
-    private javax.swing.JTextField jtfEstoque;
+    private javax.swing.JFormattedTextField jtfEstoque;
     private javax.swing.JTextField jtfNomeProduto;
     private javax.swing.JTextField jtfPesquisa;
-    private javax.swing.JTextField jtfValor;
+    private javax.swing.JFormattedTextField jtfValor;
     // End of variables declaration//GEN-END:variables
 }
