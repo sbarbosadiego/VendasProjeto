@@ -276,7 +276,7 @@ public class ViewCliente extends javax.swing.JFrame {
                     .addComponent(btnEditar)
                     .addComponent(btnNovo)
                     .addComponent(btnSalvar))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

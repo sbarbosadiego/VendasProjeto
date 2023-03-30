@@ -459,7 +459,7 @@ public class ViewProduto extends javax.swing.JFrame {
     }
 
     /**
-     * Retorna os produtos na modelo de acordo com o que está no banco de dados
+     * Retorna os produtos cadastrados no banco de dados
      */
     private void listarProdutos() {
         listaModelProdutos = controllerProdutos.retornaListaProdutosController();
@@ -474,7 +474,6 @@ public class ViewProduto extends javax.swing.JFrame {
                 listaModelProdutos.get(c).getProdutoEstoque(),
                 listaModelProdutos.get(c).getProdutoValor()
             });
-
         }
     }
     
