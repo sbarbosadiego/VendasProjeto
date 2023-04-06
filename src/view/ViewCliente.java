@@ -4,17 +4,31 @@
  */
 package view;
 
+import controller.ControllerCliente;
+import java.util.ArrayList;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.ModelClientes;
+
 /**
  *
  * @author Diego Barbosa
  */
 public class ViewCliente extends javax.swing.JFrame {
 
+    ArrayList<ModelClientes> listaModelClientes = new ArrayList<ModelClientes>();
+    ControllerCliente controllerCliente = new ControllerCliente();
+    ModelClientes modelCliente = new ModelClientes();
+    String editarSalvar;
+    
     /**
      * Creates new form ViewCliente
      */
     public ViewCliente() {
         initComponents();
+        this.listarClientes();
+        this.habilitarDesabilitarCampos(false);
     }
 
     /**
@@ -44,7 +58,7 @@ public class ViewCliente extends javax.swing.JFrame {
         jtfCep = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtCliente = new javax.swing.JTable();
+        jtableCliente = new javax.swing.JTable();
         btnEditar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
@@ -53,6 +67,7 @@ public class ViewCliente extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jtfComplemento = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 600));
@@ -68,7 +83,9 @@ public class ViewCliente extends javax.swing.JFrame {
 
         jtfNome.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
+        jtfCodigo.setBackground(new java.awt.Color(242, 242, 242));
         jtfCodigo.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jtfCodigo.setEnabled(false);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel3.setText("Telefone:");
@@ -101,10 +118,9 @@ public class ViewCliente extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel8.setText("CEP:");
 
-        jtCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtCliente.setModel(new javax.swing.table.DefaultTableModel(
+        jtableCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtableCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"56535", "Thomas Shelby", "Limeira", null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
@@ -121,33 +137,53 @@ public class ViewCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jtCliente);
-        if (jtCliente.getColumnModel().getColumnCount() > 0) {
-            jtCliente.getColumnModel().getColumn(0).setMinWidth(70);
-            jtCliente.getColumnModel().getColumn(0).setPreferredWidth(70);
-            jtCliente.getColumnModel().getColumn(0).setMaxWidth(70);
-            jtCliente.getColumnModel().getColumn(1).setMinWidth(150);
-            jtCliente.getColumnModel().getColumn(1).setPreferredWidth(150);
-            jtCliente.getColumnModel().getColumn(2).setMinWidth(120);
-            jtCliente.getColumnModel().getColumn(2).setPreferredWidth(120);
-            jtCliente.getColumnModel().getColumn(3).setMinWidth(120);
-            jtCliente.getColumnModel().getColumn(3).setPreferredWidth(120);
+        jScrollPane1.setViewportView(jtableCliente);
+        if (jtableCliente.getColumnModel().getColumnCount() > 0) {
+            jtableCliente.getColumnModel().getColumn(0).setMinWidth(70);
+            jtableCliente.getColumnModel().getColumn(0).setPreferredWidth(70);
+            jtableCliente.getColumnModel().getColumn(0).setMaxWidth(70);
+            jtableCliente.getColumnModel().getColumn(1).setMinWidth(150);
+            jtableCliente.getColumnModel().getColumn(1).setPreferredWidth(150);
+            jtableCliente.getColumnModel().getColumn(2).setMinWidth(120);
+            jtableCliente.getColumnModel().getColumn(2).setPreferredWidth(120);
+            jtableCliente.getColumnModel().getColumn(3).setMinWidth(120);
+            jtableCliente.getColumnModel().getColumn(3).setPreferredWidth(120);
         }
 
         btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEditar.setForeground(new java.awt.Color(51, 0, 255));
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 0, 0));
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnNovo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
 
         btnSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnSalvar.setForeground(new java.awt.Color(0, 204, 51));
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         jtfNumero.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
@@ -159,6 +195,15 @@ public class ViewCliente extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel10.setText("Complemento:");
 
+        btnExcluir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnExcluir.setForeground(new java.awt.Color(255, 0, 0));
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -166,6 +211,23 @@ public class ViewCliente extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jtfCep, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jcbUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jtfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jtfComplemento)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -189,32 +251,18 @@ public class ViewCliente extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jtfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
-                            .addComponent(jtfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jtfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnNovo)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEditar)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSalvar)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnCancelar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jtfCep, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jcbUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jtfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jtfComplemento)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -270,13 +318,20 @@ public class ViewCliente extends javax.swing.JFrame {
                         .addComponent(jtfComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelar)
-                    .addComponent(btnEditar)
-                    .addComponent(btnNovo)
-                    .addComponent(btnSalvar))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnNovo)
+                            .addComponent(btnSalvar)
+                            .addComponent(btnEditar))
+                        .addGap(14, 14, 14))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCancelar)
+                            .addComponent(btnExcluir))
+                        .addContainerGap(18, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -287,13 +342,51 @@ public class ViewCliente extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        int linha = jtableCliente.getSelectedRow();
+        int codigoProduto = (int) jtableCliente.getValueAt(linha, 0);
+        if (controllerCliente.excluirClienteController(codigoProduto)) {
+            JOptionPane.showMessageDialog(this, "Cliente excluído", "ATENÇÃO",
+                JOptionPane.WARNING_MESSAGE);
+            this.listarClientes();
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        // TODO add your handling code here:
+        this.habilitarDesabilitarCampos(true);
+        editarSalvar = "salvar";
+    }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // TODO add your handling code here:
+        if (editarSalvar.equals("salvar")) {
+            this.salvarCliente();
+        } else if (editarSalvar.equals("editar")) {
+            this.editarProduto();
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.habilitarDesabilitarCampos(false);
+        this.limparCampos();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -329,10 +422,121 @@ public class ViewCliente extends javax.swing.JFrame {
             }
         });
     }
+    
+    /**
+     * Método para salvar um novo produto cadastrado
+     */
+    private void salvarCliente() {
+        modelCliente.setClienteNome(this.jtfNome.getText().toUpperCase());
+        modelCliente.setClienteTelefone(this.jtfTelefone.getText());
+        modelCliente.setClienteEndereco(this.jtfEndereco.getText().toUpperCase());
+        modelCliente.setClienteBairro(this.jtfBairro.getText().toUpperCase());
+        modelCliente.setClienteCep(this.jtfCep.getText());
+        modelCliente.setClienteNumero(this.jtfNumero.getText());
+        modelCliente.setClienteComplemento(this.jtfComplemento.getText().toUpperCase());
+        if (controllerCliente.salvarClienteController(modelCliente) > 0) {
+            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!!", "ATENÇÃO",
+                    JOptionPane.INFORMATION_MESSAGE);
+            this.listarClientes();
+            this.habilitarDesabilitarCampos(false);
+            this.limparCampos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Cliente não cadastrado, verifique as informações", "ERRO",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Método para salvar um cliente que está sendo editado
+     */
+    private void editarProduto() {
+        modelCliente.setClienteNome(this.jtfNome.getText().toUpperCase());
+        modelCliente.setClienteTelefone(this.jtfTelefone.getText());
+        modelCliente.setClienteEndereco(this.jtfEndereco.getText().toUpperCase());
+        modelCliente.setClienteBairro(this.jtfBairro.getText().toUpperCase());
+        modelCliente.setClienteCep(this.jtfCep.getText());
+        modelCliente.setClienteNumero(this.jtfNumero.getText());
+        modelCliente.setClienteComplemento(this.jtfComplemento.getText().toUpperCase());
+        modelCliente.setClienteUf(this.jcbUF.getItemAt(WIDTH));
+        if (controllerCliente.editarClienteController(modelCliente)) {
+            JOptionPane.showMessageDialog(this, "Editado com sucesso!!", "ATENÇÃO",
+                    JOptionPane.INFORMATION_MESSAGE);
+            this.listarClientes();
+            this.habilitarDesabilitarCampos(false);
+            this.limparCampos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Não foi aplicado a edição, verifique as informações", "ERRO",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Limpa os campos de texto
+     * @param condicacao
+     */
+    private void limparCampos() {
+        this.jtfCodigo.setText("");
+        this.jtfTelefone.setText("");
+        this.jtfEndereco.setText("");
+        this.jtfBairro.setText("");
+        this.jtfCidade.setText("");
+        this.jtfCep.setText("");
+        this.jtfNumero.setText("");
+        this.jtfComplemento.setText("");
+    }
+
+    /**
+     * Método que habilita (true) e desabilita (false) os campos de inserção de dados
+     * @param condicao
+     */
+    private void habilitarDesabilitarCampos(boolean condicao) {
+        this.jtfNome.setEnabled(condicao);
+        this.jtfTelefone.setEnabled(condicao);
+        this.jtfEndereco.setEnabled(condicao);
+        this.jtfBairro.setEnabled(condicao);
+        this.jtfCidade.setEnabled(condicao);
+        this.jtfCep.setEnabled(condicao);
+        this.jcbUF.setEnabled(condicao);
+        this.jtfNumero.setEnabled(condicao);
+        this.jtfComplemento.setEnabled(condicao);
+    }
+
+    /**
+     * Retorna os clientes cadastrados no banco de dados
+     */
+    private void listarClientes() {
+        listaModelClientes = controllerCliente.retornaListaClientesController();
+        DefaultTableModel tabela = (DefaultTableModel) jtableCliente.getModel();
+        tabela.setNumRows(0);
+
+        int contador = listaModelClientes.size();
+        for (int c = 0; c < contador; c++) {
+            tabela.addRow(new Object[]{
+                listaModelClientes.get(c).getIdCliente(),
+                listaModelClientes.get(c).getClienteNome(),
+                listaModelClientes.get(c).getClienteCidade(),
+                listaModelClientes.get(c).getClienteTelefone()
+            });
+        }
+    }
+    
+    /**
+     * Método para verificar se uma String contém valores numéricos
+     * @param texto
+     * @return boolean
+     */
+    private boolean testaString(String texto) {
+        Pattern p = Pattern.compile("[0-9]+");
+        String pesquisa;
+        pesquisa = texto;
+        boolean numerico = (pesquisa != null && p.matcher(pesquisa).find());
+        return numerico;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
@@ -348,7 +552,7 @@ public class ViewCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jcbUF;
-    private javax.swing.JTable jtCliente;
+    private javax.swing.JTable jtableCliente;
     private javax.swing.JTextField jtfBairro;
     private javax.swing.JTextField jtfCep;
     private javax.swing.JTextField jtfCidade;

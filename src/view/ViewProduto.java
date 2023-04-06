@@ -357,11 +357,9 @@ public class ViewProduto extends javax.swing.JFrame {
             this.jtfNomeProduto.setText(modelProduto.getProdutoNome());
             this.jtfEstoque.setText(String.valueOf(modelProduto.getProdutoEstoque()));
             this.jtfValor.setText(String.valueOf(modelProduto.getProdutoValor()));
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nenhum registro selecionado");
         }
-
     }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
