@@ -107,7 +107,7 @@ public class ConexaoMySql {
             this.setStatement(getCon().createStatement());
 
             // Definido o Statement, executamos a query no banco de dados
-            this.getStatement().executeUpdate(pSQL);
+            this.getStatement().executeLargeUpdate(pSQL);
             
             //consulta o ultimo id inserido
             this.setResultSet(this.getStatement().executeQuery("SELECT last_insert_id();"));

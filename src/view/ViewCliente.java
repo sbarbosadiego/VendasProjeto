@@ -70,6 +70,8 @@ public class ViewCliente extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de Cliente");
+        setLocation(new java.awt.Point(600, 150));
         setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
@@ -331,7 +333,7 @@ public class ViewCliente extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnCancelar)
                             .addComponent(btnExcluir))
-                        .addContainerGap(18, Short.MAX_VALUE))))
+                        .addContainerGap(29, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -342,7 +344,7 @@ public class ViewCliente extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
         );
 
         pack();
@@ -457,7 +459,7 @@ public class ViewCliente extends javax.swing.JFrame {
         modelCliente.setClienteCep(this.jtfCep.getText());
         modelCliente.setClienteNumero(this.jtfNumero.getText());
         modelCliente.setClienteComplemento(this.jtfComplemento.getText().toUpperCase());
-        modelCliente.setClienteUf(this.jcbUF.getItemAt(WIDTH));
+        //modelCliente.setClienteUf(this.jcbUF.getItemAt(WIDTH));
         if (controllerCliente.editarClienteController(modelCliente)) {
             JOptionPane.showMessageDialog(this, "Editado com sucesso!!", "ATENÇÃO",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -496,7 +498,7 @@ public class ViewCliente extends javax.swing.JFrame {
         this.jtfBairro.setEnabled(condicao);
         this.jtfCidade.setEnabled(condicao);
         this.jtfCep.setEnabled(condicao);
-        this.jcbUF.setEnabled(condicao);
+        //this.jcbUF.setEnabled(condicao);
         this.jtfNumero.setEnabled(condicao);
         this.jtfComplemento.setEnabled(condicao);
     }
