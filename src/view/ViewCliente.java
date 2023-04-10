@@ -8,7 +8,10 @@ import controller.ControllerCliente;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import model.ModelClientes;
 
 /**
@@ -68,6 +71,9 @@ public class ViewCliente extends javax.swing.JFrame {
         jtfComplemento = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         btnExcluir = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jtfPesquisa = new javax.swing.JTextField();
+        btnPesquisar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Cliente");
@@ -206,6 +212,19 @@ public class ViewCliente extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel11.setText("Pesquisar:");
+
+        jtfPesquisa.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        btnPesquisar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -264,7 +283,13 @@ public class ViewCliente extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfPesquisa)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -319,9 +344,14 @@ public class ViewCliente extends javax.swing.JFrame {
                         .addGap(2, 2, 2)
                         .addComponent(jtfComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jtfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnNovo)
@@ -381,7 +411,25 @@ public class ViewCliente extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        
+        editarSalvar = "editar";
+        int linha = this.jtableCliente.getSelectedRow();
+        this.habilitarDesabilitarCampos(true);
+        try {
+            int codigoCliente = (int) this.jtableCliente.getValueAt(linha, 0);
+            modelCliente = controllerCliente.retornarClienteController(codigoCliente);
+            this.jtfCodigo.setText(String.valueOf(modelCliente.getIdCliente()));
+            this.jtfNome.setText(modelCliente.getClienteNome());
+            this.jtfTelefone.setText(modelCliente.getClienteTelefone());
+            this.jtfEndereco.setText(modelCliente.getClienteEndereco());
+            this.jtfBairro.setText(modelCliente.getClienteBairro());
+            this.jtfCidade.setText(modelCliente.getClienteCidade());
+            this.jtfCep.setText(modelCliente.getClienteCep());
+            this.jtfNumero.setText(modelCliente.getClienteNumero());
+            this.jtfComplemento.setText(modelCliente.getClienteComplemento());
+            this.jcbUF.setSelectedItem(modelCliente.getClienteUf());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Nenhum registro selecionado");
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -389,6 +437,19 @@ public class ViewCliente extends javax.swing.JFrame {
         this.habilitarDesabilitarCampos(false);
         this.limparCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel modelo = (DefaultTableModel) this.jtableCliente.getModel();
+        final TableRowSorter<TableModel> classifica = new TableRowSorter<>(modelo);
+        this.jtableCliente.setRowSorter(classifica);
+        String pesquisa = this.jtfPesquisa.getText();
+        if (this.testaString(pesquisa) == true) {
+            classifica.setRowFilter(RowFilter.regexFilter(pesquisa, 0));
+        } else {
+            classifica.setRowFilter(RowFilter.regexFilter(pesquisa.toUpperCase(), 1));
+        }
+    }//GEN-LAST:event_btnPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -433,9 +494,11 @@ public class ViewCliente extends javax.swing.JFrame {
         modelCliente.setClienteTelefone(this.jtfTelefone.getText());
         modelCliente.setClienteEndereco(this.jtfEndereco.getText().toUpperCase());
         modelCliente.setClienteBairro(this.jtfBairro.getText().toUpperCase());
+        modelCliente.setClienteCidade(this.jtfCidade.getText().toUpperCase());
         modelCliente.setClienteCep(this.jtfCep.getText());
         modelCliente.setClienteNumero(this.jtfNumero.getText());
         modelCliente.setClienteComplemento(this.jtfComplemento.getText().toUpperCase());
+        modelCliente.setClienteUf(this.jcbUF.getSelectedItem().toString());
         if (controllerCliente.salvarClienteController(modelCliente) > 0) {
             JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!!", "ATENÇÃO",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -459,7 +522,7 @@ public class ViewCliente extends javax.swing.JFrame {
         modelCliente.setClienteCep(this.jtfCep.getText());
         modelCliente.setClienteNumero(this.jtfNumero.getText());
         modelCliente.setClienteComplemento(this.jtfComplemento.getText().toUpperCase());
-        //modelCliente.setClienteUf(this.jcbUF.getItemAt(WIDTH));
+        modelCliente.setClienteUf(this.jcbUF.getSelectedItem().toString());
         if (controllerCliente.editarClienteController(modelCliente)) {
             JOptionPane.showMessageDialog(this, "Editado com sucesso!!", "ATENÇÃO",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -478,6 +541,7 @@ public class ViewCliente extends javax.swing.JFrame {
      */
     private void limparCampos() {
         this.jtfCodigo.setText("");
+        this.jtfNome.setText("");
         this.jtfTelefone.setText("");
         this.jtfEndereco.setText("");
         this.jtfBairro.setText("");
@@ -498,7 +562,7 @@ public class ViewCliente extends javax.swing.JFrame {
         this.jtfBairro.setEnabled(condicao);
         this.jtfCidade.setEnabled(condicao);
         this.jtfCep.setEnabled(condicao);
-        //this.jcbUF.setEnabled(condicao);
+        this.jcbUF.setEnabled(condicao);
         this.jtfNumero.setEnabled(condicao);
         this.jtfComplemento.setEnabled(condicao);
     }
@@ -540,9 +604,11 @@ public class ViewCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -563,6 +629,7 @@ public class ViewCliente extends javax.swing.JFrame {
     private javax.swing.JTextField jtfEndereco;
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfNumero;
+    private javax.swing.JTextField jtfPesquisa;
     private javax.swing.JTextField jtfTelefone;
     // End of variables declaration//GEN-END:variables
 }
