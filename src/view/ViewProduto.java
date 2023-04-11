@@ -274,6 +274,7 @@ public class ViewProduto extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
@@ -291,6 +292,7 @@ public class ViewProduto extends javax.swing.JFrame {
 
     /**
      * Cadastrar um produto na base de dados
+     *
      * @param evt
      */
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -303,25 +305,31 @@ public class ViewProduto extends javax.swing.JFrame {
 
     /**
      * Excluir um produto da base de dados
+     *
      * @param evt
      */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
         int linha = jtableProdutos.getSelectedRow();
         int codigoProduto = (int) jtableProdutos.getValueAt(linha, 0);
-        if (controllerProdutos.excluirProdutoController(codigoProduto)) {
-            JOptionPane.showMessageDialog(this, "Produto excluído", "ATENÇÃO",
-                    JOptionPane.WARNING_MESSAGE);
-            this.listarProdutos();
-        } else {
-            JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
-                    JOptionPane.ERROR_MESSAGE);
+        if (JOptionPane.showConfirmDialog(this, "Excluir Produto?", "Excluir",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (controllerProdutos.excluirProdutoController(codigoProduto)) {
+                JOptionPane.showMessageDialog(this, "Produto excluído", "ATENÇÃO",
+                        JOptionPane.WARNING_MESSAGE);
+                this.listarProdutos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
+
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * Método para o cadastro de um novo produto
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         // TODO add your handling code here:
@@ -331,7 +339,8 @@ public class ViewProduto extends javax.swing.JFrame {
 
     /**
      * Método para cancelar o cadastro/edição de um produto
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
@@ -437,6 +446,7 @@ public class ViewProduto extends javax.swing.JFrame {
 
     /**
      * Limpa os campos de texto
+     *
      * @param condicacao
      */
     private void limparCampos() {
@@ -447,7 +457,9 @@ public class ViewProduto extends javax.swing.JFrame {
     }
 
     /**
-     * Método que habilita (true) e desabilita (false) os campos de inserção de dados
+     * Método que habilita (true) e desabilita (false) os campos de inserção de
+     * dados
+     *
      * @param condicao
      */
     private void habilitarDesabilitarCampos(boolean condicao) {
@@ -474,9 +486,10 @@ public class ViewProduto extends javax.swing.JFrame {
             });
         }
     }
-    
+
     /**
      * Método para verificar se uma String contém valores numéricos
+     *
      * @param texto
      * @return boolean
      */
