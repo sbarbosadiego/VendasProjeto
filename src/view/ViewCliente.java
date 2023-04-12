@@ -37,6 +37,8 @@ public class ViewCliente extends javax.swing.JFrame {
         initComponents();
         this.listarClientes();
         this.habilitarDesabilitarCampos(false);
+        this.formatarCep();
+        this.formatarTelefone();
     }
 
     /**
@@ -54,7 +56,6 @@ public class ViewCliente extends javax.swing.JFrame {
         jtfNome = new javax.swing.JTextField();
         jtfCodigo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jtfTelefone = new javax.swing.JTextField();
         jtfEndereco = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jtfBairro = new javax.swing.JTextField();
@@ -63,7 +64,6 @@ public class ViewCliente extends javax.swing.JFrame {
         jtfCidade = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jtfCep = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtableCliente = new javax.swing.JTable();
@@ -79,6 +79,8 @@ public class ViewCliente extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jtfPesquisa = new javax.swing.JTextField();
         btnPesquisar = new javax.swing.JButton();
+        jtfCep = new javax.swing.JFormattedTextField();
+        jtfTelefone = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Cliente");
@@ -103,8 +105,6 @@ public class ViewCliente extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel3.setText("Telefone:");
 
-        jtfTelefone.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
         jtfEndereco.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -125,8 +125,6 @@ public class ViewCliente extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel7.setText("Cidade:");
-
-        jtfCep.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel8.setText("CEP:");
@@ -230,6 +228,10 @@ public class ViewCliente extends javax.swing.JFrame {
             }
         });
 
+        jtfCep.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        jtfTelefone.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -275,9 +277,9 @@ public class ViewCliente extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3)
-                            .addComponent(jtfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
-                            .addComponent(jtfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfCidade, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                            .addComponent(jtfTelefone))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -294,8 +296,9 @@ public class ViewCliente extends javax.swing.JFrame {
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtfPesquisa)
-                        .addGap(28, 28, 28)
-                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -316,7 +319,7 @@ public class ViewCliente extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(2, 2, 2)
-                                .addComponent(jtfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jtfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -334,21 +337,21 @@ public class ViewCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(2, 2, 2)
-                        .addComponent(jtfCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(2, 2, 2)
-                        .addComponent(jcbUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(2, 2, 2)
                         .addComponent(jtfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(2, 2, 2)
-                        .addComponent(jtfComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jtfComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jcbUF)
+                            .addComponent(jtfCep))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -524,6 +527,7 @@ public class ViewCliente extends javax.swing.JFrame {
         modelCliente.setClienteTelefone(this.jtfTelefone.getText());
         modelCliente.setClienteEndereco(this.jtfEndereco.getText().toUpperCase());
         modelCliente.setClienteBairro(this.jtfBairro.getText().toUpperCase());
+        modelCliente.setClienteCidade(this.jtfCidade.getText().toUpperCase());
         modelCliente.setClienteCep(this.jtfCep.getText());
         modelCliente.setClienteNumero(this.jtfNumero.getText());
         modelCliente.setClienteComplemento(this.jtfComplemento.getText().toUpperCase());
@@ -604,6 +608,32 @@ public class ViewCliente extends javax.swing.JFrame {
         return numerico;
     }
     
+    /**
+     * Formatador de campo CEP
+     */
+    private void formatarCep() {
+        try {
+            MaskFormatter mask = new MaskFormatter("#####-###");
+            mask.install(jtfCep);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Não foi possível formatar campo", "ERRO",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    /**
+     * Formatador de campo Telefone
+     */
+    private void formatarTelefone() {
+        try {
+            MaskFormatter mask = new MaskFormatter("(##) #####-####");
+            mask.install(jtfTelefone);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Não foi possível formatar campo", "ERRO",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -628,7 +658,7 @@ public class ViewCliente extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcbUF;
     private javax.swing.JTable jtableCliente;
     private javax.swing.JTextField jtfBairro;
-    private javax.swing.JTextField jtfCep;
+    private javax.swing.JFormattedTextField jtfCep;
     private javax.swing.JTextField jtfCidade;
     private javax.swing.JTextField jtfCodigo;
     private javax.swing.JTextField jtfComplemento;
@@ -636,6 +666,6 @@ public class ViewCliente extends javax.swing.JFrame {
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfNumero;
     private javax.swing.JTextField jtfPesquisa;
-    private javax.swing.JTextField jtfTelefone;
+    private javax.swing.JFormattedTextField jtfTelefone;
     // End of variables declaration//GEN-END:variables
 }

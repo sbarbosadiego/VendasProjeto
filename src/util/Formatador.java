@@ -28,6 +28,4 @@ public class Formatador {
         return Double.parseDouble(retorno);
     }
     
-    
-    
 }
