@@ -136,5 +136,4 @@ public class DaoProdutos extends ConexaoMySql {
         return listaModelProdutos;
     }
     
-    
 }

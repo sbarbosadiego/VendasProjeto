@@ -7,7 +7,6 @@ package model;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author Diego Barbosa
  */
 public class ModelProdutos {
@@ -16,8 +15,6 @@ public class ModelProdutos {
     private String produtoNome;
     private Double produtoValor;
     private int produtoEstoque;
-    
-    
     
     // Getters e Setters
     public int getIdProduto() {
