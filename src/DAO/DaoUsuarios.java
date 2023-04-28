@@ -91,7 +91,7 @@ public class DaoUsuarios extends ConexaoMySql {
             this.executarSQL("SELECT "
                     + "pk_id_usuario, "
                     + "usuario_nome, "
-                    + "usuario_login, "
+                    + "usuario_login "
                     + "FROM tbl_usuario WHERE pk_id_usuario = '" + pIdUsuario + "'");
             while (this.getResultSet().next()) {
                 modelUsuarios.setIdUsuario(this.getResultSet().getInt(1));

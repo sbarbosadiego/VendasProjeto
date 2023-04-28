@@ -18,6 +18,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
 import model.ModelClientes;
+import util.CampoDePesquisa;
 
 /**
  *
@@ -454,7 +455,7 @@ public class ViewCliente extends javax.swing.JFrame {
         final TableRowSorter<TableModel> classifica = new TableRowSorter<>(modelo);
         this.jtableCliente.setRowSorter(classifica);
         String pesquisa = this.jtfPesquisa.getText();
-        if (this.testaString(pesquisa) == true) {
+        if (CampoDePesquisa.testaString(pesquisa) == true) {
             classifica.setRowFilter(RowFilter.regexFilter(pesquisa, 0));
         } else {
             classifica.setRowFilter(RowFilter.regexFilter(pesquisa.toUpperCase(), 1));
@@ -595,19 +596,6 @@ public class ViewCliente extends javax.swing.JFrame {
                 listaModelClientes.get(c).getClienteTelefone()
             });
         }
-    }
-    
-    /**
-     * Método para verificar se uma String contém valores numéricos
-     * @param texto
-     * @return boolean
-     */
-    private boolean testaString(String texto) {
-        Pattern p = Pattern.compile("[0-9]+");
-        String pesquisa;
-        pesquisa = texto;
-        boolean numerico = (pesquisa != null && p.matcher(pesquisa).find());
-        return numerico;
     }
     
     /**

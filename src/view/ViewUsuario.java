@@ -4,32 +4,32 @@
  */
 package view;
 
-import controller.ControllerProduto;
+import controller.ControllerUsuarios;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import model.ModelProdutos;
+import model.ModelUsuarios;
 import util.CampoDePesquisa;
 
 /**
  * @author Diego Barbosa
  */
-public class ViewProduto extends javax.swing.JFrame {
+public class ViewUsuario extends javax.swing.JFrame {
 
-    ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<ModelProdutos>();
-    ControllerProduto controllerProdutos = new ControllerProduto();
-    ModelProdutos modelProduto = new ModelProdutos();
+    ArrayList<ModelUsuarios> listaModelUsuarios = new ArrayList<ModelUsuarios>();
+    ControllerUsuarios controllerUsuarios = new ControllerUsuarios();
+    ModelUsuarios modelUsuario = new ModelUsuarios();
     String editarSalvar;
 
     /**
-     * Creates new form ViewProduto
+     * Creates new form ViewUsuario
      */
-    public ViewProduto() {
+    public ViewUsuario() {
         initComponents();
-        this.listarProdutos();
+        this.listarUsuarios();
         this.habilitarDesabilitarCampos(false);
     }
 
@@ -45,12 +45,12 @@ public class ViewProduto extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jtfCodigo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jtfNomeProduto = new javax.swing.JTextField();
+        jtfNomeUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtableProdutos = new javax.swing.JTable();
+        jtableUsuarios = new javax.swing.JTable();
         btnNovo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
@@ -59,13 +59,12 @@ public class ViewProduto extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
-        jtfEstoque = new javax.swing.JFormattedTextField();
-        jtfValor = new javax.swing.JFormattedTextField();
+        jtfLogin = new javax.swing.JTextField();
+        jtfSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Produto");
+        setTitle("Cadastro de Usuários");
         setLocation(new java.awt.Point(600, 150));
-        setPreferredSize(new java.awt.Dimension(800, 580));
 
         jtfCodigo.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jtfCodigo.setEnabled(false);
@@ -73,31 +72,31 @@ public class ViewProduto extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel1.setText("Código:");
 
-        jtfNomeProduto.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jtfNomeUsuario.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel2.setText("Nome:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel3.setText("Estoque:");
+        jLabel3.setText("Login:");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel4.setText("Valor:");
+        jLabel4.setText("Senha:");
 
-        jtableProdutos.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jtableProdutos.setModel(new javax.swing.table.DefaultTableModel(
+        jtableUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jtableUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Código", "Nome", "Estoque", "Valor"
+                "Código", "Nome", "Login"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -108,12 +107,11 @@ public class ViewProduto extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jtableProdutos);
-        if (jtableProdutos.getColumnModel().getColumnCount() > 0) {
-            jtableProdutos.getColumnModel().getColumn(0).setPreferredWidth(30);
-            jtableProdutos.getColumnModel().getColumn(1).setPreferredWidth(200);
-            jtableProdutos.getColumnModel().getColumn(2).setPreferredWidth(60);
-            jtableProdutos.getColumnModel().getColumn(3).setPreferredWidth(60);
+        jScrollPane1.setViewportView(jtableUsuarios);
+        if (jtableUsuarios.getColumnModel().getColumnCount() > 0) {
+            jtableUsuarios.getColumnModel().getColumn(0).setPreferredWidth(30);
+            jtableUsuarios.getColumnModel().getColumn(1).setPreferredWidth(200);
+            jtableUsuarios.getColumnModel().getColumn(2).setPreferredWidth(60);
         }
 
         btnNovo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -173,11 +171,9 @@ public class ViewProduto extends javax.swing.JFrame {
             }
         });
 
-        jtfEstoque.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
-        jtfEstoque.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jtfLogin.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        jtfValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
-        jtfValor.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jtfSenha.setText("jPasswordField1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -195,7 +191,7 @@ public class ViewProduto extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jtfNomeProduto)))
+                            .addComponent(jtfNomeUsuario)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
@@ -205,15 +201,6 @@ public class ViewProduto extends javax.swing.JFrame {
                         .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jtfEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -222,7 +209,15 @@ public class ViewProduto extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jtfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jtfSenha))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -233,26 +228,28 @@ public class ViewProduto extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(2, 2, 2)
-                        .addComponent(jtfNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jtfNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(2, 2, 2)
                         .addComponent(jtfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(2, 2, 2)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jtfEstoque)
-                    .addComponent(jtfValor))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(2, 2, 2)
+                        .addComponent(jtfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(2, 2, 2)
+                        .addComponent(jtfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jtfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
@@ -280,9 +277,9 @@ public class ViewProduto extends javax.swing.JFrame {
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel modelo = (DefaultTableModel) this.jtableProdutos.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) this.jtableUsuarios.getModel();
         final TableRowSorter<TableModel> classifica = new TableRowSorter<>(modelo);
-        this.jtableProdutos.setRowSorter(classifica);
+        this.jtableUsuarios.setRowSorter(classifica);
         String pesquisa = this.jtfPesquisa.getText();
         if (CampoDePesquisa.testaString(pesquisa) == true) {
             classifica.setRowFilter(RowFilter.regexFilter(pesquisa, 0));
@@ -292,33 +289,33 @@ public class ViewProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     /**
-     * Cadastrar um produto na base de dados
+     * Cadastrar um Usuario na base de dados
      *
      * @param evt
      */
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if (editarSalvar.equals("salvar")) {
-            this.salvarProduto();
+            this.salvarUsuario();
         } else if (editarSalvar.equals("editar")) {
-            this.editarProduto();
+            this.editarUsuario();
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
-     * Excluir um produto da base de dados
+     * Excluir um Usuario da base de dados
      *
      * @param evt
      */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-        int linha = jtableProdutos.getSelectedRow();
-        int codigoProduto = (int) jtableProdutos.getValueAt(linha, 0);
-        if (JOptionPane.showConfirmDialog(this, "Excluir Produto?", "Excluir",
+        int linha = jtableUsuarios.getSelectedRow();
+        int codigoUsuario = (int) jtableUsuarios.getValueAt(linha, 0);
+        if (JOptionPane.showConfirmDialog(this, "Excluir Usuario?", "Excluir",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            if (controllerProdutos.excluirProdutoController(codigoProduto)) {
-                JOptionPane.showMessageDialog(this, "Produto excluído", "ATENÇÃO",
+            if (controllerUsuarios.excluirUsuarioController(codigoUsuario)) {
+                JOptionPane.showMessageDialog(this, "Usuario excluído", "ATENÇÃO",
                         JOptionPane.WARNING_MESSAGE);
-                this.listarProdutos();
+                this.listarUsuarios();
             } else {
                 JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
                         JOptionPane.ERROR_MESSAGE);
@@ -328,7 +325,7 @@ public class ViewProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
-     * Método para o cadastro de um novo produto
+     * Método para o cadastro de um novo Usuario
      *
      * @param evt
      */
@@ -339,7 +336,7 @@ public class ViewProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     /**
-     * Método para cancelar o cadastro/edição de um produto
+     * Método para cancelar o cadastro/edição de um Usuario
      *
      * @param evt
      */
@@ -356,17 +353,17 @@ public class ViewProduto extends javax.swing.JFrame {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
         editarSalvar = "editar";
-        int linha = this.jtableProdutos.getSelectedRow();
+        int linha = this.jtableUsuarios.getSelectedRow();
         this.habilitarDesabilitarCampos(true);
         try {
-            int codigoProduto = (int) this.jtableProdutos.getValueAt(linha, 0);
-            // Recupera as informações do produto no banco de dados
-            modelProduto = controllerProdutos.retornarProdutoController(codigoProduto);
+            int codigoUsuario = (int) this.jtableUsuarios.getValueAt(linha, 0);
+            // Recupera as informações do Usuario no banco de dados
+            modelUsuario = controllerUsuarios.retornarUsuarioController(codigoUsuario);
             // Seta os dados recuperados no banco nos campos
-            this.jtfCodigo.setText(String.valueOf(modelProduto.getIdProduto()));
-            this.jtfNomeProduto.setText(modelProduto.getProdutoNome());
-            this.jtfEstoque.setText(String.valueOf(modelProduto.getProdutoEstoque()));
-            this.jtfValor.setText(String.valueOf(modelProduto.getProdutoValor()));
+            this.jtfCodigo.setText(String.valueOf(modelUsuario.getIdUsuario()));
+            this.jtfNomeUsuario.setText(modelUsuario.getUsuarioNome());
+            this.jtfLogin.setText(String.valueOf(modelUsuario.getUsuarioLogin()));
+            this.jtfSenha.setText(String.valueOf(modelUsuario.getUsuarioSenha()));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nenhum registro selecionado");
         }
@@ -389,54 +386,55 @@ public class ViewProduto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewProduto().setVisible(true);
+                new ViewUsuario().setVisible(true);
             }
         });
     }
 
     /**
-     * Método para salvar um novo produto cadastrado
+     * Método para salvar um novo Usuario cadastrado
      */
-    private void salvarProduto() {
-        modelProduto.setProdutoNome(this.jtfNomeProduto.getText().toUpperCase());
-        modelProduto.setProdutoEstoque(Integer.parseInt(this.jtfEstoque.getText()));
-        modelProduto.setProdutoValor(Double.parseDouble(this.jtfValor.getText().replace(",", ".")));
-        if (controllerProdutos.salvarProdutoController(modelProduto) > 0) {
+    private void salvarUsuario() {
+        modelUsuario.setUsuarioNome(this.jtfNomeUsuario.getText().toUpperCase());
+        modelUsuario.setUsuarioLogin(this.jtfLogin.getText());
+        modelUsuario.setUsuarioSenha(this.jtfSenha.getText());
+        if (controllerUsuarios.salvarUsuarioController(modelUsuario) > 0) {
             JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!!", "ATENÇÃO",
                     JOptionPane.INFORMATION_MESSAGE);
-            this.listarProdutos();
+            this.listarUsuarios();
             this.habilitarDesabilitarCampos(false);
             this.limparCampos();
         } else {
-            JOptionPane.showMessageDialog(this, "Produto não cadastrado, verifique as informações", "ERRO",
+            JOptionPane.showMessageDialog(this, "Usuario não cadastrado, verifique as informações", "ERRO",
                     JOptionPane.ERROR_MESSAGE);
         }
     }
 
     /**
-     * Método para salvar um produto que está sendo editado
+     * Método para salvar um Usuario que está sendo editado
      */
-    private void editarProduto() {
-        modelProduto.setProdutoNome(this.jtfNomeProduto.getText().toUpperCase());
-        modelProduto.setProdutoEstoque(Integer.parseInt(this.jtfEstoque.getText()));
-        modelProduto.setProdutoValor(Double.parseDouble(this.jtfValor.getText().replace(",", ".")));
-        if (controllerProdutos.editarProdutoController(modelProduto)) {
+    private void editarUsuario() {
+        modelUsuario.setUsuarioNome(this.jtfNomeUsuario.getText().toUpperCase());
+        modelUsuario.setUsuarioLogin(this.jtfLogin.getText());
+        modelUsuario.setUsuarioSenha(this.jtfSenha.getText());
+        if (controllerUsuarios.editarUsuarioController(modelUsuario)) {
             JOptionPane.showMessageDialog(this, "Editado com sucesso!!", "ATENÇÃO",
                     JOptionPane.INFORMATION_MESSAGE);
-            this.listarProdutos();
+            this.listarUsuarios();
             this.habilitarDesabilitarCampos(false);
             this.limparCampos();
         } else {
@@ -452,9 +450,9 @@ public class ViewProduto extends javax.swing.JFrame {
      */
     private void limparCampos() {
         this.jtfCodigo.setText("");
-        this.jtfNomeProduto.setText("");
-        this.jtfEstoque.setText("");
-        this.jtfValor.setText("");
+        this.jtfNomeUsuario.setText("");
+        this.jtfLogin.setText("");
+        this.jtfSenha.setText("");
     }
 
     /**
@@ -464,26 +462,25 @@ public class ViewProduto extends javax.swing.JFrame {
      * @param condicao
      */
     private void habilitarDesabilitarCampos(boolean condicao) {
-        this.jtfNomeProduto.setEnabled(condicao);
-        this.jtfEstoque.setEnabled(condicao);
-        this.jtfValor.setEnabled(condicao);
+        this.jtfNomeUsuario.setEnabled(condicao);
+        this.jtfLogin.setEnabled(condicao);
+        this.jtfSenha.setEnabled(condicao);
     }
 
     /**
-     * Retorna os produtos cadastrados no banco de dados
+     * Retorna os Usuarios cadastrados no banco de dados
      */
-    private void listarProdutos() {
-        listaModelProdutos = controllerProdutos.retornaListaProdutosController();
-        DefaultTableModel tabela = (DefaultTableModel) jtableProdutos.getModel();
+    private void listarUsuarios() {
+        listaModelUsuarios = controllerUsuarios.retornaListaUsuariosController();
+        DefaultTableModel tabela = (DefaultTableModel) jtableUsuarios.getModel();
         tabela.setNumRows(0);
 
-        int contador = listaModelProdutos.size();
+        int contador = listaModelUsuarios.size();
         for (int c = 0; c < contador; c++) {
             tabela.addRow(new Object[]{
-                listaModelProdutos.get(c).getIdProduto(),
-                listaModelProdutos.get(c).getProdutoNome(),
-                listaModelProdutos.get(c).getProdutoEstoque(),
-                listaModelProdutos.get(c).getProdutoValor()
+                listaModelUsuarios.get(c).getIdUsuario(),
+                listaModelUsuarios.get(c).getUsuarioNome(),
+                listaModelUsuarios.get(c).getUsuarioLogin(),
             });
         }
     }
@@ -503,11 +500,11 @@ public class ViewProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtableProdutos;
+    private javax.swing.JTable jtableUsuarios;
     private javax.swing.JTextField jtfCodigo;
-    private javax.swing.JFormattedTextField jtfEstoque;
-    private javax.swing.JTextField jtfNomeProduto;
+    private javax.swing.JTextField jtfLogin;
+    private javax.swing.JTextField jtfNomeUsuario;
     private javax.swing.JTextField jtfPesquisa;
-    private javax.swing.JFormattedTextField jtfValor;
+    private javax.swing.JPasswordField jtfSenha;
     // End of variables declaration//GEN-END:variables
 }
