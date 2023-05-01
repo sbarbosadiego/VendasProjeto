@@ -248,8 +248,8 @@ public class ViewUsuario extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jtfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
@@ -276,7 +276,6 @@ public class ViewUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        // TODO add your handling code here:
         DefaultTableModel modelo = (DefaultTableModel) this.jtableUsuarios.getModel();
         final TableRowSorter<TableModel> classifica = new TableRowSorter<>(modelo);
         this.jtableUsuarios.setRowSorter(classifica);
@@ -288,11 +287,6 @@ public class ViewUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
-    /**
-     * Cadastrar um Usuario na base de dados
-     *
-     * @param evt
-     */
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if (editarSalvar.equals("salvar")) {
             this.salvarUsuario();
@@ -301,13 +295,7 @@ public class ViewUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    /**
-     * Excluir um Usuario da base de dados
-     *
-     * @param evt
-     */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
         int linha = jtableUsuarios.getSelectedRow();
         int codigoUsuario = (int) jtableUsuarios.getValueAt(linha, 0);
         if (JOptionPane.showConfirmDialog(this, "Excluir Usuario?", "Excluir",
@@ -324,34 +312,17 @@ public class ViewUsuario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    /**
-     * Método para o cadastro de um novo Usuario
-     *
-     * @param evt
-     */
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        // TODO add your handling code here:
         this.habilitarDesabilitarCampos(true);
         editarSalvar = "salvar";
     }//GEN-LAST:event_btnNovoActionPerformed
 
-    /**
-     * Método para cancelar o cadastro/edição de um Usuario
-     *
-     * @param evt
-     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
         this.habilitarDesabilitarCampos(false);
         this.limparCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    /**
-     *
-     * @param evt
-     */
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
         editarSalvar = "editar";
         int linha = this.jtableUsuarios.getSelectedRow();
         this.habilitarDesabilitarCampos(true);
@@ -406,7 +377,7 @@ public class ViewUsuario extends javax.swing.JFrame {
     }
 
     /**
-     * Método para salvar um novo Usuario cadastrado
+     * Método para salvar o cadastro de um usuário no banco de dados.
      */
     private void salvarUsuario() {
         modelUsuario.setUsuarioNome(this.jtfNomeUsuario.getText().toUpperCase());
@@ -425,7 +396,7 @@ public class ViewUsuario extends javax.swing.JFrame {
     }
 
     /**
-     * Método para salvar um Usuario que está sendo editado
+     * Método para salvar a edição de um registro no banco de dados.
      */
     private void editarUsuario() {
         modelUsuario.setUsuarioNome(this.jtfNomeUsuario.getText().toUpperCase());
@@ -442,11 +413,9 @@ public class ViewUsuario extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
     /**
-     * Limpa os campos de texto
-     *
-     * @param condicacao
+     * Método para limpar os campos de texto.
      */
     private void limparCampos() {
         this.jtfCodigo.setText("");
@@ -454,12 +423,10 @@ public class ViewUsuario extends javax.swing.JFrame {
         this.jtfLogin.setText("");
         this.jtfSenha.setText("");
     }
-
+    
     /**
-     * Método que habilita (true) e desabilita (false) os campos de inserção de
-     * dados
-     *
-     * @param condicao
+     * Método que habilita e desabilita campos de texto.
+     * @param condicao 
      */
     private void habilitarDesabilitarCampos(boolean condicao) {
         this.jtfNomeUsuario.setEnabled(condicao);
@@ -468,7 +435,7 @@ public class ViewUsuario extends javax.swing.JFrame {
     }
 
     /**
-     * Retorna os Usuarios cadastrados no banco de dados
+     * Retorna os Usuarios cadastrados no banco de dados.
      */
     private void listarUsuarios() {
         listaModelUsuarios = controllerUsuarios.retornaListaUsuariosController();

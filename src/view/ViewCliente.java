@@ -7,10 +7,6 @@ package view;
 import controller.ControllerCliente;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Pattern;
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -86,7 +82,7 @@ public class ViewCliente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Cliente");
         setLocation(new java.awt.Point(600, 150));
-        setPreferredSize(new java.awt.Dimension(790, 550));
+        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 540));
@@ -367,7 +363,7 @@ public class ViewCliente extends javax.swing.JFrame {
                     .addComponent(btnEditar)
                     .addComponent(btnSalvar)
                     .addComponent(btnNovo))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -378,9 +374,7 @@ public class ViewCliente extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
         );
 
         pack();
@@ -388,7 +382,6 @@ public class ViewCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
         int linha = jtableCliente.getSelectedRow();
         int codigoProduto = (int) jtableCliente.getValueAt(linha, 0);
         if (JOptionPane.showConfirmDialog(this, "Excluir Cliente?", "Excluir",
@@ -406,13 +399,11 @@ public class ViewCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        // TODO add your handling code here:
         this.habilitarDesabilitarCampos(true);
         editarSalvar = "salvar";
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
         if (editarSalvar.equals("salvar")) {
             this.salvarCliente();
         } else if (editarSalvar.equals("editar")) {
@@ -421,7 +412,6 @@ public class ViewCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
         editarSalvar = "editar";
         int linha = this.jtableCliente.getSelectedRow();
         this.habilitarDesabilitarCampos(true);
@@ -444,13 +434,11 @@ public class ViewCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
         this.habilitarDesabilitarCampos(false);
         this.limparCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        // TODO add your handling code here:
         DefaultTableModel modelo = (DefaultTableModel) this.jtableCliente.getModel();
         final TableRowSorter<TableModel> classifica = new TableRowSorter<>(modelo);
         this.jtableCliente.setRowSorter(classifica);
@@ -498,7 +486,7 @@ public class ViewCliente extends javax.swing.JFrame {
     }
     
     /**
-     * Método para salvar um novo produto cadastrado
+     * Método para salvar o cadastro de um usuário no banco de dados.
      */
     private void salvarCliente() {
         modelCliente.setClienteNome(this.jtfNome.getText().toUpperCase());
@@ -523,7 +511,7 @@ public class ViewCliente extends javax.swing.JFrame {
     }
 
     /**
-     * Método para salvar um cliente que está sendo editado
+     * Método para salvar a edição de um registro no banco de dados.
      */
     private void editarProduto() {
         modelCliente.setClienteNome(this.jtfNome.getText().toUpperCase());
@@ -548,8 +536,7 @@ public class ViewCliente extends javax.swing.JFrame {
     }
 
     /**
-     * Limpa os campos de texto
-     * @param condicacao
+     * Método para limpar os campos de texto.
      */
     private void limparCampos() {
         this.jtfCodigo.setText("");
@@ -564,7 +551,7 @@ public class ViewCliente extends javax.swing.JFrame {
     }
 
     /**
-     * Método que habilita (true) e desabilita (false) os campos de inserção de dados
+     * Método que habilita e desabilita campos de texto.
      * @param condicao
      */
     private void habilitarDesabilitarCampos(boolean condicao) {
@@ -580,7 +567,7 @@ public class ViewCliente extends javax.swing.JFrame {
     }
 
     /**
-     * Retorna os clientes cadastrados no banco de dados
+     * Retorna os clientes cadastrados no banco de dados.
      */
     private void listarClientes() {
         listaModelClientes = controllerCliente.retornaListaClientesController();
@@ -599,7 +586,7 @@ public class ViewCliente extends javax.swing.JFrame {
     }
     
     /**
-     * Formatador de campo CEP
+     * Formatar campo de CEP.
      */
     private void formatarCep() {
         try {
@@ -612,7 +599,7 @@ public class ViewCliente extends javax.swing.JFrame {
     }
     
     /**
-     * Formatador de campo Telefone
+     * Formatar campo de telefone.
      */
     private void formatarTelefone() {
         try {

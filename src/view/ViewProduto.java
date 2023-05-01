@@ -250,8 +250,8 @@ public class ViewProduto extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jtfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
@@ -278,7 +278,6 @@ public class ViewProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        // TODO add your handling code here:
         DefaultTableModel modelo = (DefaultTableModel) this.jtableProdutos.getModel();
         final TableRowSorter<TableModel> classifica = new TableRowSorter<>(modelo);
         this.jtableProdutos.setRowSorter(classifica);
@@ -290,10 +289,6 @@ public class ViewProduto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
-    /**
-     * Cadastrar um produto na base de dados
-     * @param evt
-     */
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if (editarSalvar.equals("salvar")) {
             this.salvarProduto();
@@ -302,12 +297,7 @@ public class ViewProduto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    /**
-     * Excluir um produto da base de dados
-     * @param evt
-     */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
         int linha = jtableProdutos.getSelectedRow();
         int codigoProduto = (int) jtableProdutos.getValueAt(linha, 0);
         if (JOptionPane.showConfirmDialog(this, "Excluir Produto?", "Excluir",
@@ -324,29 +314,16 @@ public class ViewProduto extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    /**
-     * Método para o cadastro de um novo produto
-     * @param evt
-     */
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        // TODO add your handling code here:
         this.habilitarDesabilitarCampos(true);
         editarSalvar = "salvar";
     }//GEN-LAST:event_btnNovoActionPerformed
 
-    /**
-     * Método para cancelar o cadastro/edição de um produto
-     * @param evt
-     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
         this.habilitarDesabilitarCampos(false);
         this.limparCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    /**
-     * @param evt
-     */
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         editarSalvar = "editar";
         int linha = this.jtableProdutos.getSelectedRow();
@@ -366,7 +343,6 @@ public class ViewProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jtfValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfValorActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jtfValorActionPerformed
 
     /**
@@ -405,7 +381,7 @@ public class ViewProduto extends javax.swing.JFrame {
     }
 
     /**
-     * Método para salvar um novo produto cadastrado
+     * Método para salvar um novo produto cadastrado no banco de dados.
      */
     private void salvarProduto() {
         if (this.jtfNomeProduto.getText().isEmpty() || this.jtfEstoque.getText().isEmpty() || this.jtfValor.getText().isEmpty()) {
@@ -429,31 +405,38 @@ public class ViewProduto extends javax.swing.JFrame {
                         JOptionPane.ERROR_MESSAGE);
             }
         }
-        
+
     }
 
     /**
-     * Método para salvar um produto que está sendo editado
+     * Método para salvar a edição de um registro no banco de dados.
      */
     private void editarProduto() {
-        modelProduto.setProdutoNome(this.jtfNomeProduto.getText().toUpperCase());
-        modelProduto.setProdutoEstoque(Integer.parseInt(this.jtfEstoque.getText()));
-        modelProduto.setProdutoValor(Double.parseDouble(this.jtfValor.getText().replace(",", ".")));
-        if (controllerProdutos.editarProdutoController(modelProduto)) {
-            JOptionPane.showMessageDialog(this, "Editado com sucesso!!", "ATENÇÃO",
-                    JOptionPane.INFORMATION_MESSAGE);
-            this.listarProdutos();
-            this.habilitarDesabilitarCampos(false);
-            this.limparCampos();
+        if (this.jtfNomeProduto.getText().isEmpty() || this.jtfEstoque.getText().isEmpty() || this.jtfValor.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo vazio", "ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
+        } else if (this.jtfNomeProduto.getText().length() >= 101) {
+            JOptionPane.showMessageDialog(null, "Excede o limite de 100 caracteres!!", "ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "Não foi aplicado a edição, verifique as informações", "ERRO",
-                    JOptionPane.ERROR_MESSAGE);
+            modelProduto.setProdutoNome(this.jtfNomeProduto.getText().toUpperCase());
+            modelProduto.setProdutoEstoque(Integer.parseInt(this.jtfEstoque.getText()));
+            modelProduto.setProdutoValor(Double.parseDouble(this.jtfValor.getText().replace(",", ".")));
+            if (controllerProdutos.editarProdutoController(modelProduto)) {
+                JOptionPane.showMessageDialog(this, "Editado com sucesso!!", "ATENÇÃO",
+                        JOptionPane.INFORMATION_MESSAGE);
+                this.listarProdutos();
+                this.habilitarDesabilitarCampos(false);
+                this.limparCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Não foi aplicado a edição, verifique as informações", "ERRO",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
     /**
-     * Limpa os campos de texto
-     * @param condicacao
+     * Método para limpar os campos de texto.
      */
     private void limparCampos() {
         this.jtfCodigo.setText("");
@@ -463,7 +446,8 @@ public class ViewProduto extends javax.swing.JFrame {
     }
 
     /**
-     * Método que habilita (true) e desabilita (false) os campos de inserção de dados
+     * Método que habilita e desabilita campos de texto.
+     *
      * @param condicao
      */
     private void habilitarDesabilitarCampos(boolean condicao) {
@@ -473,7 +457,7 @@ public class ViewProduto extends javax.swing.JFrame {
     }
 
     /**
-     * Retorna os produtos cadastrados no banco de dados
+     * Retorna os produtos cadastrados no banco de dados.
      */
     private void listarProdutos() {
         listaModelProdutos = controllerProdutos.retornaListaProdutosController();
