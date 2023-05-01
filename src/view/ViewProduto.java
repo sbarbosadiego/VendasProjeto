@@ -31,7 +31,6 @@ public class ViewProduto extends javax.swing.JFrame {
         initComponents();
         this.listarProdutos();
         this.habilitarDesabilitarCampos(false);
-        this.habilitarDesabilitarObrigatorio(false);
     }
 
     /**
@@ -62,9 +61,6 @@ public class ViewProduto extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         jtfEstoque = new javax.swing.JFormattedTextField();
         jtfValor = new javax.swing.JFormattedTextField();
-        jObrigatorio = new javax.swing.JLabel();
-        jObrigatorio1 = new javax.swing.JLabel();
-        jObrigatorio2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Produto");
@@ -188,18 +184,6 @@ public class ViewProduto extends javax.swing.JFrame {
             }
         });
 
-        jObrigatorio.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jObrigatorio.setForeground(new java.awt.Color(255, 0, 0));
-        jObrigatorio.setText("*");
-
-        jObrigatorio1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jObrigatorio1.setForeground(new java.awt.Color(255, 0, 0));
-        jObrigatorio1.setText("*");
-
-        jObrigatorio2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jObrigatorio2.setForeground(new java.awt.Color(255, 0, 0));
-        jObrigatorio2.setText("*");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -207,7 +191,7 @@ public class ViewProduto extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -219,7 +203,7 @@ public class ViewProduto extends javax.swing.JFrame {
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 292, Short.MAX_VALUE)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -230,41 +214,29 @@ public class ViewProduto extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jtfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jtfEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jObrigatorio1)))
-                        .addGap(30, 30, 30)
+                            .addComponent(jtfEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jObrigatorio2))
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jtfNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jObrigatorio)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jtfNomeProduto))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jObrigatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(2, 2, 2)
-                        .addComponent(jtfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -272,16 +244,14 @@ public class ViewProduto extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
                     .addComponent(jtfEstoque)
-                    .addComponent(jObrigatorio1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtfValor)
-                    .addComponent(jObrigatorio2))
+                    .addComponent(jtfValor))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jtfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
@@ -322,7 +292,6 @@ public class ViewProduto extends javax.swing.JFrame {
 
     /**
      * Cadastrar um produto na base de dados
-     *
      * @param evt
      */
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -335,7 +304,6 @@ public class ViewProduto extends javax.swing.JFrame {
 
     /**
      * Excluir um produto da base de dados
-     *
      * @param evt
      */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -358,7 +326,6 @@ public class ViewProduto extends javax.swing.JFrame {
 
     /**
      * Método para o cadastro de um novo produto
-     *
      * @param evt
      */
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -369,22 +336,18 @@ public class ViewProduto extends javax.swing.JFrame {
 
     /**
      * Método para cancelar o cadastro/edição de um produto
-     *
      * @param evt
      */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.habilitarDesabilitarCampos(false);
-        this.habilitarDesabilitarObrigatorio(false);
         this.limparCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
-     *
      * @param evt
      */
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        this.habilitarDesabilitarObrigatorio(false);
         editarSalvar = "editar";
         int linha = this.jtableProdutos.getSelectedRow();
         this.habilitarDesabilitarCampos(true);
@@ -446,11 +409,9 @@ public class ViewProduto extends javax.swing.JFrame {
      */
     private void salvarProduto() {
         if (this.jtfNomeProduto.getText().isEmpty() || this.jtfEstoque.getText().isEmpty() || this.jtfValor.getText().isEmpty()) {
-            this.habilitarDesabilitarObrigatorio(true);
             JOptionPane.showMessageDialog(null, "Campo vazio", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
         } else if (this.jtfNomeProduto.getText().length() >= 101) {
-            this.habilitarDesabilitarObrigatorio(true);
             JOptionPane.showMessageDialog(null, "Excede o limite de 100 caracteres!!", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
         } else {
@@ -462,7 +423,6 @@ public class ViewProduto extends javax.swing.JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
                 this.listarProdutos();
                 this.habilitarDesabilitarCampos(false);
-                this.habilitarDesabilitarObrigatorio(false);
                 this.limparCampos();
             } else {
                 JOptionPane.showMessageDialog(this, "Produto não cadastrado, verifique as informações", "ERRO",
@@ -493,7 +453,6 @@ public class ViewProduto extends javax.swing.JFrame {
 
     /**
      * Limpa os campos de texto
-     *
      * @param condicacao
      */
     private void limparCampos() {
@@ -504,21 +463,13 @@ public class ViewProduto extends javax.swing.JFrame {
     }
 
     /**
-     * Método que habilita (true) e desabilita (false) os campos de inserção de
-     * dados
-     *
+     * Método que habilita (true) e desabilita (false) os campos de inserção de dados
      * @param condicao
      */
     private void habilitarDesabilitarCampos(boolean condicao) {
         this.jtfNomeProduto.setEnabled(condicao);
         this.jtfEstoque.setEnabled(condicao);
         this.jtfValor.setEnabled(condicao);
-    }
-    
-    private void habilitarDesabilitarObrigatorio(boolean condicao) {
-        this.jObrigatorio.setVisible(condicao);
-        this.jObrigatorio1.setVisible(condicao);
-        this.jObrigatorio2.setVisible(condicao);
     }
 
     /**
@@ -553,9 +504,6 @@ public class ViewProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jObrigatorio;
-    private javax.swing.JLabel jObrigatorio1;
-    private javax.swing.JLabel jObrigatorio2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtableProdutos;
