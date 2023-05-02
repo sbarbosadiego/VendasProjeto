@@ -17,7 +17,6 @@ import model.ModelClientes;
 import util.CampoDePesquisa;
 
 /**
- *
  * @author Diego Barbosa
  */
 public class ViewCliente extends javax.swing.JFrame {
@@ -26,7 +25,7 @@ public class ViewCliente extends javax.swing.JFrame {
     ControllerCliente controllerCliente = new ControllerCliente();
     ModelClientes modelCliente = new ModelClientes();
     String editarSalvar;
-    
+
     /**
      * Creates new form ViewCliente
      */
@@ -395,7 +394,7 @@ public class ViewCliente extends javax.swing.JFrame {
                         JOptionPane.ERROR_MESSAGE);
             }
         }
-        
+
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -484,29 +483,37 @@ public class ViewCliente extends javax.swing.JFrame {
             }
         });
     }
-    
+
     /**
      * Método para salvar o cadastro de um usuário no banco de dados.
      */
     private void salvarCliente() {
-        modelCliente.setClienteNome(this.jtfNome.getText().toUpperCase());
-        modelCliente.setClienteTelefone(this.jtfTelefone.getText());
-        modelCliente.setClienteEndereco(this.jtfEndereco.getText().toUpperCase());
-        modelCliente.setClienteBairro(this.jtfBairro.getText().toUpperCase());
-        modelCliente.setClienteCidade(this.jtfCidade.getText().toUpperCase());
-        modelCliente.setClienteCep(this.jtfCep.getText());
-        modelCliente.setClienteNumero(this.jtfNumero.getText());
-        modelCliente.setClienteComplemento(this.jtfComplemento.getText().toUpperCase());
-        modelCliente.setClienteUf(this.jcbUF.getSelectedItem().toString());
-        if (controllerCliente.salvarClienteController(modelCliente) > 0) {
-            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!!", "ATENÇÃO",
-                    JOptionPane.INFORMATION_MESSAGE);
-            this.listarClientes();
-            this.habilitarDesabilitarCampos(false);
-            this.limparCampos();
+        if (this.jtfNome.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo vazio", "ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
+        } else if (this.jtfNome.getText().length() >= 61) {
+            JOptionPane.showMessageDialog(null, "Campo Nome excede o limite de 60 caracteres!!", "ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "Cliente não cadastrado, verifique as informações", "ERRO",
-                    JOptionPane.ERROR_MESSAGE);
+            modelCliente.setClienteNome(this.jtfNome.getText().toUpperCase());
+            modelCliente.setClienteTelefone(this.jtfTelefone.getText());
+            modelCliente.setClienteEndereco(this.jtfEndereco.getText().toUpperCase());
+            modelCliente.setClienteBairro(this.jtfBairro.getText().toUpperCase());
+            modelCliente.setClienteCidade(this.jtfCidade.getText().toUpperCase());
+            modelCliente.setClienteCep(this.jtfCep.getText());
+            modelCliente.setClienteNumero(this.jtfNumero.getText());
+            modelCliente.setClienteComplemento(this.jtfComplemento.getText().toUpperCase());
+            modelCliente.setClienteUf(this.jcbUF.getSelectedItem().toString());
+            if (controllerCliente.salvarClienteController(modelCliente) > 0) {
+                JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!!", "ATENÇÃO",
+                        JOptionPane.INFORMATION_MESSAGE);
+                this.listarClientes();
+                this.habilitarDesabilitarCampos(false);
+                this.limparCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Cliente não cadastrado, verifique as informações", "ERRO",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
@@ -514,24 +521,32 @@ public class ViewCliente extends javax.swing.JFrame {
      * Método para salvar a edição de um registro no banco de dados.
      */
     private void editarProduto() {
-        modelCliente.setClienteNome(this.jtfNome.getText().toUpperCase());
-        modelCliente.setClienteTelefone(this.jtfTelefone.getText());
-        modelCliente.setClienteEndereco(this.jtfEndereco.getText().toUpperCase());
-        modelCliente.setClienteBairro(this.jtfBairro.getText().toUpperCase());
-        modelCliente.setClienteCidade(this.jtfCidade.getText().toUpperCase());
-        modelCliente.setClienteCep(this.jtfCep.getText());
-        modelCliente.setClienteNumero(this.jtfNumero.getText());
-        modelCliente.setClienteComplemento(this.jtfComplemento.getText().toUpperCase());
-        modelCliente.setClienteUf(this.jcbUF.getSelectedItem().toString());
-        if (controllerCliente.editarClienteController(modelCliente)) {
-            JOptionPane.showMessageDialog(this, "Editado com sucesso!!", "ATENÇÃO",
-                    JOptionPane.INFORMATION_MESSAGE);
-            this.listarClientes();
-            this.habilitarDesabilitarCampos(false);
-            this.limparCampos();
+        if (this.jtfNome.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo vazio", "ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
+        } else if (this.jtfNome.getText().length() >= 61) {
+            JOptionPane.showMessageDialog(null, "Campo Nome excede o limite de 60 caracteres!!", "ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "Não foi aplicado a edição, verifique as informações", "ERRO",
-                    JOptionPane.ERROR_MESSAGE);
+            modelCliente.setClienteNome(this.jtfNome.getText().toUpperCase());
+            modelCliente.setClienteTelefone(this.jtfTelefone.getText());
+            modelCliente.setClienteEndereco(this.jtfEndereco.getText().toUpperCase());
+            modelCliente.setClienteBairro(this.jtfBairro.getText().toUpperCase());
+            modelCliente.setClienteCidade(this.jtfCidade.getText().toUpperCase());
+            modelCliente.setClienteCep(this.jtfCep.getText());
+            modelCliente.setClienteNumero(this.jtfNumero.getText());
+            modelCliente.setClienteComplemento(this.jtfComplemento.getText().toUpperCase());
+            modelCliente.setClienteUf(this.jcbUF.getSelectedItem().toString());
+            if (controllerCliente.editarClienteController(modelCliente)) {
+                JOptionPane.showMessageDialog(this, "Editado com sucesso!!", "ATENÇÃO",
+                        JOptionPane.INFORMATION_MESSAGE);
+                this.listarClientes();
+                this.habilitarDesabilitarCampos(false);
+                this.limparCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Não foi aplicado a edição, verifique as informações", "ERRO",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
@@ -552,6 +567,7 @@ public class ViewCliente extends javax.swing.JFrame {
 
     /**
      * Método que habilita e desabilita campos de texto.
+     *
      * @param condicao
      */
     private void habilitarDesabilitarCampos(boolean condicao) {
@@ -584,7 +600,7 @@ public class ViewCliente extends javax.swing.JFrame {
             });
         }
     }
-    
+
     /**
      * Formatar campo de CEP.
      */
@@ -597,7 +613,7 @@ public class ViewCliente extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     /**
      * Formatar campo de telefone.
      */
@@ -610,7 +626,7 @@ public class ViewCliente extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

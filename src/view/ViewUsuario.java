@@ -173,8 +173,6 @@ public class ViewUsuario extends javax.swing.JFrame {
 
         jtfLogin.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        jtfSenha.setText("jPasswordField1");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -234,22 +232,23 @@ public class ViewUsuario extends javax.swing.JFrame {
                         .addGap(2, 2, 2)
                         .addComponent(jtfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(2, 2, 2)
-                        .addComponent(jtfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addGap(2, 2, 2)
-                        .addComponent(jtfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jtfSenha)
+                    .addComponent(jtfLogin))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jtfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
@@ -380,18 +379,29 @@ public class ViewUsuario extends javax.swing.JFrame {
      * Método para salvar o cadastro de um usuário no banco de dados.
      */
     private void salvarUsuario() {
-        modelUsuario.setUsuarioNome(this.jtfNomeUsuario.getText().toUpperCase());
-        modelUsuario.setUsuarioLogin(this.jtfLogin.getText());
-        modelUsuario.setUsuarioSenha(this.jtfSenha.getText());
-        if (controllerUsuarios.salvarUsuarioController(modelUsuario) > 0) {
-            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!!", "ATENÇÃO",
-                    JOptionPane.INFORMATION_MESSAGE);
-            this.listarUsuarios();
-            this.habilitarDesabilitarCampos(false);
-            this.limparCampos();
+        if (this.jtfNomeUsuario.getText().isEmpty() || this.jtfLogin.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo vazio", "ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
+        } else if (this.jtfLogin.getText().length() >= 51) {
+            JOptionPane.showMessageDialog(null, "Campo Login excede o limite de caractes 50 caracteres!!", "ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
+        } else if (this.jtfNomeUsuario.getText().length() >= 61) {
+            JOptionPane.showMessageDialog(null, "Campo Nome excede o limite de caractes 60 caracteres!!", "ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "Usuario não cadastrado, verifique as informações", "ERRO",
-                    JOptionPane.ERROR_MESSAGE);
+            modelUsuario.setUsuarioNome(this.jtfNomeUsuario.getText().toUpperCase());
+            modelUsuario.setUsuarioLogin(this.jtfLogin.getText());
+            modelUsuario.setUsuarioSenha(this.jtfSenha.getText());
+            if (controllerUsuarios.salvarUsuarioController(modelUsuario) > 0) {
+                JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!!", "ATENÇÃO",
+                        JOptionPane.INFORMATION_MESSAGE);
+                this.listarUsuarios();
+                this.habilitarDesabilitarCampos(false);
+                this.limparCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Usuario não cadastrado, verifique as informações", "ERRO",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
@@ -399,18 +409,29 @@ public class ViewUsuario extends javax.swing.JFrame {
      * Método para salvar a edição de um registro no banco de dados.
      */
     private void editarUsuario() {
-        modelUsuario.setUsuarioNome(this.jtfNomeUsuario.getText().toUpperCase());
-        modelUsuario.setUsuarioLogin(this.jtfLogin.getText());
-        modelUsuario.setUsuarioSenha(this.jtfSenha.getText());
-        if (controllerUsuarios.editarUsuarioController(modelUsuario)) {
-            JOptionPane.showMessageDialog(this, "Editado com sucesso!!", "ATENÇÃO",
-                    JOptionPane.INFORMATION_MESSAGE);
-            this.listarUsuarios();
-            this.habilitarDesabilitarCampos(false);
-            this.limparCampos();
+        if (this.jtfNomeUsuario.getText().isEmpty() || this.jtfLogin.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo vazio", "ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
+        } else if (this.jtfLogin.getText().length() >= 51) {
+            JOptionPane.showMessageDialog(null, "Campo Login excede o limite de caractes 50 caracteres!!", "ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
+        } else if (this.jtfNomeUsuario.getText().length() >= 61) {
+            JOptionPane.showMessageDialog(null, "Campo Nome excede o limite de caractes 60 caracteres!!", "ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "Não foi aplicado a edição, verifique as informações", "ERRO",
-                    JOptionPane.ERROR_MESSAGE);
+            modelUsuario.setUsuarioNome(this.jtfNomeUsuario.getText().toUpperCase());
+            modelUsuario.setUsuarioLogin(this.jtfLogin.getText());
+            modelUsuario.setUsuarioSenha(this.jtfSenha.getText());
+            if (controllerUsuarios.editarUsuarioController(modelUsuario)) {
+                JOptionPane.showMessageDialog(this, "Editado com sucesso!!", "ATENÇÃO",
+                        JOptionPane.INFORMATION_MESSAGE);
+                this.listarUsuarios();
+                this.habilitarDesabilitarCampos(false);
+                this.limparCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Não foi aplicado a edição, verifique as informações", "ERRO",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
     

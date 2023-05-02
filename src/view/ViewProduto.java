@@ -65,7 +65,6 @@ public class ViewProduto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Produto");
         setLocation(new java.awt.Point(600, 150));
-        setPreferredSize(new java.awt.Dimension(800, 580));
 
         jtfCodigo.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jtfCodigo.setEnabled(false);
@@ -76,7 +75,7 @@ public class ViewProduto extends javax.swing.JFrame {
         jtfNomeProduto.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel2.setText("Nome:");
+        jLabel2.setText("Produto:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel3.setText("Estoque:");
@@ -203,7 +202,7 @@ public class ViewProduto extends javax.swing.JFrame {
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 292, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 284, Short.MAX_VALUE)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,7 +250,7 @@ public class ViewProduto extends javax.swing.JFrame {
                     .addComponent(jtfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
@@ -388,7 +387,7 @@ public class ViewProduto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Campo vazio", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
         } else if (this.jtfNomeProduto.getText().length() >= 101) {
-            JOptionPane.showMessageDialog(null, "Excede o limite de 100 caracteres!!", "ATENÇÃO",
+            JOptionPane.showMessageDialog(null, "Campo Produto excede o limite de 100 caracteres!!", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
         } else {
             modelProduto.setProdutoNome(this.jtfNomeProduto.getText().toUpperCase());
