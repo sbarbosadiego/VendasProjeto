@@ -388,6 +388,8 @@ public class ViewCliente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Cliente excluído", "ATENÇÃO",
                         JOptionPane.WARNING_MESSAGE);
                 this.listarClientes();
+                this.limparCampos();
+                this.habilitarDesabilitarCampos(false);
             } else {
                 JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
                         JOptionPane.ERROR_MESSAGE);

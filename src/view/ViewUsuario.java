@@ -297,6 +297,8 @@ public class ViewUsuario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Usuario excluído", "ATENÇÃO",
                         JOptionPane.WARNING_MESSAGE);
                 this.listarUsuarios();
+                this.limparCampos();
+                this.habilitarDesabilitarCampos(false);
             } else {
                 JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
                         JOptionPane.ERROR_MESSAGE);

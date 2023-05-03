@@ -297,6 +297,8 @@ public class ViewProduto extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Produto excluído", "ATENÇÃO",
                         JOptionPane.WARNING_MESSAGE);
                 this.listarProdutos();
+                this.limparCampos();
+                this.habilitarDesabilitarCampos(false);
             } else {
                 JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
                         JOptionPane.ERROR_MESSAGE);
