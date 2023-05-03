@@ -57,5 +57,14 @@ public class ControllerUsuarios {
     public ArrayList<ModelUsuarios> retornaListaUsuariosController() {
         return this.daoUsuarios.retornarListaUsuariosDAO();
     }
+    
+    /**
+     * Validar login de usuário.
+     * @param pmodelUsuario
+     * @return 
+     */
+    public boolean getUsuarioController(ModelUsuarios pmodelUsuario) {
+        return this.daoUsuarios.getValidarUsuarioDAO(pmodelUsuario);
+    }
 
 }

@@ -78,7 +78,7 @@ public class ViewCliente extends javax.swing.JFrame {
         jtfCep = new javax.swing.JFormattedTextField();
         jtfTelefone = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Cliente");
         setLocation(new java.awt.Point(600, 150));
         setPreferredSize(new java.awt.Dimension(800, 600));
@@ -128,9 +128,7 @@ public class ViewCliente extends javax.swing.JFrame {
         jtableCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtableCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Código", "Nome", "Cidade", "Telefone"
@@ -144,6 +142,7 @@ public class ViewCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jtableCliente.setRowHeight(25);
         jScrollPane1.setViewportView(jtableCliente);
         if (jtableCliente.getColumnModel().getColumnCount() > 0) {
             jtableCliente.getColumnModel().getColumn(0).setMinWidth(70);
@@ -157,7 +156,7 @@ public class ViewCliente extends javax.swing.JFrame {
             jtableCliente.getColumnModel().getColumn(3).setPreferredWidth(120);
         }
 
-        btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnEditar.setForeground(new java.awt.Color(51, 0, 255));
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -166,7 +165,7 @@ public class ViewCliente extends javax.swing.JFrame {
             }
         });
 
-        btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 0, 0));
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +174,7 @@ public class ViewCliente extends javax.swing.JFrame {
             }
         });
 
-        btnNovo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNovo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,8 +182,8 @@ public class ViewCliente extends javax.swing.JFrame {
             }
         });
 
-        btnSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnSalvar.setForeground(new java.awt.Color(0, 204, 51));
+        btnSalvar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSalvar.setForeground(new java.awt.Color(0, 153, 51));
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,7 +201,7 @@ public class ViewCliente extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel10.setText("Complemento:");
 
-        btnExcluir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnExcluir.setForeground(new java.awt.Color(255, 0, 0));
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -394,7 +393,6 @@ public class ViewCliente extends javax.swing.JFrame {
                         JOptionPane.ERROR_MESSAGE);
             }
         }
-
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed

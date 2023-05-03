@@ -92,29 +92,23 @@ public class ViewUsuario extends javax.swing.JFrame {
                 "Código", "Nome", "Login"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jtableUsuarios.setRowHeight(25);
         jScrollPane1.setViewportView(jtableUsuarios);
         if (jtableUsuarios.getColumnModel().getColumnCount() > 0) {
             jtableUsuarios.getColumnModel().getColumn(0).setPreferredWidth(30);
-            jtableUsuarios.getColumnModel().getColumn(1).setPreferredWidth(200);
-            jtableUsuarios.getColumnModel().getColumn(2).setPreferredWidth(60);
+            jtableUsuarios.getColumnModel().getColumn(1).setPreferredWidth(220);
+            jtableUsuarios.getColumnModel().getColumn(2).setPreferredWidth(220);
         }
 
-        btnNovo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNovo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,7 +116,7 @@ public class ViewUsuario extends javax.swing.JFrame {
             }
         });
 
-        btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnEditar.setForeground(new java.awt.Color(51, 0, 255));
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -131,8 +125,8 @@ public class ViewUsuario extends javax.swing.JFrame {
             }
         });
 
-        btnSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnSalvar.setForeground(new java.awt.Color(0, 204, 51));
+        btnSalvar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSalvar.setForeground(new java.awt.Color(0, 153, 51));
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,7 +134,7 @@ public class ViewUsuario extends javax.swing.JFrame {
             }
         });
 
-        btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 0, 0));
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +156,7 @@ public class ViewUsuario extends javax.swing.JFrame {
             }
         });
 
-        btnExcluir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnExcluir.setForeground(new java.awt.Color(255, 0, 0));
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -391,7 +385,7 @@ public class ViewUsuario extends javax.swing.JFrame {
         } else {
             modelUsuario.setUsuarioNome(this.jtfNomeUsuario.getText().toUpperCase());
             modelUsuario.setUsuarioLogin(this.jtfLogin.getText());
-            modelUsuario.setUsuarioSenha(this.jtfSenha.getText());
+            modelUsuario.setUsuarioSenha(String.valueOf(this.jtfSenha.getPassword()));
             if (controllerUsuarios.salvarUsuarioController(modelUsuario) > 0) {
                 JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!!", "ATENÇÃO",
                         JOptionPane.INFORMATION_MESSAGE);
@@ -421,7 +415,7 @@ public class ViewUsuario extends javax.swing.JFrame {
         } else {
             modelUsuario.setUsuarioNome(this.jtfNomeUsuario.getText().toUpperCase());
             modelUsuario.setUsuarioLogin(this.jtfLogin.getText());
-            modelUsuario.setUsuarioSenha(this.jtfSenha.getText());
+            modelUsuario.setUsuarioSenha(String.valueOf(this.jtfSenha.getPassword()));
             if (controllerUsuarios.editarUsuarioController(modelUsuario)) {
                 JOptionPane.showMessageDialog(this, "Editado com sucesso!!", "ATENÇÃO",
                         JOptionPane.INFORMATION_MESSAGE);

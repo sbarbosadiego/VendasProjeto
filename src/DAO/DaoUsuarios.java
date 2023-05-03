@@ -15,6 +15,7 @@ public class DaoUsuarios extends ConexaoMySql {
 
     /**
      * Inseri um usuario no banco de dados
+     *
      * @param pModelUsuarios
      * @return int
      */
@@ -40,6 +41,7 @@ public class DaoUsuarios extends ConexaoMySql {
 
     /**
      * Exclui um usuario no banco de dados
+     *
      * @param pIdUsuario
      * @return boolean
      */
@@ -58,6 +60,7 @@ public class DaoUsuarios extends ConexaoMySql {
 
     /**
      * Editar usuario
+     *
      * @param pModelUsuarios
      * @return boolean
      */
@@ -81,6 +84,7 @@ public class DaoUsuarios extends ConexaoMySql {
 
     /**
      * Consulta de usuario por código
+     *
      * @param pIdUsuario
      * @return modelUsuario
      */
@@ -108,6 +112,7 @@ public class DaoUsuarios extends ConexaoMySql {
 
     /**
      * Retornar lista de usuarios
+     *
      * @return listaModelUsuarios
      */
     public ArrayList<ModelUsuarios> retornarListaUsuariosDAO() {
@@ -129,6 +134,33 @@ public class DaoUsuarios extends ConexaoMySql {
             this.fecharConexao();
         }
         return listaModelUsuarios;
+    }
+    
+    /**
+     * Validar login de usuário.
+     * @param pModelUsuario
+     * @return boolean
+     */
+    public boolean getValidarUsuarioDAO(ModelUsuarios pModelUsuario) {
+        try {
+            this.conectar();
+            this.executarSQL("SELECT "
+                    + "pk_id_usuario, "
+                    + "usuario_nome, "
+                    + "usuario_login "
+                    + "FROM tbl_usuario WHERE usuario_login = '" + pModelUsuario.getUsuarioLogin() + "' "
+                    + "AND usuario_senha = '" + pModelUsuario.getUsuarioSenha() + "';");
+            if (getResultSet().next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            this.fecharConexao();
+        }
     }
 
 }

@@ -5,6 +5,9 @@
 package view;
 
 import controller.ControllerProduto;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -81,7 +84,7 @@ public class ViewProduto extends javax.swing.JFrame {
         jLabel3.setText("Estoque:");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel4.setText("Valor:");
+        jLabel4.setText("Preço:");
 
         jtableProdutos.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jtableProdutos.setModel(new javax.swing.table.DefaultTableModel(
@@ -89,24 +92,18 @@ public class ViewProduto extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Nome", "Estoque", "Valor"
+                "Código", "Produto", "Estoque", "Preço"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jtableProdutos.setRowHeight(25);
         jScrollPane1.setViewportView(jtableProdutos);
         if (jtableProdutos.getColumnModel().getColumnCount() > 0) {
             jtableProdutos.getColumnModel().getColumn(0).setPreferredWidth(30);
@@ -123,7 +120,7 @@ public class ViewProduto extends javax.swing.JFrame {
             }
         });
 
-        btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnEditar.setForeground(new java.awt.Color(51, 0, 255));
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -132,8 +129,8 @@ public class ViewProduto extends javax.swing.JFrame {
             }
         });
 
-        btnSalvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnSalvar.setForeground(new java.awt.Color(0, 204, 51));
+        btnSalvar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSalvar.setForeground(new java.awt.Color(0, 153, 51));
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,7 +138,7 @@ public class ViewProduto extends javax.swing.JFrame {
             }
         });
 
-        btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 0, 0));
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +160,7 @@ public class ViewProduto extends javax.swing.JFrame {
             }
         });
 
-        btnExcluir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnExcluir.setForeground(new java.awt.Color(255, 0, 0));
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -177,11 +174,6 @@ public class ViewProduto extends javax.swing.JFrame {
 
         jtfValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
         jtfValor.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jtfValor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfValorActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -216,13 +208,13 @@ public class ViewProduto extends javax.swing.JFrame {
                             .addComponent(jtfEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfNomeProduto)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
-                                    .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jtfNomeProduto))))
+                                    .addComponent(jLabel4)
+                                    .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -241,8 +233,8 @@ public class ViewProduto extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addGap(2, 2, 2)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                    .addComponent(jtfEstoque)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtfEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                     .addComponent(jtfValor))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -250,7 +242,7 @@ public class ViewProduto extends javax.swing.JFrame {
                     .addComponent(jtfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
@@ -341,9 +333,6 @@ public class ViewProduto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void jtfValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfValorActionPerformed
-    }//GEN-LAST:event_jtfValorActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -392,7 +381,15 @@ public class ViewProduto extends javax.swing.JFrame {
         } else {
             modelProduto.setProdutoNome(this.jtfNomeProduto.getText().toUpperCase());
             modelProduto.setProdutoEstoque(Integer.parseInt(this.jtfEstoque.getText()));
-            modelProduto.setProdutoValor(Double.parseDouble(this.jtfValor.getText().replace(",", ".")));
+            try {
+                DecimalFormat format = new DecimalFormat("#,###.00");
+                DecimalFormatSymbols decimalSimbol = new DecimalFormatSymbols();
+                decimalSimbol.setDecimalSeparator('.');
+                modelProduto.setProdutoValor(format.parse(this.jtfValor.getText()).doubleValue());
+            } catch (ParseException e) {
+                JOptionPane.showMessageDialog(this, "Não foi possível formatar campo", "ERRO",
+                        JOptionPane.ERROR_MESSAGE);
+            }
             if (controllerProdutos.salvarProdutoController(modelProduto) > 0) {
                 JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!!", "ATENÇÃO",
                         JOptionPane.INFORMATION_MESSAGE);
@@ -404,7 +401,6 @@ public class ViewProduto extends javax.swing.JFrame {
                         JOptionPane.ERROR_MESSAGE);
             }
         }
-
     }
 
     /**
@@ -420,7 +416,15 @@ public class ViewProduto extends javax.swing.JFrame {
         } else {
             modelProduto.setProdutoNome(this.jtfNomeProduto.getText().toUpperCase());
             modelProduto.setProdutoEstoque(Integer.parseInt(this.jtfEstoque.getText()));
-            modelProduto.setProdutoValor(Double.parseDouble(this.jtfValor.getText().replace(",", ".")));
+            try {
+                DecimalFormat format = new DecimalFormat("#,###.00");
+                DecimalFormatSymbols decimalSimbol = new DecimalFormatSymbols();
+                decimalSimbol.setDecimalSeparator('.');
+                modelProduto.setProdutoValor(format.parse(this.jtfValor.getText()).doubleValue());
+            } catch (ParseException e) {
+                JOptionPane.showMessageDialog(this, "Não foi possível formatar campo", "ERRO",
+                        JOptionPane.ERROR_MESSAGE);
+            }
             if (controllerProdutos.editarProdutoController(modelProduto)) {
                 JOptionPane.showMessageDialog(this, "Editado com sucesso!!", "ATENÇÃO",
                         JOptionPane.INFORMATION_MESSAGE);
