@@ -64,6 +64,10 @@ public class ViewProduto extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         jtfEstoque = new javax.swing.JFormattedTextField();
         jtfValor = new javax.swing.JFormattedTextField();
+        jtfCusto = new javax.swing.JFormattedTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jtfMarca = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Produto");
@@ -84,7 +88,7 @@ public class ViewProduto extends javax.swing.JFrame {
         jLabel3.setText("Estoque:");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel4.setText("Preço:");
+        jLabel4.setText("Marca:");
 
         jtableProdutos.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jtableProdutos.setModel(new javax.swing.table.DefaultTableModel(
@@ -175,6 +179,23 @@ public class ViewProduto extends javax.swing.JFrame {
         jtfValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
         jtfValor.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
+        jtfCusto.setEnabled(false);
+        jtfCusto.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jtfCusto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfCustoActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel6.setText("Custo:");
+
+        jtfMarca.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jtfMarca.setEnabled(false);
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel7.setText("Preço:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -209,12 +230,21 @@ public class ViewProduto extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfNomeProduto)
+                            .addComponent(jLabel2)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                    .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jtfMarca))))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -231,11 +261,15 @@ public class ViewProduto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
                 .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtfMarca)
                     .addComponent(jtfEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                    .addComponent(jtfValor))
+                    .addComponent(jtfValor)
+                    .addComponent(jtfCusto))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -334,6 +368,10 @@ public class ViewProduto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Nenhum registro selecionado");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void jtfCustoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCustoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfCustoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -493,11 +531,15 @@ public class ViewProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtableProdutos;
     private javax.swing.JTextField jtfCodigo;
+    private javax.swing.JFormattedTextField jtfCusto;
     private javax.swing.JFormattedTextField jtfEstoque;
+    private javax.swing.JTextField jtfMarca;
     private javax.swing.JTextField jtfNomeProduto;
     private javax.swing.JTextField jtfPesquisa;
     private javax.swing.JFormattedTextField jtfValor;

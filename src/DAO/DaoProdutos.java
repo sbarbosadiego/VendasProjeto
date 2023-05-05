@@ -15,7 +15,7 @@ import model.ModelProdutos;
 public class DaoProdutos extends ConexaoMySql {
     
     /**
-     * Inseri um produto no banco de dados
+     * Inseri um produto no banco de dados.
      * @param pModelProdutos
      * @return int
      */
@@ -40,7 +40,7 @@ public class DaoProdutos extends ConexaoMySql {
     }
     
     /**
-     * Exclui o produto no banco de dados
+     * Exclui o produto no banco de dados.
      * @param pIdProduto
      * @return boolean
      */
@@ -58,7 +58,7 @@ public class DaoProdutos extends ConexaoMySql {
     }
     
     /**
-     * Alterar atributos do produto
+     * Alterar atributos do produto.
      * @param pModelProdutos
      * @return boolean
      */
@@ -81,7 +81,7 @@ public class DaoProdutos extends ConexaoMySql {
     }
     
     /**
-     * Consulta de produto por código
+     * Consulta de produto por código.
      * @param pIdProduto
      * @return modelProduto
      */
@@ -111,7 +111,7 @@ public class DaoProdutos extends ConexaoMySql {
     }
     
     /**
-     * Retornar lista de produtos
+     * Retornar lista de produtos.
      * @return listaModelProdutos
      */
     public ArrayList<ModelProdutos> retornarListaProdutosDAO() {
