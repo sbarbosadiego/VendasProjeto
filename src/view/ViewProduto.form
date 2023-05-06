@@ -55,15 +55,15 @@
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="btnExcluir" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="btnExcluir" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnCancelar" min="-2" pref="90" max="-2" attributes="0"/>
-                          <EmptySpace pref="284" max="32767" attributes="0"/>
-                          <Component id="btnEditar" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="btnCancelar" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace pref="234" max="32767" attributes="0"/>
+                          <Component id="btnEditar" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnSalvar" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="btnSalvar" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnNovo" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="btnNovo" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -215,7 +215,7 @@
                     <Column editable="false" title="C&#xf3;digo" type="java.lang.Object"/>
                     <Column editable="false" title="Produto" type="java.lang.Object"/>
                     <Column editable="false" title="Estoque" type="java.lang.Object"/>
-                    <Column editable="false" title="Pre&#xe7;o" type="java.lang.Object"/>
+                    <Column editable="false" title="Pre&#xe7;o" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -253,7 +253,7 @@
         <Component class="javax.swing.JButton" name="btnNovo">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="0"/>
+              <Font name="Segoe UI" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Novo"/>
           </Properties>

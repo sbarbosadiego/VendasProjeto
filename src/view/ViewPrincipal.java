@@ -84,7 +84,6 @@ public class ViewPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jmSair);
-        jmSair.getAccessibleContext().setAccessibleDescription("");
 
         jMenuBar1.add(jMenu1);
 

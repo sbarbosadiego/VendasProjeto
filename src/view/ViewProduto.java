@@ -99,9 +99,16 @@ public class ViewProduto extends javax.swing.JFrame {
                 "Código", "Produto", "Estoque", "Preço"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -116,7 +123,7 @@ public class ViewProduto extends javax.swing.JFrame {
             jtableProdutos.getColumnModel().getColumn(3).setPreferredWidth(60);
         }
 
-        btnNovo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNovo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,15 +219,15 @@ public class ViewProduto extends javax.swing.JFrame {
                         .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 284, Short.MAX_VALUE)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 234, Short.MAX_VALUE)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -302,6 +309,28 @@ public class ViewProduto extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jtfCustoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCustoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfCustoActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int linha = jtableProdutos.getSelectedRow();
+        int codigoProduto = (int) jtableProdutos.getValueAt(linha, 0);
+        if (JOptionPane.showConfirmDialog(this, "Excluir Produto?", "Excluir",
+            JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        if (controllerProdutos.excluirProdutoController(codigoProduto)) {
+            JOptionPane.showMessageDialog(this, "Produto excluído", "ATENÇÃO",
+                JOptionPane.WARNING_MESSAGE);
+            this.listarProdutos();
+            this.limparCampos();
+            this.habilitarDesabilitarCampos(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
+                JOptionPane.ERROR_MESSAGE);
+        }
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         DefaultTableModel modelo = (DefaultTableModel) this.jtableProdutos.getModel();
         final TableRowSorter<TableModel> classifica = new TableRowSorter<>(modelo);
@@ -314,6 +343,11 @@ public class ViewProduto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.habilitarDesabilitarCampos(false);
+        this.limparCampos();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if (editarSalvar.equals("salvar")) {
             this.salvarProduto();
@@ -321,35 +355,6 @@ public class ViewProduto extends javax.swing.JFrame {
             this.editarProduto();
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
-
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int linha = jtableProdutos.getSelectedRow();
-        int codigoProduto = (int) jtableProdutos.getValueAt(linha, 0);
-        if (JOptionPane.showConfirmDialog(this, "Excluir Produto?", "Excluir",
-                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            if (controllerProdutos.excluirProdutoController(codigoProduto)) {
-                JOptionPane.showMessageDialog(this, "Produto excluído", "ATENÇÃO",
-                        JOptionPane.WARNING_MESSAGE);
-                this.listarProdutos();
-                this.limparCampos();
-                this.habilitarDesabilitarCampos(false);
-            } else {
-                JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        }
-
-    }//GEN-LAST:event_btnExcluirActionPerformed
-
-    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        this.habilitarDesabilitarCampos(true);
-        editarSalvar = "salvar";
-    }//GEN-LAST:event_btnNovoActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.habilitarDesabilitarCampos(false);
-        this.limparCampos();
-    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         editarSalvar = "editar";
@@ -369,9 +374,10 @@ public class ViewProduto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void jtfCustoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCustoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfCustoActionPerformed
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        this.habilitarDesabilitarCampos(true);
+        editarSalvar = "salvar";
+    }//GEN-LAST:event_btnNovoActionPerformed
 
     /**
      * @param args the command line arguments
