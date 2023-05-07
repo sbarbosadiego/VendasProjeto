@@ -68,13 +68,13 @@ public class ViewPrincipal extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 571, Short.MAX_VALUE)
+            .addGap(0, 574, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Opções");
-        jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jMenu1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
-        jmSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jmSair.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jmSair.setText("Sair");
         jmSair.setToolTipText("");
         jmSair.setName(""); // NOI18N
@@ -89,9 +89,9 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Cadastro");
         jMenu2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jMenu2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jMenu2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
-        jmClientes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jmClientes.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jmClientes.setText("Clientes");
         jmClientes.setToolTipText("");
         jmClientes.setHideActionText(true);
@@ -103,7 +103,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jmClientes);
 
-        jmProdutos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jmProdutos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jmProdutos.setText("Produtos");
         jmProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +112,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jmProdutos);
 
-        jmUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jmUsuarios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jmUsuarios.setText("Usuários");
         jmUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,13 +124,13 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Vendas");
-        jMenu3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jMenu3.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Sobre");
-        jMenu4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jMenu4.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
-        jmProjeto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jmProjeto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jmProjeto.setText("Projeto");
         jmProjeto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
