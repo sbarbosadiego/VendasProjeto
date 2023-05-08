@@ -5,6 +5,7 @@
 package view;
 
 import controller.ControllerUsuarios;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import model.ModelUsuarios;
 
@@ -38,7 +39,7 @@ public class ViewLogin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jtfSenha = new javax.swing.JPasswordField();
         jbtSair = new javax.swing.JButton();
-        jbtEntrar1 = new javax.swing.JButton();
+        jbtEntrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login - Bem-Vindo!");
@@ -53,11 +54,21 @@ public class ViewLogin extends javax.swing.JFrame {
                 jtfLoginActionPerformed(evt);
             }
         });
+        jtfLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfLoginKeyPressed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel2.setText("Senha:");
 
         jtfSenha.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jtfSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfSenhaKeyPressed(evt);
+            }
+        });
 
         jbtSair.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jbtSair.setForeground(new java.awt.Color(255, 0, 0));
@@ -68,12 +79,17 @@ public class ViewLogin extends javax.swing.JFrame {
             }
         });
 
-        jbtEntrar1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        jbtEntrar1.setForeground(new java.awt.Color(0, 153, 51));
-        jbtEntrar1.setText("Entrar");
-        jbtEntrar1.addActionListener(new java.awt.event.ActionListener() {
+        jbtEntrar.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jbtEntrar.setForeground(new java.awt.Color(0, 153, 51));
+        jbtEntrar.setText("Entrar");
+        jbtEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtEntrar1ActionPerformed(evt);
+                jbtEntrarActionPerformed(evt);
+            }
+        });
+        jbtEntrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jbtEntrarKeyPressed(evt);
             }
         });
 
@@ -86,8 +102,8 @@ public class ViewLogin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jbtSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-                        .addComponent(jbtEntrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                        .addComponent(jbtEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -114,7 +130,7 @@ public class ViewLogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtSair)
-                    .addComponent(jbtEntrar1))
+                    .addComponent(jbtEntrar))
                 .addGap(21, 21, 21))
         );
 
@@ -143,7 +159,7 @@ public class ViewLogin extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jbtSairActionPerformed
 
-    private void jbtEntrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtEntrar1ActionPerformed
+    private void jbtEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtEntrarActionPerformed
         modelUsuario.setUsuarioLogin(this.jtfLogin.getText());
         modelUsuario.setUsuarioSenha(String.valueOf(this.jtfSenha.getPassword()));
         if (this.jtfLogin.getText().isEmpty() || String.valueOf(this.jtfSenha.getPassword()).isEmpty()) {
@@ -159,7 +175,23 @@ public class ViewLogin extends javax.swing.JFrame {
             }
         } 
         
-    }//GEN-LAST:event_jbtEntrar1ActionPerformed
+    }//GEN-LAST:event_jbtEntrarActionPerformed
+
+    private void jtfLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfLoginKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.jtfSenha.requestFocus();
+        }
+    }//GEN-LAST:event_jtfLoginKeyPressed
+
+    private void jtfSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfSenhaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.jbtEntrar.requestFocus();
+        }
+    }//GEN-LAST:event_jtfSenhaKeyPressed
+
+    private void jbtEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jbtEntrarKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtEntrarKeyPressed
 
     /**
      * @param args the command line arguments
@@ -200,7 +232,7 @@ public class ViewLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton jbtEntrar1;
+    private javax.swing.JButton jbtEntrar;
     private javax.swing.JButton jbtSair;
     private javax.swing.JTextField jtfLogin;
     private javax.swing.JPasswordField jtfSenha;
