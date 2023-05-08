@@ -8,11 +8,10 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import javax.swing.JOptionPane;
 
 /**
  *
- * @author di_an
+ * @author Diego Barbosa
  */
 public class ViewPrincipal extends javax.swing.JFrame {
 
@@ -35,14 +34,15 @@ public class ViewPrincipal extends javax.swing.JFrame {
         uJPanelImagem1 = new componentes.UJPanelImagem();
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jmOpcoes = new javax.swing.JMenu();
         jmSair = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jmCadastro = new javax.swing.JMenu();
         jmClientes = new javax.swing.JMenuItem();
         jmProdutos = new javax.swing.JMenuItem();
         jmUsuarios = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
+        jmVenda = new javax.swing.JMenu();
+        jmRelatorio = new javax.swing.JMenu();
+        jmSobre = new javax.swing.JMenu();
         jmProjeto = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout uJPanelImagem1Layout = new javax.swing.GroupLayout(uJPanelImagem1);
@@ -71,8 +71,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
             .addGap(0, 574, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Opções");
-        jMenu1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jmOpcoes.setText("Opções");
+        jmOpcoes.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
         jmSair.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jmSair.setText("Sair");
@@ -83,17 +83,16 @@ public class ViewPrincipal extends javax.swing.JFrame {
                 jmSairActionPerformed(evt);
             }
         });
-        jMenu1.add(jmSair);
+        jmOpcoes.add(jmSair);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jmOpcoes);
 
-        jMenu2.setText("Cadastro");
-        jMenu2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jMenu2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jmCadastro.setText("Cadastro");
+        jmCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jmCadastro.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
         jmClientes.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jmClientes.setText("Clientes");
-        jmClientes.setToolTipText("");
         jmClientes.setHideActionText(true);
         jmClientes.setName(""); // NOI18N
         jmClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +100,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
                 jmClientesActionPerformed(evt);
             }
         });
-        jMenu2.add(jmClientes);
+        jmCadastro.add(jmClientes);
 
         jmProdutos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jmProdutos.setText("Produtos");
@@ -110,7 +109,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
                 jmProdutosActionPerformed(evt);
             }
         });
-        jMenu2.add(jmProdutos);
+        jmCadastro.add(jmProdutos);
 
         jmUsuarios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jmUsuarios.setText("Usuários");
@@ -119,16 +118,20 @@ public class ViewPrincipal extends javax.swing.JFrame {
                 jmUsuariosActionPerformed(evt);
             }
         });
-        jMenu2.add(jmUsuarios);
+        jmCadastro.add(jmUsuarios);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jmCadastro);
 
-        jMenu3.setText("Vendas");
-        jMenu3.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jMenuBar1.add(jMenu3);
+        jmVenda.setText("Venda");
+        jmVenda.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jMenuBar1.add(jmVenda);
 
-        jMenu4.setText("Sobre");
-        jMenu4.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jmRelatorio.setText("Relatório");
+        jmRelatorio.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jMenuBar1.add(jmRelatorio);
+
+        jmSobre.setText("Sobre");
+        jmSobre.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
         jmProjeto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jmProjeto.setText("Projeto");
@@ -142,9 +145,9 @@ public class ViewPrincipal extends javax.swing.JFrame {
                 jmProjetoActionPerformed(evt);
             }
         });
-        jMenu4.add(jmProjeto);
+        jmSobre.add(jmProjeto);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(jmSobre);
 
         setJMenuBar(jMenuBar1);
 
@@ -228,17 +231,18 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenu jmCadastro;
     private javax.swing.JMenuItem jmClientes;
+    private javax.swing.JMenu jmOpcoes;
     private javax.swing.JMenuItem jmProdutos;
     private javax.swing.JMenuItem jmProjeto;
+    private javax.swing.JMenu jmRelatorio;
     private javax.swing.JMenuItem jmSair;
+    private javax.swing.JMenu jmSobre;
     private javax.swing.JMenuItem jmUsuarios;
+    private javax.swing.JMenu jmVenda;
     private componentes.UJPanelImagem uJPanelImagem1;
     // End of variables declaration//GEN-END:variables
 }

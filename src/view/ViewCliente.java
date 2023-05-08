@@ -21,7 +21,7 @@ import util.CampoDePesquisa;
  */
 public class ViewCliente extends javax.swing.JFrame {
 
-    ArrayList<ModelClientes> listaModelClientes = new ArrayList<ModelClientes>();
+    ArrayList<ModelClientes> listaModelClientes = new ArrayList<>();
     ControllerCliente controllerCliente = new ControllerCliente();
     ModelClientes modelCliente = new ModelClientes();
     String editarSalvar;
@@ -131,11 +131,11 @@ public class ViewCliente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Nome", "Cidade", "Telefone"
+                "Código", "Nome", "Cidade", "UF", "Telefone"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -152,8 +152,11 @@ public class ViewCliente extends javax.swing.JFrame {
             jtableCliente.getColumnModel().getColumn(1).setPreferredWidth(150);
             jtableCliente.getColumnModel().getColumn(2).setMinWidth(120);
             jtableCliente.getColumnModel().getColumn(2).setPreferredWidth(120);
-            jtableCliente.getColumnModel().getColumn(3).setMinWidth(120);
-            jtableCliente.getColumnModel().getColumn(3).setPreferredWidth(120);
+            jtableCliente.getColumnModel().getColumn(3).setMinWidth(50);
+            jtableCliente.getColumnModel().getColumn(3).setPreferredWidth(50);
+            jtableCliente.getColumnModel().getColumn(3).setMaxWidth(60);
+            jtableCliente.getColumnModel().getColumn(4).setMinWidth(120);
+            jtableCliente.getColumnModel().getColumn(4).setPreferredWidth(120);
         }
 
         btnEditar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -348,12 +351,13 @@ public class ViewCliente extends javax.swing.JFrame {
                             .addComponent(jcbUF)
                             .addComponent(jtfCep, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jtfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11)
+                        .addComponent(jtfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -361,7 +365,7 @@ public class ViewCliente extends javax.swing.JFrame {
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -596,6 +600,7 @@ public class ViewCliente extends javax.swing.JFrame {
                 listaModelClientes.get(c).getIdCliente(),
                 listaModelClientes.get(c).getClienteNome(),
                 listaModelClientes.get(c).getClienteCidade(),
+                listaModelClientes.get(c).getClienteUf(),
                 listaModelClientes.get(c).getClienteTelefone()
             });
         }

@@ -13,7 +13,7 @@ import model.ModelUsuarios;
  * @author Diego Barbosa
  */
 public class ViewLogin extends javax.swing.JFrame {
-    
+
     ControllerUsuarios controllerUsuario = new ControllerUsuarios();
     ModelUsuarios modelUsuario = new ModelUsuarios();
 
@@ -173,8 +173,8 @@ public class ViewLogin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Não foi encontrado o usuário", "ATENÇÃO",
                         JOptionPane.WARNING_MESSAGE);
             }
-        } 
-        
+        }
+
     }//GEN-LAST:event_jbtEntrarActionPerformed
 
     private void jtfLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfLoginKeyPressed
@@ -190,7 +190,22 @@ public class ViewLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfSenhaKeyPressed
 
     private void jbtEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jbtEntrarKeyPressed
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            modelUsuario.setUsuarioLogin(this.jtfLogin.getText());
+            modelUsuario.setUsuarioSenha(String.valueOf(this.jtfSenha.getPassword()));
+            if (this.jtfLogin.getText().isEmpty() || String.valueOf(this.jtfSenha.getPassword()).isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Digite o usuário e senha", "ATENÇÃO",
+                        JOptionPane.WARNING_MESSAGE);
+            } else {
+                if (controllerUsuario.getUsuarioController(modelUsuario)) {
+                    new ViewPrincipal().setVisible(true);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Não foi encontrado o usuário", "ATENÇÃO",
+                            JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
     }//GEN-LAST:event_jbtEntrarKeyPressed
 
     /**

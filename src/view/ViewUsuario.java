@@ -19,7 +19,7 @@ import util.CampoDePesquisa;
  */
 public class ViewUsuario extends javax.swing.JFrame {
 
-    ArrayList<ModelUsuarios> listaModelUsuarios = new ArrayList<ModelUsuarios>();
+    ArrayList<ModelUsuarios> listaModelUsuarios = new ArrayList<>();
     ControllerUsuarios controllerUsuarios = new ControllerUsuarios();
     ModelUsuarios modelUsuario = new ModelUsuarios();
     String editarSalvar;
@@ -65,6 +65,7 @@ public class ViewUsuario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Usuários");
         setLocation(new java.awt.Point(600, 150));
+        setResizable(false);
 
         jtfCodigo.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jtfCodigo.setEnabled(false);

@@ -22,7 +22,7 @@ import util.CampoDePesquisa;
  */
 public class ViewProduto extends javax.swing.JFrame {
 
-    ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<ModelProdutos>();
+    ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<>();
     ControllerProduto controllerProdutos = new ControllerProduto();
     ModelProdutos modelProduto = new ModelProdutos();
     String editarSalvar;
@@ -72,6 +72,7 @@ public class ViewProduto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Produto");
         setLocation(new java.awt.Point(600, 150));
+        setResizable(false);
 
         jtfCodigo.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jtfCodigo.setEnabled(false);
