@@ -7,8 +7,10 @@ package view;
 import controller.ControllerProduto;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +23,8 @@ import util.CampoDePesquisa;
  * @author Diego Barbosa
  */
 public class ViewProduto extends javax.swing.JFrame {
-
+    
+    Locale localeBR = new Locale("pt","BR");
     ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<>();
     ControllerProduto controllerProdutos = new ControllerProduto();
     ModelProdutos modelProduto = new ModelProdutos();
@@ -63,11 +66,11 @@ public class ViewProduto extends javax.swing.JFrame {
         btnPesquisar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         jtfEstoque = new javax.swing.JFormattedTextField();
-        jtfValor = new javax.swing.JFormattedTextField();
-        jtfCusto = new javax.swing.JFormattedTextField();
+        jtfPreco = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         jtfMarca = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        jtfCusto = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Produto");
@@ -97,14 +100,14 @@ public class ViewProduto extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Produto", "Estoque", "Preço"
+                "Código", "Produto", "Estoque", "Preço", "Custo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -184,25 +187,19 @@ public class ViewProduto extends javax.swing.JFrame {
         jtfEstoque.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
         jtfEstoque.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
-        jtfValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
-        jtfValor.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-
-        jtfCusto.setEnabled(false);
-        jtfCusto.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jtfCusto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfCustoActionPerformed(evt);
-            }
-        });
+        jtfPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        jtfPreco.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel6.setText("Custo:");
 
         jtfMarca.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jtfMarca.setEnabled(false);
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel7.setText("Preço:");
+
+        jtfCusto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        jtfCusto.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -241,12 +238,12 @@ public class ViewProduto extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel7))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6))
+                                    .addComponent(jLabel6)
+                                    .addComponent(jtfCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -274,24 +271,28 @@ public class ViewProduto extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfMarca, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(jtfEstoque)
-                    .addComponent(jtfValor)
-                    .addComponent(jtfCusto))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jtfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfMarca, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                            .addComponent(jtfEstoque)
+                            .addComponent(jtfPreco))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jtfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jtfCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -309,10 +310,6 @@ public class ViewProduto extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jtfCustoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCustoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfCustoActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         int linha = jtableProdutos.getSelectedRow();
@@ -368,8 +365,10 @@ public class ViewProduto extends javax.swing.JFrame {
             // Seta os dados recuperados no banco nos campos
             this.jtfCodigo.setText(String.valueOf(modelProduto.getIdProduto()));
             this.jtfNomeProduto.setText(modelProduto.getProdutoNome());
+            this.jtfMarca.setText(modelProduto.getProdutoMarca());
             this.jtfEstoque.setText(String.valueOf(modelProduto.getProdutoEstoque()));
-            this.jtfValor.setText(String.valueOf(modelProduto.getProdutoValor()));
+            this.jtfPreco.setText(String.valueOf(modelProduto.getProdutoPreco()));
+            this.jtfCusto.setText(String.valueOf(modelProduto.getProdutoCusto()));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nenhum registro selecionado");
         }
@@ -419,7 +418,7 @@ public class ViewProduto extends javax.swing.JFrame {
      * Método para salvar um novo produto cadastrado no banco de dados.
      */
     private void salvarProduto() {
-        if (this.jtfNomeProduto.getText().isEmpty() || this.jtfEstoque.getText().isEmpty() || this.jtfValor.getText().isEmpty()) {
+        if (this.jtfNomeProduto.getText().isEmpty() || this.jtfEstoque.getText().isEmpty() || this.jtfPreco.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo vazio", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
         } else if (this.jtfNomeProduto.getText().length() >= 101) {
@@ -427,12 +426,14 @@ public class ViewProduto extends javax.swing.JFrame {
                     JOptionPane.WARNING_MESSAGE);
         } else {
             modelProduto.setProdutoNome(this.jtfNomeProduto.getText().toUpperCase());
+            modelProduto.setProdutoMarca(this.jtfMarca.getText().toUpperCase());
             modelProduto.setProdutoEstoque(Integer.parseInt(this.jtfEstoque.getText()));
             try {
                 DecimalFormat format = new DecimalFormat("#,###.00");
                 DecimalFormatSymbols decimalSimbol = new DecimalFormatSymbols();
                 decimalSimbol.setDecimalSeparator('.');
-                modelProduto.setProdutoValor(format.parse(this.jtfValor.getText()).doubleValue());
+                modelProduto.setProdutoPreco(format.parse(this.jtfPreco.getText()).doubleValue());
+                modelProduto.setProdutoCusto(format.parse(this.jtfCusto.getText()).doubleValue());
             } catch (ParseException e) {
                 JOptionPane.showMessageDialog(this, "Não foi possível formatar campo", "ERRO",
                         JOptionPane.ERROR_MESSAGE);
@@ -454,7 +455,7 @@ public class ViewProduto extends javax.swing.JFrame {
      * Método para salvar a edição de um registro no banco de dados.
      */
     private void editarProduto() {
-        if (this.jtfNomeProduto.getText().isEmpty() || this.jtfEstoque.getText().isEmpty() || this.jtfValor.getText().isEmpty()) {
+        if (this.jtfNomeProduto.getText().isEmpty() || this.jtfEstoque.getText().isEmpty() || this.jtfPreco.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo vazio", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
         } else if (this.jtfNomeProduto.getText().length() >= 101) {
@@ -462,12 +463,14 @@ public class ViewProduto extends javax.swing.JFrame {
                     JOptionPane.WARNING_MESSAGE);
         } else {
             modelProduto.setProdutoNome(this.jtfNomeProduto.getText().toUpperCase());
+            modelProduto.setProdutoMarca(this.jtfMarca.getText().toUpperCase());
             modelProduto.setProdutoEstoque(Integer.parseInt(this.jtfEstoque.getText()));
             try {
                 DecimalFormat format = new DecimalFormat("#,###.00");
                 DecimalFormatSymbols decimalSimbol = new DecimalFormatSymbols();
                 decimalSimbol.setDecimalSeparator('.');
-                modelProduto.setProdutoValor(format.parse(this.jtfValor.getText()).doubleValue());
+                modelProduto.setProdutoPreco(format.parse(this.jtfPreco.getText()).doubleValue());
+                modelProduto.setProdutoCusto(format.parse(this.jtfCusto.getText()).doubleValue());
             } catch (ParseException e) {
                 JOptionPane.showMessageDialog(this, "Não foi possível formatar campo", "ERRO",
                         JOptionPane.ERROR_MESSAGE);
@@ -492,7 +495,9 @@ public class ViewProduto extends javax.swing.JFrame {
         this.jtfCodigo.setText("");
         this.jtfNomeProduto.setText("");
         this.jtfEstoque.setText("");
-        this.jtfValor.setText("");
+        this.jtfPreco.setText("");
+        this.jtfMarca.setText("");
+        this.jtfCusto.setText("");
     }
 
     /**
@@ -503,7 +508,9 @@ public class ViewProduto extends javax.swing.JFrame {
     private void habilitarDesabilitarCampos(boolean condicao) {
         this.jtfNomeProduto.setEnabled(condicao);
         this.jtfEstoque.setEnabled(condicao);
-        this.jtfValor.setEnabled(condicao);
+        this.jtfPreco.setEnabled(condicao);
+        this.jtfCusto.setEnabled(condicao);
+        this.jtfMarca.setEnabled(condicao);
     }
 
     /**
@@ -513,6 +520,8 @@ public class ViewProduto extends javax.swing.JFrame {
         listaModelProdutos = controllerProdutos.retornaListaProdutosController();
         DefaultTableModel tabela = (DefaultTableModel) jtableProdutos.getModel();
         tabela.setNumRows(0);
+        NumberFormat preco = NumberFormat.getCurrencyInstance(localeBR);
+        NumberFormat custo = NumberFormat.getCurrencyInstance(localeBR);
 
         int contador = listaModelProdutos.size();
         for (int c = 0; c < contador; c++) {
@@ -520,7 +529,8 @@ public class ViewProduto extends javax.swing.JFrame {
                 listaModelProdutos.get(c).getIdProduto(),
                 listaModelProdutos.get(c).getProdutoNome(),
                 listaModelProdutos.get(c).getProdutoEstoque(),
-                listaModelProdutos.get(c).getProdutoValor()
+                preco.format(listaModelProdutos.get(c).getProdutoPreco()),
+                custo.format(listaModelProdutos.get(c).getProdutoCusto())
             });
         }
     }
@@ -549,6 +559,6 @@ public class ViewProduto extends javax.swing.JFrame {
     private javax.swing.JTextField jtfMarca;
     private javax.swing.JTextField jtfNomeProduto;
     private javax.swing.JTextField jtfPesquisa;
-    private javax.swing.JFormattedTextField jtfValor;
+    private javax.swing.JFormattedTextField jtfPreco;
     // End of variables declaration//GEN-END:variables
 }

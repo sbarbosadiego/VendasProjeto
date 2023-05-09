@@ -25,6 +25,7 @@ public class ViewCliente extends javax.swing.JFrame {
     ControllerCliente controllerCliente = new ControllerCliente();
     ModelClientes modelCliente = new ModelClientes();
     String editarSalvar;
+    
 
     /**
      * Creates new form ViewCliente
@@ -81,7 +82,7 @@ public class ViewCliente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Cliente");
         setLocation(new java.awt.Point(600, 150));
-        setPreferredSize(new java.awt.Dimension(800, 580));
+        setPreferredSize(new java.awt.Dimension(800, 560));
         setResizable(false);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 540));
@@ -365,7 +366,7 @@ public class ViewCliente extends javax.swing.JFrame {
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -376,7 +377,7 @@ public class ViewCliente extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
         );
 
         pack();

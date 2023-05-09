@@ -29,7 +29,9 @@ usuario_senha VARCHAR(30) NOT NULL
 CREATE TABLE IF NOT EXISTS tbl_produto (
 pk_id_produto SERIAL NOT NULL AUTO_INCREMENT PRIMARY KEY,
 produto_nome VARCHAR(100) NOT NULL,
-produto_valor DECIMAL(10,2),
+produto_marca VARCHAR(100) NOT NULL,
+produto_preco DECIMAL(10,2),
+produto_custo DECIMAL(10,2),
 produto_estoque INT
 );
 

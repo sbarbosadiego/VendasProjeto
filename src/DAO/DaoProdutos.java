@@ -24,11 +24,15 @@ public class DaoProdutos extends ConexaoMySql {
             this.conectar();
             return this.insertSQL("INSERT INTO tbl_produto ("
                     + "produto_nome,"
-                    + "produto_valor,"
+                    + "produto_marca,"
+                    + "produto_preco,"
+                    + "produto_custo,"
                     + "produto_estoque"
                     + ") VALUES ("
                     + "'"+pModelProdutos.getProdutoNome()+"',"
-                    + "'"+pModelProdutos.getProdutoValor()+"',"
+                    + "'"+pModelProdutos.getProdutoMarca()+"',"
+                    + "'"+pModelProdutos.getProdutoPreco()+"',"
+                    + "'"+pModelProdutos.getProdutoCusto()+"',"
                     + "'"+pModelProdutos.getProdutoEstoque()+"'"
                     + ");");
         } catch (Exception e) {
@@ -68,7 +72,9 @@ public class DaoProdutos extends ConexaoMySql {
             return this.executarUpdateDeleteSQL(
                     "UPDATE tbl_produto SET "
                             + "produto_nome = '"+pModelProdutos.getProdutoNome()+"',"
-                            + "produto_valor = '"+pModelProdutos.getProdutoValor()+"',"
+                            + "produto_marca = '"+pModelProdutos.getProdutoMarca()+"',"
+                            + "produto_preco = '"+pModelProdutos.getProdutoPreco()+"',"
+                            + "produto_custo = '"+pModelProdutos.getProdutoCusto()+"',"
                             + "produto_estoque = '"+pModelProdutos.getProdutoEstoque()+"'"
                             + "WHERE pk_id_produto = '"+pModelProdutos.getIdProduto()+"';"
             );
@@ -93,14 +99,18 @@ public class DaoProdutos extends ConexaoMySql {
             this.executarSQL("SELECT "
                     + "pk_id_produto, "
                     + "produto_nome, "
-                    + "produto_valor, "
+                    + "produto_marca, "
+                    + "produto_preco, "
+                    + "produto_custo, "
                     + "produto_estoque "
                     + "FROM tbl_produto WHERE pk_id_produto = '"+pIdProduto+"'");
             while (this.getResultSet().next()) {
                 modelProdutos.setIdProduto(this.getResultSet().getInt(1));
                 modelProdutos.setProdutoNome(this.getResultSet().getString(2));
-                modelProdutos.setProdutoValor(this.getResultSet().getDouble(3));
-                modelProdutos.setProdutoEstoque(this.getResultSet().getInt(4));
+                modelProdutos.setProdutoMarca(this.getResultSet().getString(3));
+                modelProdutos.setProdutoPreco(this.getResultSet().getDouble(4));
+                modelProdutos.setProdutoCusto(this.getResultSet().getDouble(5));
+                modelProdutos.setProdutoEstoque(this.getResultSet().getInt(6));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,13 +129,15 @@ public class DaoProdutos extends ConexaoMySql {
         ModelProdutos modelProdutos = new ModelProdutos();
         try {
             this.conectar();
-            this.executarSQL("SELECT pk_id_produto, produto_nome, produto_valor, produto_estoque FROM tbl_produto;");
+            this.executarSQL("SELECT pk_id_produto, produto_nome, produto_marca, produto_preco, produto_custo, produto_estoque FROM tbl_produto;");
             while (this.getResultSet().next()) {
                 modelProdutos = new ModelProdutos();
                 modelProdutos.setIdProduto(this.getResultSet().getInt(1));
                 modelProdutos.setProdutoNome(this.getResultSet().getString(2));
-                modelProdutos.setProdutoValor(this.getResultSet().getDouble(3));
-                modelProdutos.setProdutoEstoque(this.getResultSet().getInt(4));
+                modelProdutos.setProdutoMarca(this.getResultSet().getString(3));
+                modelProdutos.setProdutoPreco(this.getResultSet().getDouble(4));
+                modelProdutos.setProdutoCusto(this.getResultSet().getDouble(5));
+                modelProdutos.setProdutoEstoque(this.getResultSet().getInt(6));
                 listaModelProdutos.add(modelProdutos);
             }
         } catch (Exception e) {

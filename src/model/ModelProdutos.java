@@ -13,7 +13,9 @@ public class ModelProdutos {
     
     private int idProduto;
     private String produtoNome;
-    private Double produtoValor;
+    private String produtoMarca;
+    private Double produtoCusto;
+    private Double produtoPreco;
     private int produtoEstoque;
     
     // Getters e Setters
@@ -33,12 +35,12 @@ public class ModelProdutos {
         this.produtoNome = produtoNome;
     }
 
-    public Double getProdutoValor() {
-        return produtoValor;
+    public Double getProdutoPreco() {
+        return produtoPreco;
     }
 
-    public void setProdutoValor(Double produtoValor) {
-        this.produtoValor = produtoValor;
+    public void setProdutoPreco(Double produtoValor) {
+        this.produtoPreco = produtoValor;
     }
 
     public int getProdutoEstoque() {
@@ -48,5 +50,23 @@ public class ModelProdutos {
     public void setProdutoEstoque(int produtoEstoque) {
         this.produtoEstoque = produtoEstoque;
     }
+
+    public String getProdutoMarca() {
+        return produtoMarca;
+    }
+
+    public void setProdutoMarca(String produtoMarca) {
+        this.produtoMarca = produtoMarca;
+    }
+
+    public Double getProdutoCusto() {
+        return produtoCusto;
+    }
+
+    public void setProdutoCusto(Double produtoCusto) {
+        this.produtoCusto = produtoCusto;
+    }
+    
+    
     
 }

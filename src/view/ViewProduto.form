@@ -79,13 +79,13 @@
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jtfValor" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Component id="jtfPreco" min="-2" pref="150" max="-2" attributes="0"/>
                                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jtfCusto" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jtfCusto" min="-2" pref="150" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -125,26 +125,33 @@
                   </Group>
                   <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jtfMarca" pref="30" max="32767" attributes="0"/>
-                      <Component id="jtfEstoque" max="32767" attributes="0"/>
-                      <Component id="jtfValor" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jtfCusto" alignment="0" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfPesquisa" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnPesquisar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="347" max="32767" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnCancelar" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="btnEditar" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="btnNovo" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="btnSalvar" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="btnExcluir" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jtfMarca" pref="30" max="32767" attributes="0"/>
+                              <Component id="jtfEstoque" max="32767" attributes="0"/>
+                              <Component id="jtfPreco" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfPesquisa" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnPesquisar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" pref="347" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnCancelar" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="btnEditar" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="btnNovo" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="btnSalvar" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="btnExcluir" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="jtfCusto" min="-2" pref="30" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -212,11 +219,12 @@
                   <Font name="Arial" size="16" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="0">
+                  <Table columnCount="5" rowCount="0">
                     <Column editable="false" title="C&#xf3;digo" type="java.lang.Object"/>
                     <Column editable="false" title="Produto" type="java.lang.Object"/>
                     <Column editable="false" title="Estoque" type="java.lang.Object"/>
                     <Column editable="false" title="Pre&#xe7;o" type="java.lang.String"/>
+                    <Column editable="false" title="Custo" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -237,6 +245,11 @@
                       <Renderer/>
                     </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="60" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -354,7 +367,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jtfValor">
+        <Component class="javax.swing.JFormattedTextField" name="jtfPreco">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
               <Format format="#,##0.00" subtype="-1" type="0"/>
@@ -363,17 +376,6 @@
               <Font name="Arial" size="16" style="0"/>
             </Property>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jtfCusto">
-          <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="16" style="0"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfCustoActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
@@ -388,7 +390,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="16" style="0"/>
             </Property>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
@@ -397,6 +398,16 @@
               <Font name="Arial" size="16" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Pre&#xe7;o:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="jtfCusto">
+          <Properties>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+              <Format format="#,##0.00" subtype="-1" type="0"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="16" style="0"/>
+            </Property>
           </Properties>
         </Component>
       </SubComponents>
