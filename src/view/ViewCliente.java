@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
-import model.ModelClientes;
+import model.ModelCliente;
 import util.CampoDePesquisa;
 
 /**
@@ -21,9 +21,9 @@ import util.CampoDePesquisa;
  */
 public class ViewCliente extends javax.swing.JFrame {
 
-    ArrayList<ModelClientes> listaModelClientes = new ArrayList<>();
+    ArrayList<ModelCliente> listaModelClientes = new ArrayList<>();
     ControllerCliente controllerCliente = new ControllerCliente();
-    ModelClientes modelCliente = new ModelClientes();
+    ModelCliente modelCliente = new ModelCliente();
     String editarSalvar;
     
 

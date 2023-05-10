@@ -8,7 +8,7 @@ package model;
  *
  * @author Diego Barbosa
  */
-public class ModelUsuarios {
+public class ModelUsuario {
     
     private int idUsuario;
     private String usuarioNome;

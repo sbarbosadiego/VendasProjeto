@@ -4,18 +4,18 @@
  */
 package view;
 
-import controller.ControllerUsuarios;
+import controller.ControllerUsuario;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-import model.ModelUsuarios;
+import model.ModelUsuario;
 
 /**
  * @author Diego Barbosa
  */
 public class ViewLogin extends javax.swing.JFrame {
 
-    ControllerUsuarios controllerUsuario = new ControllerUsuarios();
-    ModelUsuarios modelUsuario = new ModelUsuarios();
+    ControllerUsuario controllerUsuario = new ControllerUsuario();
+    ModelUsuario modelUsuario = new ModelUsuario();
 
     /**
      * Creates new form ViewLogin

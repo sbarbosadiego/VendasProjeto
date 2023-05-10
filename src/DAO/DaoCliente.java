@@ -6,19 +6,19 @@ package DAO;
 
 import conexoes.ConexaoMySql;
 import java.util.ArrayList;
-import model.ModelClientes;
+import model.ModelCliente;
 
 /**
  * @author Diego Barbosa
  */
-public class DaoClientes extends ConexaoMySql {
+public class DaoCliente extends ConexaoMySql {
 
     /**
      * Inseri um Cliente no banco de dados
      * @param pModelClientes
      * @return int
      */
-    public int salvarClientesDAO(ModelClientes pModelClientes) {
+    public int salvarClientesDAO(ModelCliente pModelClientes) {
         try {
             this.conectar();
             return this.insertSQL("INSERT INTO tbl_cliente ("
@@ -73,7 +73,7 @@ public class DaoClientes extends ConexaoMySql {
      * @param pModelClientes
      * @return boolean
      */
-    public boolean alterarClienteDAO(ModelClientes pModelClientes) {
+    public boolean alterarClienteDAO(ModelCliente pModelClientes) {
         try {
             this.conectar();
             return this.executarUpdateDeleteSQL(
@@ -102,8 +102,8 @@ public class DaoClientes extends ConexaoMySql {
      * @param pIdCliente
      * @return modelCliente
      */
-    public ModelClientes retornarClienteDAO(int pIdCliente) {
-        ModelClientes modelClientes = new ModelClientes();
+    public ModelCliente retornarClienteDAO(int pIdCliente) {
+        ModelCliente modelClientes = new ModelCliente();
         try {
             this.conectar();
             this.executarSQL("SELECT "
@@ -142,9 +142,9 @@ public class DaoClientes extends ConexaoMySql {
      * Retornar lista de Clientes
      * @return listaModelClientes
      */
-    public ArrayList<ModelClientes> retornarListaClientesDAO() {
-        ArrayList<ModelClientes> listaModelClientes = new ArrayList<>();
-        ModelClientes modelClientes = new ModelClientes();
+    public ArrayList<ModelCliente> retornarListaClientesDAO() {
+        ArrayList<ModelCliente> listaModelClientes = new ArrayList<>();
+        ModelCliente modelClientes = new ModelCliente();
         try {
             this.conectar();
             this.executarSQL("SELECT "
@@ -160,7 +160,7 @@ public class DaoClientes extends ConexaoMySql {
                     + "cliente_complemento "
                     + "FROM tbl_cliente;");
             while (this.getResultSet().next()) {
-                modelClientes = new ModelClientes();
+                modelClientes = new ModelCliente();
                 modelClientes.setIdCliente(this.getResultSet().getInt(1));
                 modelClientes.setClienteNome(this.getResultSet().getString(2));
                 modelClientes.setClienteEndereco(this.getResultSet().getString(3));

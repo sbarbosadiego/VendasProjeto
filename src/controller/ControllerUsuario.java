@@ -4,22 +4,22 @@
  */
 package controller;
 
-import DAO.DaoUsuarios;
+import DAO.DaoUsuario;
 import java.util.ArrayList;
-import model.ModelUsuarios;
+import model.ModelUsuario;
 
 /**
  * @author Diego Barbosa
  */
-public class ControllerUsuarios {
+public class ControllerUsuario {
 
-    private DaoUsuarios daoUsuarios = new DaoUsuarios();
+    private DaoUsuario daoUsuarios = new DaoUsuario();
 
     /**
      * Salvar usuario controller
      * @return int
      */
-    public int salvarUsuarioController(ModelUsuarios pModelUsuarios) {
+    public int salvarUsuarioController(ModelUsuario pModelUsuarios) {
         return this.daoUsuarios.salvarUsuariosDAO(pModelUsuarios);
     }
 
@@ -37,16 +37,16 @@ public class ControllerUsuarios {
      * @param pModelUsuarios
      * @return boolean
      */
-    public boolean editarUsuarioController(ModelUsuarios pModelUsuarios) {
+    public boolean editarUsuarioController(ModelUsuario pModelUsuarios) {
         return this.daoUsuarios.alterarUsuarioDAO(pModelUsuarios);
     }
 
     /**
      * Retornar pelo código de usuario
      * @param pIdUsuario
-     * @return ModelUsuarios
+     * @return ModelUsuario
      */
-    public ModelUsuarios retornarUsuarioController(int pIdUsuario) {
+    public ModelUsuario retornarUsuarioController(int pIdUsuario) {
         return this.daoUsuarios.retornarUsuarioDAO(pIdUsuario);
     }
 
@@ -54,7 +54,7 @@ public class ControllerUsuarios {
      * Retornar lista de usuarios
      * @return ArrayList
      */
-    public ArrayList<ModelUsuarios> retornaListaUsuariosController() {
+    public ArrayList<ModelUsuario> retornaListaUsuariosController() {
         return this.daoUsuarios.retornarListaUsuariosDAO();
     }
     
@@ -63,7 +63,7 @@ public class ControllerUsuarios {
      * @param pmodelUsuario
      * @return 
      */
-    public boolean getUsuarioController(ModelUsuarios pmodelUsuario) {
+    public boolean getUsuarioController(ModelUsuario pmodelUsuario) {
         return this.daoUsuarios.getValidarUsuarioDAO(pmodelUsuario);
     }
 

@@ -12,7 +12,7 @@ import model.ModelProdutos;
  *
  * @author Diego Barbosa
  */
-public class DaoProdutos extends ConexaoMySql {
+public class DaoProduto extends ConexaoMySql {
     
     /**
      * Inseri um produto no banco de dados.
@@ -30,7 +30,7 @@ public class DaoProdutos extends ConexaoMySql {
                     + "produto_estoque"
                     + ") VALUES ("
                     + "'"+pModelProdutos.getProdutoNome()+"',"
-                    + "'"+pModelProdutos.getProdutoMarca()+"',"
+                    + "'"+pModelProdutos.getProdutoFabricante()+"',"
                     + "'"+pModelProdutos.getProdutoPreco()+"',"
                     + "'"+pModelProdutos.getProdutoCusto()+"',"
                     + "'"+pModelProdutos.getProdutoEstoque()+"'"
@@ -72,7 +72,7 @@ public class DaoProdutos extends ConexaoMySql {
             return this.executarUpdateDeleteSQL(
                     "UPDATE tbl_produto SET "
                             + "produto_nome = '"+pModelProdutos.getProdutoNome()+"',"
-                            + "produto_marca = '"+pModelProdutos.getProdutoMarca()+"',"
+                            + "produto_marca = '"+pModelProdutos.getProdutoFabricante()+"',"
                             + "produto_preco = '"+pModelProdutos.getProdutoPreco()+"',"
                             + "produto_custo = '"+pModelProdutos.getProdutoCusto()+"',"
                             + "produto_estoque = '"+pModelProdutos.getProdutoEstoque()+"'"
@@ -107,7 +107,7 @@ public class DaoProdutos extends ConexaoMySql {
             while (this.getResultSet().next()) {
                 modelProdutos.setIdProduto(this.getResultSet().getInt(1));
                 modelProdutos.setProdutoNome(this.getResultSet().getString(2));
-                modelProdutos.setProdutoMarca(this.getResultSet().getString(3));
+                modelProdutos.setProdutoFabricante(this.getResultSet().getString(3));
                 modelProdutos.setProdutoPreco(this.getResultSet().getDouble(4));
                 modelProdutos.setProdutoCusto(this.getResultSet().getDouble(5));
                 modelProdutos.setProdutoEstoque(this.getResultSet().getInt(6));
@@ -134,7 +134,7 @@ public class DaoProdutos extends ConexaoMySql {
                 modelProdutos = new ModelProdutos();
                 modelProdutos.setIdProduto(this.getResultSet().getInt(1));
                 modelProdutos.setProdutoNome(this.getResultSet().getString(2));
-                modelProdutos.setProdutoMarca(this.getResultSet().getString(3));
+                modelProdutos.setProdutoFabricante(this.getResultSet().getString(3));
                 modelProdutos.setProdutoPreco(this.getResultSet().getDouble(4));
                 modelProdutos.setProdutoCusto(this.getResultSet().getDouble(5));
                 modelProdutos.setProdutoEstoque(this.getResultSet().getInt(6));

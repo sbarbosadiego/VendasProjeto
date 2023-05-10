@@ -4,14 +4,14 @@
  */
 package view;
 
-import controller.ControllerUsuarios;
+import controller.ControllerUsuario;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import model.ModelUsuarios;
+import model.ModelUsuario;
 import util.CampoDePesquisa;
 
 /**
@@ -19,9 +19,9 @@ import util.CampoDePesquisa;
  */
 public class ViewUsuario extends javax.swing.JFrame {
 
-    ArrayList<ModelUsuarios> listaModelUsuarios = new ArrayList<>();
-    ControllerUsuarios controllerUsuarios = new ControllerUsuarios();
-    ModelUsuarios modelUsuario = new ModelUsuarios();
+    ArrayList<ModelUsuario> listaModelUsuarios = new ArrayList<>();
+    ControllerUsuario controllerUsuarios = new ControllerUsuario();
+    ModelUsuario modelUsuario = new ModelUsuario();
     String editarSalvar;
 
     /**

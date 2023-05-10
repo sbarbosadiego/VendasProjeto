@@ -6,12 +6,12 @@ package DAO;
 
 import conexoes.ConexaoMySql;
 import java.util.ArrayList;
-import model.ModelUsuarios;
+import model.ModelUsuario;
 
 /**
  * @author Diego Barbosa
  */
-public class DaoUsuarios extends ConexaoMySql {
+public class DaoUsuario extends ConexaoMySql {
 
     /**
      * Inseri um usuario no banco de dados
@@ -19,7 +19,7 @@ public class DaoUsuarios extends ConexaoMySql {
      * @param pModelUsuarios
      * @return int
      */
-    public int salvarUsuariosDAO(ModelUsuarios pModelUsuarios) {
+    public int salvarUsuariosDAO(ModelUsuario pModelUsuarios) {
         try {
             this.conectar();
             return this.insertSQL("INSERT INTO tbl_usuario ("
@@ -64,7 +64,7 @@ public class DaoUsuarios extends ConexaoMySql {
      * @param pModelUsuarios
      * @return boolean
      */
-    public boolean alterarUsuarioDAO(ModelUsuarios pModelUsuarios) {
+    public boolean alterarUsuarioDAO(ModelUsuario pModelUsuarios) {
         try {
             this.conectar();
             return this.executarUpdateDeleteSQL(
@@ -88,8 +88,8 @@ public class DaoUsuarios extends ConexaoMySql {
      * @param pIdUsuario
      * @return modelUsuario
      */
-    public ModelUsuarios retornarUsuarioDAO(int pIdUsuario) {
-        ModelUsuarios modelUsuarios = new ModelUsuarios();
+    public ModelUsuario retornarUsuarioDAO(int pIdUsuario) {
+        ModelUsuario modelUsuarios = new ModelUsuario();
         try {
             this.conectar();
             this.executarSQL("SELECT "
@@ -115,14 +115,14 @@ public class DaoUsuarios extends ConexaoMySql {
      *
      * @return listaModelUsuarios
      */
-    public ArrayList<ModelUsuarios> retornarListaUsuariosDAO() {
-        ArrayList<ModelUsuarios> listaModelUsuarios = new ArrayList<>();
-        ModelUsuarios modelUsuarios = new ModelUsuarios();
+    public ArrayList<ModelUsuario> retornarListaUsuariosDAO() {
+        ArrayList<ModelUsuario> listaModelUsuarios = new ArrayList<>();
+        ModelUsuario modelUsuarios = new ModelUsuario();
         try {
             this.conectar();
             this.executarSQL("SELECT pk_id_usuario, usuario_nome, usuario_login FROM tbl_usuario;");
             while (this.getResultSet().next()) {
-                modelUsuarios = new ModelUsuarios();
+                modelUsuarios = new ModelUsuario();
                 modelUsuarios.setIdUsuario(this.getResultSet().getInt(1));
                 modelUsuarios.setUsuarioNome(this.getResultSet().getString(2));
                 modelUsuarios.setUsuarioLogin(this.getResultSet().getString(3));
@@ -141,7 +141,7 @@ public class DaoUsuarios extends ConexaoMySql {
      * @param pModelUsuario
      * @return boolean
      */
-    public boolean getValidarUsuarioDAO(ModelUsuarios pModelUsuario) {
+    public boolean getValidarUsuarioDAO(ModelUsuario pModelUsuario) {
         try {
             this.conectar();
             this.executarSQL("SELECT "

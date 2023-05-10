@@ -13,7 +13,7 @@ public class ModelProdutos {
     
     private int idProduto;
     private String produtoNome;
-    private String produtoMarca;
+    private String produtoFabricante;
     private Double produtoCusto;
     private Double produtoPreco;
     private int produtoEstoque;
@@ -51,12 +51,12 @@ public class ModelProdutos {
         this.produtoEstoque = produtoEstoque;
     }
 
-    public String getProdutoMarca() {
-        return produtoMarca;
+    public String getProdutoFabricante() {
+        return produtoFabricante;
     }
 
-    public void setProdutoMarca(String produtoMarca) {
-        this.produtoMarca = produtoMarca;
+    public void setProdutoFabricante(String produtoFabricante) {
+        this.produtoFabricante = produtoFabricante;
     }
 
     public Double getProdutoCusto() {

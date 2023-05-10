@@ -8,18 +8,18 @@ package model;
  *
  * @author Diego Barbosa
  */
-public class ModelClientes {
+public class ModelCliente {
 
-    int idCliente;
-    String clienteNumero;
-    String clienteTelefone;
-    String clienteCep;
-    String clienteNome;
-    String clienteEndereco;
-    String clienteBairro;
-    String clienteCidade;
-    String clienteUf;
-    String clienteComplemento;
+    private int idCliente;
+    private String clienteNumero;
+    private String clienteTelefone;
+    private String clienteCep;
+    private String clienteNome;
+    private String clienteEndereco;
+    private String clienteBairro;
+    private String clienteCidade;
+    private String clienteUf;
+    private String clienteComplemento;
 
     public int getIdCliente() {
         return idCliente;

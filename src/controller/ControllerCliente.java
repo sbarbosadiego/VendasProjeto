@@ -4,9 +4,9 @@
  */
 package controller;
 
-import DAO.DaoClientes;
+import DAO.DaoCliente;
 import java.util.ArrayList;
-import model.ModelClientes;
+import model.ModelCliente;
 
 /**
  *
@@ -14,13 +14,13 @@ import model.ModelClientes;
  */
 public class ControllerCliente {
     
-    private DaoClientes daoClientes = new DaoClientes();
+    private DaoCliente daoClientes = new DaoCliente();
     
     /**
      * Salvar Cliente controller
      * @return int
      */
-    public int salvarClienteController(ModelClientes pModelClientes) {
+    public int salvarClienteController(ModelCliente pModelClientes) {
         return this.daoClientes.salvarClientesDAO(pModelClientes);
     }
     
@@ -38,16 +38,16 @@ public class ControllerCliente {
      * @param pModelClientes
      * @return boolean
      */
-    public boolean editarClienteController(ModelClientes pModelClientes) {
+    public boolean editarClienteController(ModelCliente pModelClientes) {
         return this.daoClientes.alterarClienteDAO(pModelClientes);
     }
     
     /**
      * Retornar pelo código de cliente
      * @param pIdProduto
-     * @return ModelClientes
+     * @return ModelCliente
      */
-    public ModelClientes retornarClienteController(int pIdCliente) {
+    public ModelCliente retornarClienteController(int pIdCliente) {
         return this.daoClientes.retornarClienteDAO(pIdCliente);
     }
     
@@ -55,7 +55,7 @@ public class ControllerCliente {
      * Retornar lista de clientes
      * @return ArrayList
      */
-    public ArrayList<ModelClientes> retornaListaClientesController() {
+    public ArrayList<ModelCliente> retornaListaClientesController() {
         return this.daoClientes.retornarListaClientesDAO();
     }
     

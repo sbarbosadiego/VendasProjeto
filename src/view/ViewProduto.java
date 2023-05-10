@@ -68,7 +68,7 @@ public class ViewProduto extends javax.swing.JFrame {
         jtfEstoque = new javax.swing.JFormattedTextField();
         jtfPreco = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
-        jtfMarca = new javax.swing.JTextField();
+        jtfFabricante = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jtfCusto = new javax.swing.JFormattedTextField();
 
@@ -92,7 +92,7 @@ public class ViewProduto extends javax.swing.JFrame {
         jLabel3.setText("Estoque:");
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel4.setText("Marca:");
+        jLabel4.setText("Fabricante:");
 
         jtableProdutos.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jtableProdutos.setModel(new javax.swing.table.DefaultTableModel(
@@ -100,14 +100,14 @@ public class ViewProduto extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Produto", "Estoque", "Preço", "Custo"
+                "Código", "Fabricante", "Produto", "Estoque", "Preço", "Custo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, true, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -122,9 +122,9 @@ public class ViewProduto extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jtableProdutos);
         if (jtableProdutos.getColumnModel().getColumnCount() > 0) {
             jtableProdutos.getColumnModel().getColumn(0).setPreferredWidth(30);
-            jtableProdutos.getColumnModel().getColumn(1).setPreferredWidth(200);
-            jtableProdutos.getColumnModel().getColumn(2).setPreferredWidth(60);
+            jtableProdutos.getColumnModel().getColumn(2).setPreferredWidth(200);
             jtableProdutos.getColumnModel().getColumn(3).setPreferredWidth(60);
+            jtableProdutos.getColumnModel().getColumn(4).setPreferredWidth(60);
         }
 
         btnNovo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -193,7 +193,7 @@ public class ViewProduto extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel6.setText("Custo:");
 
-        jtfMarca.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jtfFabricante.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel7.setText("Preço:");
@@ -249,7 +249,7 @@ public class ViewProduto extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jtfMarca))))))
+                                    .addComponent(jtfFabricante))))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -273,7 +273,7 @@ public class ViewProduto extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfMarca, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                            .addComponent(jtfFabricante, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                             .addComponent(jtfEstoque)
                             .addComponent(jtfPreco))
                         .addGap(18, 18, 18)
@@ -365,7 +365,7 @@ public class ViewProduto extends javax.swing.JFrame {
             // Seta os dados recuperados no banco nos campos
             this.jtfCodigo.setText(String.valueOf(modelProduto.getIdProduto()));
             this.jtfNomeProduto.setText(modelProduto.getProdutoNome());
-            this.jtfMarca.setText(modelProduto.getProdutoMarca());
+            this.jtfFabricante.setText(modelProduto.getProdutoFabricante());
             this.jtfEstoque.setText(String.valueOf(modelProduto.getProdutoEstoque()));
             this.jtfPreco.setText(String.valueOf(modelProduto.getProdutoPreco()));
             this.jtfCusto.setText(String.valueOf(modelProduto.getProdutoCusto()));
@@ -426,7 +426,7 @@ public class ViewProduto extends javax.swing.JFrame {
                     JOptionPane.WARNING_MESSAGE);
         } else {
             modelProduto.setProdutoNome(this.jtfNomeProduto.getText().toUpperCase());
-            modelProduto.setProdutoMarca(this.jtfMarca.getText().toUpperCase());
+            modelProduto.setProdutoFabricante(this.jtfFabricante.getText().toUpperCase());
             modelProduto.setProdutoEstoque(Integer.parseInt(this.jtfEstoque.getText()));
             try {
                 DecimalFormat format = new DecimalFormat("#,###.00");
@@ -463,7 +463,7 @@ public class ViewProduto extends javax.swing.JFrame {
                     JOptionPane.WARNING_MESSAGE);
         } else {
             modelProduto.setProdutoNome(this.jtfNomeProduto.getText().toUpperCase());
-            modelProduto.setProdutoMarca(this.jtfMarca.getText().toUpperCase());
+            modelProduto.setProdutoFabricante(this.jtfFabricante.getText().toUpperCase());
             modelProduto.setProdutoEstoque(Integer.parseInt(this.jtfEstoque.getText()));
             try {
                 DecimalFormat format = new DecimalFormat("#,###.00");
@@ -496,7 +496,7 @@ public class ViewProduto extends javax.swing.JFrame {
         this.jtfNomeProduto.setText("");
         this.jtfEstoque.setText("");
         this.jtfPreco.setText("");
-        this.jtfMarca.setText("");
+        this.jtfFabricante.setText("");
         this.jtfCusto.setText("");
     }
 
@@ -510,7 +510,7 @@ public class ViewProduto extends javax.swing.JFrame {
         this.jtfEstoque.setEnabled(condicao);
         this.jtfPreco.setEnabled(condicao);
         this.jtfCusto.setEnabled(condicao);
-        this.jtfMarca.setEnabled(condicao);
+        this.jtfFabricante.setEnabled(condicao);
     }
 
     /**
@@ -527,6 +527,7 @@ public class ViewProduto extends javax.swing.JFrame {
         for (int c = 0; c < contador; c++) {
             tabela.addRow(new Object[]{
                 listaModelProdutos.get(c).getIdProduto(),
+                listaModelProdutos.get(c).getProdutoFabricante(),
                 listaModelProdutos.get(c).getProdutoNome(),
                 listaModelProdutos.get(c).getProdutoEstoque(),
                 preco.format(listaModelProdutos.get(c).getProdutoPreco()),
@@ -556,7 +557,7 @@ public class ViewProduto extends javax.swing.JFrame {
     private javax.swing.JTextField jtfCodigo;
     private javax.swing.JFormattedTextField jtfCusto;
     private javax.swing.JFormattedTextField jtfEstoque;
-    private javax.swing.JTextField jtfMarca;
+    private javax.swing.JTextField jtfFabricante;
     private javax.swing.JTextField jtfNomeProduto;
     private javax.swing.JTextField jtfPesquisa;
     private javax.swing.JFormattedTextField jtfPreco;
