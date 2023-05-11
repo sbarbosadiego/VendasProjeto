@@ -70,7 +70,7 @@ public class DaoVenda extends ConexaoMySql {
         try {
             this.conectar();
             return this.executarUpdateDeleteSQL(
-                    "UPDATE tbl_Venda SET "
+                    "UPDATE tbl_vendas SET "
                             + "fk_cliente = '"+pModelVenda.getCliente()+"',"
                             + "venda_valor_liquido = '"+pModelVenda.getVendaValorLiquido()+"',"
                             + "venda_valor_bruto = '"+pModelVenda.getVendaValorBruto()+"',"
@@ -102,7 +102,7 @@ public class DaoVenda extends ConexaoMySql {
                     + "venda_valor_liquido, "
                     + "venda_valor_bruto, "
                     + "venda_desconto "
-                    + "FROM tbl_Venda WHERE pk_id_Venda = '"+pIdVenda+"'");
+                    + "FROM tbl_vendas WHERE pk_id_Venda = '"+pIdVenda+"'");
             while (this.getResultSet().next()) {
                 modelVenda.setIdVenda(this.getResultSet().getInt(1));
                 modelVenda.setCliente(this.getResultSet().getString(2));
