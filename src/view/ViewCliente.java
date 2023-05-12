@@ -220,7 +220,7 @@ public class ViewCliente extends javax.swing.JFrame {
         jtfPesquisa.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         btnPesquisar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.setText("Filtrar");
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarActionPerformed(evt);
@@ -295,7 +295,7 @@ public class ViewCliente extends javax.swing.JFrame {
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtfPesquisa)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );

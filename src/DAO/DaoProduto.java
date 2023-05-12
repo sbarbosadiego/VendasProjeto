@@ -24,7 +24,7 @@ public class DaoProduto extends ConexaoMySql {
             this.conectar();
             return this.insertSQL("INSERT INTO tbl_produto ("
                     + "produto_nome,"
-                    + "produto_marca,"
+                    + "produto_fabricante,"
                     + "produto_preco,"
                     + "produto_custo,"
                     + "produto_estoque"
@@ -72,7 +72,7 @@ public class DaoProduto extends ConexaoMySql {
             return this.executarUpdateDeleteSQL(
                     "UPDATE tbl_produto SET "
                             + "produto_nome = '"+pModelProdutos.getProdutoNome()+"',"
-                            + "produto_marca = '"+pModelProdutos.getProdutoFabricante()+"',"
+                            + "produto_fabricante = '"+pModelProdutos.getProdutoFabricante()+"',"
                             + "produto_preco = '"+pModelProdutos.getProdutoPreco()+"',"
                             + "produto_custo = '"+pModelProdutos.getProdutoCusto()+"',"
                             + "produto_estoque = '"+pModelProdutos.getProdutoEstoque()+"'"
@@ -99,7 +99,7 @@ public class DaoProduto extends ConexaoMySql {
             this.executarSQL("SELECT "
                     + "pk_id_produto, "
                     + "produto_nome, "
-                    + "produto_marca, "
+                    + "produto_fabricante, "
                     + "produto_preco, "
                     + "produto_custo, "
                     + "produto_estoque "
@@ -129,7 +129,7 @@ public class DaoProduto extends ConexaoMySql {
         ModelProdutos modelProdutos = new ModelProdutos();
         try {
             this.conectar();
-            this.executarSQL("SELECT pk_id_produto, produto_nome, produto_marca, produto_preco, produto_custo, produto_estoque FROM tbl_produto;");
+            this.executarSQL("SELECT pk_id_produto, produto_nome, produto_fabricante, produto_preco, produto_custo, produto_estoque FROM tbl_produto;");
             while (this.getResultSet().next()) {
                 modelProdutos = new ModelProdutos();
                 modelProdutos.setIdProduto(this.getResultSet().getInt(1));
