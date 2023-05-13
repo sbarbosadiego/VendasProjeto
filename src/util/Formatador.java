@@ -6,7 +6,7 @@ package util;
 
 /**
  *
- * @author Diego Barbosa
+ * @author Diego Barbosa da Silva
  */
 public class Formatador {
     

@@ -10,7 +10,7 @@ import model.ModelCliente;
 
 /**
  *
- * @author di_an
+ * @author Diego Barbosa da Silva 
  */
 public class ControllerCliente {
     

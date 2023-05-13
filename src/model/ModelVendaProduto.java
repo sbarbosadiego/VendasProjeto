@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author Diego Barbosa
+ * @author Diego Barbosa da Silva
  */
 public class ModelVendaProduto {
     

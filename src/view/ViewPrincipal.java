@@ -11,7 +11,7 @@ import java.net.URISyntaxException;
 
 /**
  *
- * @author Diego Barbosa
+ * @author Diego Barbosa da Silva
  */
 public class ViewPrincipal extends javax.swing.JFrame {
 

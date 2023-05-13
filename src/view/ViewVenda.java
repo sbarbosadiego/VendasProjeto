@@ -14,7 +14,7 @@ import util.CampoDePesquisa;
 
 /**
  *
- * @author Diego Barbosa
+ * @author Diego Barbosa da Silva
  */
 public class ViewVenda extends javax.swing.JFrame {
     

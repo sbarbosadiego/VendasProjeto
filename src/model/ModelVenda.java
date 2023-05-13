@@ -8,7 +8,7 @@ import java.sql.Date;
 
 /**
  *
- * @author Diego Barbosa
+ * @author Diego Barbosa da Silva
  */
 public class ModelVenda {
     

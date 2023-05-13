@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import model.ModelUsuario;
 
 /**
- * @author Diego Barbosa
+ * @author Diego Barbosa da Silva
  */
 public class ControllerUsuario {
 

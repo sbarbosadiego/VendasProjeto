@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import model.ModelCliente;
 
 /**
- * @author Diego Barbosa
+ * @author Diego Barbosa da Silva
  */
 public class DaoCliente extends ConexaoMySql {
 
     /**
-     * Inseri um Cliente no banco de dados
+     * Inseri um registro de cliente na base de dados.
      * @param pModelClientes
      * @return int
      */
@@ -51,7 +51,7 @@ public class DaoCliente extends ConexaoMySql {
     }
 
     /**
-     * Exclui o Cliente no banco de dados
+     * Exclui um registro de cliente na base de dados.
      * @param pIdCliente
      * @return boolean
      */
@@ -69,7 +69,7 @@ public class DaoCliente extends ConexaoMySql {
     }
 
     /**
-     * Alterar atributos do Cliente
+     * Altera o registro de um cliente na base de dados.
      * @param pModelClientes
      * @return boolean
      */
@@ -98,7 +98,7 @@ public class DaoCliente extends ConexaoMySql {
     }
 
     /**
-     * Consulta de Cliente por código
+     * Recupera informações de um registro de cliente na base de dados.
      * @param pIdCliente
      * @return modelCliente
      */
@@ -139,7 +139,7 @@ public class DaoCliente extends ConexaoMySql {
     }
 
     /**
-     * Retornar lista de Clientes
+     * Retornar lista de registro de clientes.
      * @return listaModelClientes
      */
     public ArrayList<ModelCliente> retornarListaClientesDAO() {

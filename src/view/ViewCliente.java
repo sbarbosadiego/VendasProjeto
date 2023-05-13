@@ -17,7 +17,7 @@ import model.ModelCliente;
 import util.CampoDePesquisa;
 
 /**
- * @author Diego Barbosa
+ * @author Diego Barbosa da Silva
  */
 public class ViewCliente extends javax.swing.JFrame {
 
@@ -88,7 +88,7 @@ public class ViewCliente extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 540));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jLabel1.setText("Código:");
+        jLabel1.setText("Cód. do Cliente:");
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel2.setText("Nome:");
@@ -132,7 +132,7 @@ public class ViewCliente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Nome", "Cidade", "UF", "Telefone"
+                "Cód.", "Nome", "Cidade", "UF", "Telefone"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -153,11 +153,13 @@ public class ViewCliente extends javax.swing.JFrame {
             jtableCliente.getColumnModel().getColumn(1).setPreferredWidth(150);
             jtableCliente.getColumnModel().getColumn(2).setMinWidth(120);
             jtableCliente.getColumnModel().getColumn(2).setPreferredWidth(120);
-            jtableCliente.getColumnModel().getColumn(3).setMinWidth(50);
-            jtableCliente.getColumnModel().getColumn(3).setPreferredWidth(50);
+            jtableCliente.getColumnModel().getColumn(2).setMaxWidth(120);
+            jtableCliente.getColumnModel().getColumn(3).setMinWidth(60);
+            jtableCliente.getColumnModel().getColumn(3).setPreferredWidth(60);
             jtableCliente.getColumnModel().getColumn(3).setMaxWidth(60);
-            jtableCliente.getColumnModel().getColumn(4).setMinWidth(120);
-            jtableCliente.getColumnModel().getColumn(4).setPreferredWidth(120);
+            jtableCliente.getColumnModel().getColumn(4).setMinWidth(150);
+            jtableCliente.getColumnModel().getColumn(4).setPreferredWidth(150);
+            jtableCliente.getColumnModel().getColumn(4).setMaxWidth(150);
         }
 
         btnEditar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -285,7 +287,7 @@ public class ViewCliente extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -360,12 +362,12 @@ public class ViewCliente extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

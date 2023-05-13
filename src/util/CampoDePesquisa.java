@@ -7,7 +7,7 @@ package util;
 import java.util.regex.Pattern;
 
 /**
- * @author Diego Barbosa
+ * @author Diego Barbosa da Silva
  */
 public class CampoDePesquisa {
     
