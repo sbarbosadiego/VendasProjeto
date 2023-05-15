@@ -117,7 +117,7 @@ public class DaoCliente extends ConexaoMySql {
                     + "cliente_cep, "
                     + "cliente_telefone, "
                     + "cliente_complemento "
-                    + "FROM tbl_Cliente WHERE pk_id_cliente = '" + pIdCliente + "'");
+                    + "FROM tbl_cliente WHERE pk_id_cliente = '" + pIdCliente + "'");
             while (this.getResultSet().next()) {
                 modelClientes.setIdCliente(this.getResultSet().getInt(1));
                 modelClientes.setClienteNome(this.getResultSet().getString(2));
