@@ -1,5 +1,6 @@
 # Vendas Projeto
-Projeto teste em criar um pequeno sistema de controle de estoque e vendas, utilizando Java, com interface Swing/Desktop.
+Projeto de um sistema com cadastro de produtos, clientes, usuários, controle de estoque, venda e relatórios.
+Criado utilizando java com interface Swing/Desktop, e banco de dados MySql.
 
 ##
 ### Configurações de Ambiente
