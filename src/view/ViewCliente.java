@@ -5,6 +5,7 @@
 package view;
 
 import controller.ControllerCliente;
+import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -220,6 +221,11 @@ public class ViewCliente extends javax.swing.JFrame {
         jLabel11.setText("Pesquisar:");
 
         jtfPesquisa.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jtfPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfPesquisaKeyPressed(evt);
+            }
+        });
 
         btnPesquisar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnPesquisar.setText("Filtrar");
@@ -454,6 +460,12 @@ public class ViewCliente extends javax.swing.JFrame {
             classifica.setRowFilter(RowFilter.regexFilter(pesquisa.toUpperCase(), 1));
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void jtfPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.btnPesquisar.requestFocus();
+        }
+    }//GEN-LAST:event_jtfPesquisaKeyPressed
 
     /**
      * @param args the command line arguments

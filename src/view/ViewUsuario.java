@@ -5,6 +5,7 @@
 package view;
 
 import controller.ControllerUsuario;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -145,6 +146,11 @@ public class ViewUsuario extends javax.swing.JFrame {
         });
 
         jtfPesquisa.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jtfPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfPesquisaKeyPressed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel5.setText("Pesquisar:");
@@ -336,6 +342,12 @@ public class ViewUsuario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Nenhum registro selecionado");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void jtfPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.btnPesquisar.requestFocus();
+        }
+    }//GEN-LAST:event_jtfPesquisaKeyPressed
 
     /**
      * @param args the command line arguments

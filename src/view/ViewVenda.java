@@ -6,6 +6,7 @@ package view;
 
 import controller.ControllerCliente;
 import controller.ControllerProduto;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Locale;
 import model.ModelCliente;
@@ -57,7 +58,7 @@ public class ViewVenda extends javax.swing.JFrame {
         jtfCodigoProduto = new javax.swing.JTextField();
         jcbProduto = new componentes.UJComboBox();
         jLabel5 = new javax.swing.JLabel();
-        jbAdicionar = new javax.swing.JButton();
+        btnAdicionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtProdutosVenda = new javax.swing.JTable();
         jtfQuantidade = new javax.swing.JFormattedTextField();
@@ -65,13 +66,13 @@ public class ViewVenda extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jtfDesconto = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
-        jbNovo = new javax.swing.JButton();
-        jbSalvar = new javax.swing.JButton();
-        jbCancelar = new javax.swing.JButton();
+        btnNovo = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jtPesquisar = new javax.swing.JTextField();
-        jbFiltrar = new javax.swing.JButton();
+        btnPesquisar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtVendas = new javax.swing.JTable();
         jbExcluir = new javax.swing.JButton();
@@ -119,8 +120,8 @@ public class ViewVenda extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel5.setText("Quantidade:");
 
-        jbAdicionar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jbAdicionar.setText("Adicionar");
+        btnAdicionar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnAdicionar.setText("Adicionar");
 
         jtProdutosVenda.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jtProdutosVenda.setModel(new javax.swing.table.DefaultTableModel(
@@ -158,6 +159,11 @@ public class ViewVenda extends javax.swing.JFrame {
 
         jtfQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
         jtfQuantidade.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jtfQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfQuantidadeKeyPressed(evt);
+            }
+        });
 
         jtfValorTotal.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
@@ -169,16 +175,16 @@ public class ViewVenda extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel7.setText("Desconto:");
 
-        jbNovo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jbNovo.setText("Novo");
+        btnNovo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnNovo.setText("Novo");
 
-        jbSalvar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jbSalvar.setForeground(new java.awt.Color(0, 153, 51));
-        jbSalvar.setText("Salvar");
+        btnSalvar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnSalvar.setForeground(new java.awt.Color(0, 153, 51));
+        btnSalvar.setText("Salvar");
 
-        jbCancelar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jbCancelar.setForeground(new java.awt.Color(255, 0, 0));
-        jbCancelar.setText("Cancelar");
+        btnCancelar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 0, 0));
+        btnCancelar.setText("Cancelar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -190,11 +196,11 @@ public class ViewVenda extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jbNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,7 +219,7 @@ public class ViewVenda extends javax.swing.JFrame {
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                                         .addComponent(jtfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(jbAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                        .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jLabel2)
@@ -258,7 +264,7 @@ public class ViewVenda extends javax.swing.JFrame {
                     .addComponent(jtfCodigoProduto)
                     .addComponent(jtfQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(jcbProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -269,9 +275,9 @@ public class ViewVenda extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -286,9 +292,14 @@ public class ViewVenda extends javax.swing.JFrame {
                 jtPesquisarActionPerformed(evt);
             }
         });
+        jtPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtPesquisarKeyPressed(evt);
+            }
+        });
 
-        jbFiltrar.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        jbFiltrar.setText("Filtrar");
+        btnPesquisar.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        btnPesquisar.setText("Filtrar");
 
         jtVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -335,7 +346,7 @@ public class ViewVenda extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jtPesquisar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jbFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(10, 10, 10))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -345,7 +356,7 @@ public class ViewVenda extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -383,6 +394,18 @@ public class ViewVenda extends javax.swing.JFrame {
     private void jtPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPesquisarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtPesquisarActionPerformed
+
+    private void jtPesquisarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPesquisarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.btnPesquisar.requestFocus();
+        }
+    }//GEN-LAST:event_jtPesquisarKeyPressed
+
+    private void jtfQuantidadeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfQuantidadeKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.btnAdicionar.requestFocus();
+        }
+    }//GEN-LAST:event_jtfQuantidadeKeyPressed
 
     /**
      * @param args the command line arguments
@@ -443,6 +466,11 @@ public class ViewVenda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnPesquisar;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -456,13 +484,8 @@ public class ViewVenda extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JButton jbAdicionar;
-    private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbEditar;
     private javax.swing.JButton jbExcluir;
-    private javax.swing.JButton jbFiltrar;
-    private javax.swing.JButton jbNovo;
-    private javax.swing.JButton jbSalvar;
     private componentes.UJComboBox jcbCliente;
     private componentes.UJComboBox jcbProduto;
     private javax.swing.JTextField jtPesquisar;

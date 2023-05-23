@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import model.ModelProdutos;
 
 /**
- *
  * @author Diego Barbosa da Silva
  */
 public class DaoProduto extends ConexaoMySql {

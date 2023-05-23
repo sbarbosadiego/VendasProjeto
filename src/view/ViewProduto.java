@@ -5,6 +5,7 @@
 package view;
 
 import controller.ControllerProduto;
+import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -166,6 +167,11 @@ public class ViewProduto extends javax.swing.JFrame {
         jtfPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfPesquisaActionPerformed(evt);
+            }
+        });
+        jtfPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfPesquisaKeyPressed(evt);
             }
         });
 
@@ -386,6 +392,12 @@ public class ViewProduto extends javax.swing.JFrame {
     private void jtfPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPesquisaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfPesquisaActionPerformed
+
+    private void jtfPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.btnPesquisar.requestFocus();
+        }
+    }//GEN-LAST:event_jtfPesquisaKeyPressed
 
     /**
      * @param args the command line arguments

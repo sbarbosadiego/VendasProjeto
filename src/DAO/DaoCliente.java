@@ -59,7 +59,7 @@ public class DaoCliente extends ConexaoMySql {
         try {
             this.conectar();
             return this.executarUpdateDeleteSQL(
-                    "DELETE FROM tbl_Cliente WHERE pk_id_cliente = '" + pIdCliente + "';");
+                    "DELETE FROM tbl_cliente WHERE pk_id_cliente = '" + pIdCliente + "';");
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -77,7 +77,7 @@ public class DaoCliente extends ConexaoMySql {
         try {
             this.conectar();
             return this.executarUpdateDeleteSQL(
-                    "UPDATE tbl_Cliente SET "
+                    "UPDATE tbl_cliente SET "
                     + "cliente_nome = '" + pModelClientes.getClienteNome() + "', "
                     + "cliente_endereco = '" + pModelClientes.getClienteEndereco() + "', "
                     + "cliente_bairro = '" + pModelClientes.getClienteBairro() + "', "
@@ -87,7 +87,7 @@ public class DaoCliente extends ConexaoMySql {
                     + "cliente_cep = '" + pModelClientes.getClienteCep() + "', "
                     + "cliente_telefone = '" + pModelClientes.getClienteTelefone() + "', "
                     + "cliente_complemento = '" + pModelClientes.getClienteComplemento() + "' "
-                    + "WHERE pk_id_Cliente = '" + pModelClientes.getIdCliente() + "';"
+                    + "WHERE pk_id_cliente = '" + pModelClientes.getIdCliente() + "';"
             );
         } catch (Exception e) {
             e.printStackTrace();

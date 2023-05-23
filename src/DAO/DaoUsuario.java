@@ -15,7 +15,6 @@ public class DaoUsuario extends ConexaoMySql {
 
     /**
      * Inseri um usuario no banco de dados
-     *
      * @param pModelUsuarios
      * @return int
      */
