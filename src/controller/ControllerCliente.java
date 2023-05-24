@@ -39,7 +39,7 @@ public class ControllerCliente {
      * @return boolean
      */
     public boolean editarClienteController(ModelCliente pModelClientes) {
-        return this.daoClientes.alterarClienteDAO(pModelClientes);
+        return this.daoClientes.editarClienteDAO(pModelClientes);
     }
     
     /**
@@ -57,6 +57,15 @@ public class ControllerCliente {
      */
     public ArrayList<ModelCliente> retornaListaClientesController() {
         return this.daoClientes.retornarListaClientesDAO();
+    }
+    
+    /**
+     * Retorna lista clientes pelo nome.
+     * @param cliente
+     * @return ArrayList
+     */
+    public ArrayList<ModelCliente> retornarListarPesquisaClientesController(String cliente) {
+        return this.daoClientes.listarPesquisaCliente(cliente);
     }
     
 }

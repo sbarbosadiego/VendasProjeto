@@ -5,7 +5,9 @@
 package DAO;
 
 import conexoes.ConexaoMySql;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import model.ModelCliente;
 
 /**
@@ -61,7 +63,7 @@ public class DaoCliente extends ConexaoMySql {
             return this.executarUpdateDeleteSQL(
                     "DELETE FROM tbl_cliente WHERE pk_id_cliente = '" + pIdCliente + "';");
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return false;
         } finally {
             this.fecharConexao();
@@ -73,7 +75,7 @@ public class DaoCliente extends ConexaoMySql {
      * @param pModelClientes
      * @return boolean
      */
-    public boolean alterarClienteDAO(ModelCliente pModelClientes) {
+    public boolean editarClienteDAO(ModelCliente pModelClientes) {
         try {
             this.conectar();
             return this.executarUpdateDeleteSQL(
@@ -90,7 +92,7 @@ public class DaoCliente extends ConexaoMySql {
                     + "WHERE pk_id_cliente = '" + pModelClientes.getIdCliente() + "';"
             );
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return false;
         } finally {
             this.fecharConexao();
@@ -130,13 +132,15 @@ public class DaoCliente extends ConexaoMySql {
                 modelClientes.setClienteTelefone(this.getResultSet().getString(9));
                 modelClientes.setClienteComplemento(this.getResultSet().getString(10));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
             this.fecharConexao();
         }
         return modelClientes;
     }
+    
+    
 
     /**
      * Retornar lista de registro de clientes.
@@ -173,12 +177,41 @@ public class DaoCliente extends ConexaoMySql {
                 modelClientes.setClienteComplemento(this.getResultSet().getString(10));
                 listaModelClientes.add(modelClientes);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
             this.fecharConexao();
         }
         return listaModelClientes;
     }
+    
+    public ArrayList<ModelCliente> listarPesquisaCliente(String cliente) {
+        ArrayList<ModelCliente> listaModelClientes = new ArrayList<>();
+        try {
+            this.conectar();
+            this.executarSQL("SELECT * FROM tbl_cliente WHERE cliente_nome LIKE '" + cliente + "%' ORDER BY cliente_nome;");
+            while (this.getResultSet().next()) {
+                ModelCliente modelClientes = new ModelCliente();
+                modelClientes.setIdCliente(this.getResultSet().getInt(1));
+                modelClientes.setClienteNome(this.getResultSet().getString(2));
+                modelClientes.setClienteEndereco(this.getResultSet().getString(3));
+                modelClientes.setClienteBairro(this.getResultSet().getString(4));
+                modelClientes.setClienteNumero(this.getResultSet().getString(5));
+                modelClientes.setClienteCidade(this.getResultSet().getString(6));
+                modelClientes.setClienteUf(this.getResultSet().getString(7));
+                modelClientes.setClienteCep(this.getResultSet().getString(8));
+                modelClientes.setClienteTelefone(this.getResultSet().getString(9));
+                modelClientes.setClienteComplemento(this.getResultSet().getString(10));
+                listaModelClientes.add(modelClientes);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            this.fecharConexao();
+        }
+        return listaModelClientes;
+    } 
+        
+        
 
 }
