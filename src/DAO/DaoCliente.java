@@ -140,7 +140,30 @@ public class DaoCliente extends ConexaoMySql {
         return modelClientes;
     }
     
-    
+    public ModelCliente retornarClienteNomeDAO(String nome){
+        ModelCliente modelCliente = new ModelCliente();
+        try {
+            this.conectar();
+            this.executarSQL("SELECT * FROM tbl_cliente WHERE cliente_nome LIKE '" + nome + "%' LIMIT 1;");
+            while (this.getResultSet().next()) {
+                modelCliente.setIdCliente(this.getResultSet().getInt(1));
+                modelCliente.setClienteNome(this.getResultSet().getString(2));
+                modelCliente.setClienteEndereco(this.getResultSet().getString(3));
+                modelCliente.setClienteBairro(this.getResultSet().getString(4));
+                modelCliente.setClienteNumero(this.getResultSet().getString(5));
+                modelCliente.setClienteCidade(this.getResultSet().getString(6));
+                modelCliente.setClienteUf(this.getResultSet().getString(7));
+                modelCliente.setClienteCep(this.getResultSet().getString(8));
+                modelCliente.setClienteTelefone(this.getResultSet().getString(9));
+                modelCliente.setClienteComplemento(this.getResultSet().getString(10));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            this.fecharConexao();
+        }
+        return modelCliente;
+    } 
 
     /**
      * Retornar lista de registro de clientes.

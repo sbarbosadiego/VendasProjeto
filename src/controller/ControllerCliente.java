@@ -52,6 +52,15 @@ public class ControllerCliente {
     }
     
     /**
+     * Retorna o nome de um registro na base de dados.
+     * @param nome
+     * @return ModelCliente
+     */
+    public ModelCliente retornarClienteNomeController(String nome) {
+        return this.daoClientes.retornarClienteNomeDAO(nome);
+    }
+    
+    /**
      * Retornar lista de clientes
      * @return ArrayList
      */
