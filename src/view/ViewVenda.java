@@ -39,8 +39,11 @@ public class ViewVenda extends javax.swing.JFrame {
         initComponents();
         modelo = new DefaultListModel();
         this.listaPesquisarCliente.setVisible(false);
+        this.listaPesquisarProduto.setVisible(false);
         this.listaPesquisarCliente.setModel(modelo);
+        this.listaPesquisarProduto.setModel(modelo);
         listarPesquisaClientes();
+        listarPesquisaProdutos();
     }
 
     /**
@@ -95,19 +98,36 @@ public class ViewVenda extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        listaPesquisarCliente.setFont(new java.awt.Font("Fira Sans", 0, 16)); // NOI18N
+        listaPesquisarCliente.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         listaPesquisarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 listaPesquisarClienteMousePressed(evt);
             }
         });
-        jPanel1.add(listaPesquisarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 63, 516, 100));
+        jPanel1.add(listaPesquisarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 63, 516, 93));
 
-        listaPesquisarProduto.setFont(new java.awt.Font("Fira Sans", 0, 16)); // NOI18N
-        jPanel1.add(listaPesquisarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 131, 396, 100));
+        listaPesquisarProduto.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        listaPesquisarProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                listaPesquisarProdutoMousePressed(evt);
+            }
+        });
+        jPanel1.add(listaPesquisarProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 131, 396, 93));
+
+        campoPesquisaProduto.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        campoPesquisaProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoPesquisaProdutoActionPerformed(evt);
+            }
+        });
+        campoPesquisaProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                campoPesquisaProdutoKeyReleased(evt);
+            }
+        });
         jPanel1.add(campoPesquisaProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 103, 400, 30));
 
-        campoPesquisaCliente.setFont(new java.awt.Font("Fira Sans", 0, 16)); // NOI18N
+        campoPesquisaCliente.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         campoPesquisaCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoPesquisaClienteActionPerformed(evt);
@@ -151,6 +171,11 @@ public class ViewVenda extends javax.swing.JFrame {
         jtfCodigoProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfCodigoProdutoActionPerformed(evt);
+            }
+        });
+        jtfCodigoProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfCodigoProdutoKeyReleased(evt);
             }
         });
         jPanel1.add(jtfCodigoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 103, 150, 30));
@@ -388,6 +413,36 @@ public class ViewVenda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jtfCodigoClienteKeyReleased
 
+    private void campoPesquisaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPesquisaProdutoActionPerformed
+        this.listaPesquisarProduto.setVisible(true);
+        Enter = 1;
+    }//GEN-LAST:event_campoPesquisaProdutoActionPerformed
+
+    private void campoPesquisaProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoPesquisaProdutoKeyReleased
+        if (Enter == 0 ) {
+            this.listarPesquisaProdutos();
+        } else {
+            Enter = 0;
+        }
+    }//GEN-LAST:event_campoPesquisaProdutoKeyReleased
+
+    private void listaPesquisarProdutoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaPesquisarProdutoMousePressed
+        this.recuperarPesquisaProduto();
+        this.listaPesquisarProduto.setVisible(false);
+    }//GEN-LAST:event_listaPesquisarProdutoMousePressed
+
+    private void jtfCodigoProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoProdutoKeyReleased
+        try {
+            if (Enter == 0) {
+                this.recuperarProdutoCodigo();
+            } else {
+                Enter = 0;
+            }
+        } catch (Exception e) {
+
+        }
+    }//GEN-LAST:event_jtfCodigoProdutoKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -441,6 +496,20 @@ public class ViewVenda extends javax.swing.JFrame {
         }
     }
     
+    private void listarPesquisaProdutos() {
+        String nomeProduto = this.campoPesquisaProduto.getText();
+        listaModelProdutos = controllerProduto.retornarListarPesquisaProdutosController(nomeProduto);
+        modelo.removeAllElements();
+        for (int c = 0; c < listaModelProdutos.size(); c++) {
+            modelo.addElement(listaModelProdutos.get(c).getProdutoNome());
+        }
+        if (this.campoPesquisaProduto.getText().isEmpty()) {
+            this.listaPesquisarProduto.setVisible(false);
+        } else {
+            this.listaPesquisarProduto.setVisible(true);
+        }
+    }
+    
     /**
      * Recupera informações do cliente na pesquisa.
      */
@@ -451,11 +520,27 @@ public class ViewVenda extends javax.swing.JFrame {
         this.jtfCodigoCliente.setText(String.valueOf(modelCliente.getIdCliente()));
     }
     
+    private void recuperarPesquisaProduto() {
+        String produto = this.listaPesquisarProduto.getSelectedValue();
+        this.campoPesquisaProduto.setText(produto);
+        modelProdutos = controllerProduto.retornarProdutoNomeController(produto);
+        this.jtfCodigoProduto.setText(String.valueOf(modelProdutos.getIdProduto()));
+    }
+    
+    /**
+     * Recupera informações do cliente pelo código.
+     */
     private void recuperarClienteCodigo() {
         int codigo = Integer.parseInt(this.jtfCodigoCliente.getText());
         modelCliente = controllerCliente.retornarClienteController(codigo);
         this.campoPesquisaCliente.setText(modelCliente.getClienteNome());
-    } 
+    }
+    
+    private void recuperarProdutoCodigo() {
+        int codigo = Integer.parseInt(this.jtfCodigoProduto.getText());
+        modelProdutos = controllerProduto.retornarProdutoController(codigo);
+        this.campoPesquisaProduto.setText(modelProdutos.getProdutoNome());
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;

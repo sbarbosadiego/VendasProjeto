@@ -51,11 +51,19 @@ public class ControllerProduto {
         return this.daoProdutos.retornarProdutoDAO(pIdProduto);
     }
     
+    public ModelProdutos retornarProdutoNomeController(String nome) {
+        return this.daoProdutos.retornarProdutoNomeDAO(nome);
+    }
+    
     /**
      * Retornar lista de produtos
      * @return ArrayList
      */
     public ArrayList<ModelProdutos> retornaListaProdutosController() {
         return this.daoProdutos.retornarListaProdutosDAO();
+    }
+    
+    public ArrayList<ModelProdutos> retornarListarPesquisaProdutosController(String produto) {
+        return this.daoProdutos.listarPesquisaProduto(produto);
     }
 }

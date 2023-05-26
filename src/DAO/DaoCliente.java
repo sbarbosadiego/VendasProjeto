@@ -234,7 +234,5 @@ public class DaoCliente extends ConexaoMySql {
         }
         return listaModelClientes;
     } 
-        
-        
 
 }
