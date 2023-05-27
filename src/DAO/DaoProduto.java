@@ -14,9 +14,10 @@ import model.ModelProdutos;
  * @author Diego Barbosa da Silva
  */
 public class DaoProduto extends ConexaoMySql {
-    
+
     /**
      * Inseri um produto no banco de dados.
+     *
      * @param pModelProdutos
      * @return int
      */
@@ -30,11 +31,11 @@ public class DaoProduto extends ConexaoMySql {
                     + "produto_custo,"
                     + "produto_estoque"
                     + ") VALUES ("
-                    + "'"+pModelProdutos.getProdutoNome()+"',"
-                    + "'"+pModelProdutos.getProdutoFabricante()+"',"
-                    + "'"+pModelProdutos.getProdutoPreco()+"',"
-                    + "'"+pModelProdutos.getProdutoCusto()+"',"
-                    + "'"+pModelProdutos.getProdutoEstoque()+"'"
+                    + "'" + pModelProdutos.getProdutoNome() + "',"
+                    + "'" + pModelProdutos.getProdutoFabricante() + "',"
+                    + "'" + pModelProdutos.getProdutoPreco() + "',"
+                    + "'" + pModelProdutos.getProdutoCusto() + "',"
+                    + "'" + pModelProdutos.getProdutoEstoque() + "'"
                     + ");");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -43,9 +44,10 @@ public class DaoProduto extends ConexaoMySql {
             this.fecharConexao();
         }
     }
-    
+
     /**
      * Exclui o produto no banco de dados.
+     *
      * @param pIdProduto
      * @return boolean
      */
@@ -61,9 +63,10 @@ public class DaoProduto extends ConexaoMySql {
             this.fecharConexao();
         }
     }
-    
+
     /**
      * Alterar atributos do produto.
+     *
      * @param pModelProdutos
      * @return boolean
      */
@@ -72,12 +75,12 @@ public class DaoProduto extends ConexaoMySql {
             this.conectar();
             return this.executarUpdateDeleteSQL(
                     "UPDATE tbl_produto SET "
-                            + "produto_nome = '"+pModelProdutos.getProdutoNome()+"',"
-                            + "produto_fabricante = '"+pModelProdutos.getProdutoFabricante()+"',"
-                            + "produto_preco = '"+pModelProdutos.getProdutoPreco()+"',"
-                            + "produto_custo = '"+pModelProdutos.getProdutoCusto()+"',"
-                            + "produto_estoque = '"+pModelProdutos.getProdutoEstoque()+"'"
-                            + "WHERE pk_id_produto = '"+pModelProdutos.getIdProduto()+"';"
+                    + "produto_nome = '" + pModelProdutos.getProdutoNome() + "',"
+                    + "produto_fabricante = '" + pModelProdutos.getProdutoFabricante() + "',"
+                    + "produto_preco = '" + pModelProdutos.getProdutoPreco() + "',"
+                    + "produto_custo = '" + pModelProdutos.getProdutoCusto() + "',"
+                    + "produto_estoque = '" + pModelProdutos.getProdutoEstoque() + "'"
+                    + "WHERE pk_id_produto = '" + pModelProdutos.getIdProduto() + "';"
             );
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -86,15 +89,16 @@ public class DaoProduto extends ConexaoMySql {
             this.fecharConexao();
         }
     }
-    
+
     /**
      * Consulta de produto por código.
+     *
      * @param pIdProduto
      * @return modelProduto
      */
     public ModelProdutos retornarProdutoDAO(int pIdProduto) {
         ModelProdutos modelProdutos = new ModelProdutos();
-        
+
         try {
             this.conectar();
             this.executarSQL("SELECT "
@@ -104,7 +108,7 @@ public class DaoProduto extends ConexaoMySql {
                     + "produto_preco, "
                     + "produto_custo, "
                     + "produto_estoque "
-                    + "FROM tbl_produto WHERE pk_id_produto = '"+pIdProduto+"'");
+                    + "FROM tbl_produto WHERE pk_id_produto = '" + pIdProduto + "'");
             while (this.getResultSet().next()) {
                 modelProdutos.setIdProduto(this.getResultSet().getInt(1));
                 modelProdutos.setProdutoNome(this.getResultSet().getString(2));
@@ -113,15 +117,21 @@ public class DaoProduto extends ConexaoMySql {
                 modelProdutos.setProdutoCusto(this.getResultSet().getDouble(5));
                 modelProdutos.setProdutoEstoque(this.getResultSet().getInt(6));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
             this.fecharConexao();
         }
         return modelProdutos;
     }
-    
-    public ModelProdutos retornarProdutoNomeDAO(String nome){
+
+    /**
+     * Retorna informações do produto pelo nome.
+     *
+     * @param nome
+     * @return modelProdutos
+     */
+    public ModelProdutos retornarProdutoNomeDAO(String nome) {
         ModelProdutos modelProdutos = new ModelProdutos();
         try {
             this.conectar();
@@ -141,9 +151,10 @@ public class DaoProduto extends ConexaoMySql {
         }
         return modelProdutos;
     }
-    
+
     /**
      * Retornar lista de produtos.
+     *
      * @return listaModelProdutos
      */
     public ArrayList<ModelProdutos> retornarListaProdutosDAO() {
@@ -162,14 +173,20 @@ public class DaoProduto extends ConexaoMySql {
                 modelProdutos.setProdutoEstoque(this.getResultSet().getInt(6));
                 listaModelProdutos.add(modelProdutos);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
             this.fecharConexao();
         }
         return listaModelProdutos;
     }
-    
+
+    /**
+     * Retorna uma lista de produtos de acordo pelo nome.
+     *
+     * @param cliente
+     * @return listaModelProdutos
+     */
     public ArrayList<ModelProdutos> listarPesquisaProduto(String cliente) {
         ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<>();
         try {
@@ -193,5 +210,5 @@ public class DaoProduto extends ConexaoMySql {
         }
         return listaModelProdutos;
     }
-    
+
 }

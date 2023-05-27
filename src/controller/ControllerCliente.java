@@ -9,72 +9,78 @@ import java.util.ArrayList;
 import model.ModelCliente;
 
 /**
- *
- * @author Diego Barbosa da Silva 
+ * @author Diego Barbosa da Silva
  */
 public class ControllerCliente {
-    
+
     private DaoCliente daoClientes = new DaoCliente();
-    
+
     /**
-     * Salvar Cliente controller
+     * Salvar Cliente controller.
+     *
      * @return int
      */
     public int salvarClienteController(ModelCliente pModelClientes) {
         return this.daoClientes.salvarClientesDAO(pModelClientes);
     }
-    
+
     /**
-     * Excluir pelo código do cliente
+     * Excluir pelo código do cliente.
+     *
      * @param pIdCliente
      * @return boolean
      */
     public boolean excluirClienteController(int pIdCliente) {
         return this.daoClientes.excluirClienteDAO(pIdCliente);
     }
-    
+
     /**
-     * Editar um cliente
+     * Editar um cliente.
+     *
      * @param pModelClientes
      * @return boolean
      */
     public boolean editarClienteController(ModelCliente pModelClientes) {
         return this.daoClientes.editarClienteDAO(pModelClientes);
     }
-    
+
     /**
-     * Retornar pelo código de cliente
+     * Retornar pelo código de cliente.
+     *
      * @param pIdProduto
      * @return ModelCliente
      */
     public ModelCliente retornarClienteController(int pIdCliente) {
         return this.daoClientes.retornarClienteDAO(pIdCliente);
     }
-    
+
     /**
      * Retorna o nome de um registro na base de dados.
+     *
      * @param nome
      * @return ModelCliente
      */
     public ModelCliente retornarClienteNomeController(String nome) {
         return this.daoClientes.retornarClienteNomeDAO(nome);
     }
-    
+
     /**
-     * Retornar lista de clientes
+     * Retornar lista de clientes.
+     *
      * @return ArrayList
      */
     public ArrayList<ModelCliente> retornaListaClientesController() {
         return this.daoClientes.retornarListaClientesDAO();
     }
-    
+
     /**
      * Retorna lista clientes pelo nome.
+     *
      * @param cliente
      * @return ArrayList
      */
     public ArrayList<ModelCliente> retornarListarPesquisaClientesController(String cliente) {
         return this.daoClientes.listarPesquisaCliente(cliente);
     }
-    
+
 }

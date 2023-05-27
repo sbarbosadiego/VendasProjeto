@@ -5,7 +5,6 @@
 package model;
 
 /**
- *
  * @author Diego Barbosa da Silva
  */
 public class ModelCliente {
@@ -20,6 +19,10 @@ public class ModelCliente {
     private String clienteCidade;
     private String clienteUf;
     private String clienteComplemento;
+
+    public ModelCliente() {
+
+    }
 
     public int getIdCliente() {
         return idCliente;
@@ -100,5 +103,5 @@ public class ModelCliente {
     public void setClienteComplemento(String clienteComplemento) {
         this.clienteComplemento = clienteComplemento;
     }
-    
+
 }

@@ -5,7 +5,6 @@
 package model;
 
 /**
- *
  * @author Diego Barbosa da Silva
  */
 public class ModelUsuario {
@@ -14,6 +13,10 @@ public class ModelUsuario {
     private String usuarioNome;
     private String usuarioLogin;
     private String usuarioSenha;
+    
+    public ModelUsuario() {
+        
+    }
     
     public int getIdUsuario() {
         return idUsuario;

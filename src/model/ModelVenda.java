@@ -7,11 +7,10 @@ package model;
 import java.sql.Date;
 
 /**
- *
  * @author Diego Barbosa da Silva
  */
 public class ModelVenda {
-    
+
     private int idVenda;
     private String cliente;
     private Date vendaData;
@@ -20,8 +19,9 @@ public class ModelVenda {
     private Double vendaDesconto;
 
     public ModelVenda() {
+        
     }
-    
+
     public int getIdVenda() {
         return idVenda;
     }
@@ -69,5 +69,5 @@ public class ModelVenda {
     public void setVendaDesconto(Double vendaDesconto) {
         this.vendaDesconto = vendaDesconto;
     }
-    
+
 }

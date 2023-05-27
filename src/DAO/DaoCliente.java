@@ -17,6 +17,7 @@ public class DaoCliente extends ConexaoMySql {
 
     /**
      * Inseri um registro de cliente na base de dados.
+     *
      * @param pModelClientes
      * @return int
      */
@@ -45,7 +46,7 @@ public class DaoCliente extends ConexaoMySql {
                     + "'" + pModelClientes.getClienteNumero() + "'"
                     + ");");
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return 0;
         } finally {
             this.fecharConexao();
@@ -54,6 +55,7 @@ public class DaoCliente extends ConexaoMySql {
 
     /**
      * Exclui um registro de cliente na base de dados.
+     *
      * @param pIdCliente
      * @return boolean
      */
@@ -72,6 +74,7 @@ public class DaoCliente extends ConexaoMySql {
 
     /**
      * Altera o registro de um cliente na base de dados.
+     *
      * @param pModelClientes
      * @return boolean
      */
@@ -101,6 +104,7 @@ public class DaoCliente extends ConexaoMySql {
 
     /**
      * Recupera informações de um registro de cliente na base de dados.
+     *
      * @param pIdCliente
      * @return modelCliente
      */
@@ -139,8 +143,14 @@ public class DaoCliente extends ConexaoMySql {
         }
         return modelClientes;
     }
-    
-    public ModelCliente retornarClienteNomeDAO(String nome){
+
+    /**
+     * Retorna informações de registro pelo nome do cliente.
+     *
+     * @param nome
+     * @return modelCliente
+     */
+    public ModelCliente retornarClienteNomeDAO(String nome) {
         ModelCliente modelCliente = new ModelCliente();
         try {
             this.conectar();
@@ -163,10 +173,11 @@ public class DaoCliente extends ConexaoMySql {
             this.fecharConexao();
         }
         return modelCliente;
-    } 
+    }
 
     /**
      * Retornar lista de registro de clientes.
+     *
      * @return listaModelClientes
      */
     public ArrayList<ModelCliente> retornarListaClientesDAO() {
@@ -207,7 +218,13 @@ public class DaoCliente extends ConexaoMySql {
         }
         return listaModelClientes;
     }
-    
+
+    /**
+     * Retorna uma lista de clientes de acordo pelo nome.
+     *
+     * @param cliente
+     * @return listaModelClientes
+     */
     public ArrayList<ModelCliente> listarPesquisaCliente(String cliente) {
         ArrayList<ModelCliente> listaModelClientes = new ArrayList<>();
         try {
@@ -233,6 +250,6 @@ public class DaoCliente extends ConexaoMySql {
             this.fecharConexao();
         }
         return listaModelClientes;
-    } 
+    }
 
 }

@@ -14,21 +14,20 @@ import model.ModelCliente;
 import model.ModelProdutos;
 
 /**
- *
  * @author Diego Barbosa da Silva
  */
 public class ViewVenda extends javax.swing.JFrame {
-    
-    Locale localeBR = new Locale("pt","BR");
-    
+
+    Locale localeBR = new Locale("pt", "BR");
+
     ModelCliente modelCliente = new ModelCliente();
     ControllerCliente controllerCliente = new ControllerCliente();
-    ArrayList<ModelCliente>  listaModelCliente = new ArrayList<>();
-    
+    ArrayList<ModelCliente> listaModelCliente = new ArrayList<>();
+
     ModelProdutos modelProdutos = new ModelProdutos();
     ControllerProduto controllerProduto = new ControllerProduto();
     ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<>();
-    
+
     DefaultListModel modelo;
     int Enter = 0;
 
@@ -145,6 +144,11 @@ public class ViewVenda extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jtfCodigoCliente.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jtfCodigoCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfCodigoClienteActionPerformed(evt);
+            }
+        });
         jtfCodigoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfCodigoClienteKeyReleased(evt);
@@ -389,7 +393,7 @@ public class ViewVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_campoPesquisaClienteActionPerformed
 
     private void campoPesquisaClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoPesquisaClienteKeyReleased
-        if (Enter == 0 ) {
+        if (Enter == 0) {
             this.listarPesquisaClientes();
         } else {
             Enter = 0;
@@ -409,7 +413,7 @@ public class ViewVenda extends javax.swing.JFrame {
                 Enter = 0;
             }
         } catch (Exception e) {
-
+            
         }
     }//GEN-LAST:event_jtfCodigoClienteKeyReleased
 
@@ -419,7 +423,7 @@ public class ViewVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_campoPesquisaProdutoActionPerformed
 
     private void campoPesquisaProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoPesquisaProdutoKeyReleased
-        if (Enter == 0 ) {
+        if (Enter == 0) {
             this.listarPesquisaProdutos();
         } else {
             Enter = 0;
@@ -442,6 +446,10 @@ public class ViewVenda extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jtfCodigoProdutoKeyReleased
+
+    private void jtfCodigoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCodigoClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfCodigoClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -478,7 +486,7 @@ public class ViewVenda extends javax.swing.JFrame {
             }
         });
     }
-    
+
     /**
      * Lista os clientes na pesquisa dinâmica.
      */
@@ -496,6 +504,9 @@ public class ViewVenda extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Lista os produtos na pesquisa dinâmica.
+     */
     private void listarPesquisaProdutos() {
         String nomeProduto = this.campoPesquisaProduto.getText();
         listaModelProdutos = controllerProduto.retornarListarPesquisaProdutosController(nomeProduto);
@@ -509,9 +520,9 @@ public class ViewVenda extends javax.swing.JFrame {
             this.listaPesquisarProduto.setVisible(true);
         }
     }
-    
+
     /**
-     * Recupera informações do cliente na pesquisa.
+     * Recupera informações do cliente na pesquisa dinâmica.
      */
     private void recuperarPesquisaCliente() {
         String nome = this.listaPesquisarCliente.getSelectedValue();
@@ -520,13 +531,16 @@ public class ViewVenda extends javax.swing.JFrame {
         this.jtfCodigoCliente.setText(String.valueOf(modelCliente.getIdCliente()));
     }
     
+    /**
+     * Recupera informações do produto na pesquisa dinâmica.
+     */
     private void recuperarPesquisaProduto() {
         String produto = this.listaPesquisarProduto.getSelectedValue();
         this.campoPesquisaProduto.setText(produto);
         modelProdutos = controllerProduto.retornarProdutoNomeController(produto);
         this.jtfCodigoProduto.setText(String.valueOf(modelProdutos.getIdProduto()));
     }
-    
+
     /**
      * Recupera informações do cliente pelo código.
      */
@@ -536,12 +550,15 @@ public class ViewVenda extends javax.swing.JFrame {
         this.campoPesquisaCliente.setText(modelCliente.getClienteNome());
     }
     
+    /**
+     * Recupera informações do produto pelo código.
+     */
     private void recuperarProdutoCodigo() {
         int codigo = Integer.parseInt(this.jtfCodigoProduto.getText());
         modelProdutos = controllerProduto.retornarProdutoController(codigo);
         this.campoPesquisaProduto.setText(modelProdutos.getProdutoNome());
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnCancelar;

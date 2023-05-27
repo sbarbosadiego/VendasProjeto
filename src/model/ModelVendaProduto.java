@@ -5,7 +5,6 @@
 package model;
 
 /**
- *
  * @author Diego Barbosa da Silva
  */
 public class ModelVendaProduto {
@@ -17,6 +16,7 @@ public class ModelVendaProduto {
     private int vendaProdutoQuantidade;
 
     public ModelVendaProduto() {
+        
     }
 
     public int getIdVendaProduto() {

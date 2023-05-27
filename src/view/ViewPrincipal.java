@@ -10,7 +10,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- *
  * @author Diego Barbosa da Silva
  */
 public class ViewPrincipal extends javax.swing.JFrame {
@@ -41,6 +40,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jmProdutos = new javax.swing.JMenuItem();
         jmUsuarios = new javax.swing.JMenuItem();
         jmVenda = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jmRelatorio = new javax.swing.JMenu();
         jmSobre = new javax.swing.JMenu();
         jmProjeto = new javax.swing.JMenuItem();
@@ -124,6 +124,16 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
         jmVenda.setText("Venda");
         jmVenda.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+
+        jMenuItem1.setFont(new java.awt.Font("Fira Sans", 0, 14)); // NOI18N
+        jMenuItem1.setText("Vendas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jmVenda.add(jMenuItem1);
+
         jMenuBar1.add(jmVenda);
 
         jmRelatorio.setText("Relatório");
@@ -195,6 +205,10 @@ public class ViewPrincipal extends javax.swing.JFrame {
         new ViewUsuario().setVisible(true);
     }//GEN-LAST:event_jmUsuariosActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new ViewVenda().setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -232,6 +246,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenu jmCadastro;
     private javax.swing.JMenuItem jmClientes;

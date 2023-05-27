@@ -10,15 +10,18 @@ import javax.swing.JOptionPane;
  * @author Diego Barbosa da Silva
  */
 public class ModelProdutos {
-    
+
     private int idProduto;
     private String produtoNome;
     private String produtoFabricante;
     private Double produtoCusto;
     private Double produtoPreco;
     private int produtoEstoque;
-    
-    // Getters e Setters
+
+    public ModelProdutos() {
+
+    }
+
     public int getIdProduto() {
         return idProduto;
     }
@@ -66,7 +69,5 @@ public class ModelProdutos {
     public void setProdutoCusto(Double produtoCusto) {
         this.produtoCusto = produtoCusto;
     }
-    
-    
-    
+
 }
