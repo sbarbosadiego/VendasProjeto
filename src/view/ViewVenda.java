@@ -201,6 +201,7 @@ public class ViewVenda extends javax.swing.JFrame {
         });
         jPanel1.add(jtfQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 103, 144, 30));
 
+        jtfValorTotal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
         jtfValorTotal.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jPanel1.add(jtfValorTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(687, 558, 180, 30));
 
