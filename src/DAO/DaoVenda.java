@@ -5,7 +5,9 @@
 package DAO;
 
 import conexoes.ConexaoMySql;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import model.ModelVenda;
 
 /**
@@ -35,7 +37,7 @@ public class DaoVenda extends ConexaoMySql {
                     + "'"+pModelVenda.getVendaDesconto()+"'"
                     + ");");
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return 0;
         } finally {
             this.fecharConexao();
@@ -53,7 +55,7 @@ public class DaoVenda extends ConexaoMySql {
             return this.executarUpdateDeleteSQL(
                     "DELETE FROM tbl_vendas WHERE pk_id_vendas = '" + pIdVenda + "';");
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return false;
         } finally {
             this.fecharConexao();
@@ -77,7 +79,7 @@ public class DaoVenda extends ConexaoMySql {
                             + "WHERE pk_id_vendas = '"+pModelVenda.getIdVenda()+"';"
             );
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return false;
         } finally {
             this.fecharConexao();
@@ -91,7 +93,6 @@ public class DaoVenda extends ConexaoMySql {
      */
     public ModelVenda retornarVendaDAO(int pIdVenda) {
         ModelVenda modelVenda = new ModelVenda();
-        
         try {
             this.conectar();
             this.executarSQL("SELECT "
@@ -110,8 +111,8 @@ public class DaoVenda extends ConexaoMySql {
                 modelVenda.setVendaValorBruto(this.getResultSet().getDouble(5));
                 modelVenda.setVendaDesconto(this.getResultSet().getDouble(6));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
             this.fecharConexao();
         }
@@ -127,7 +128,13 @@ public class DaoVenda extends ConexaoMySql {
         ModelVenda modelVenda = new ModelVenda();
         try {
             this.conectar();
-            this.executarSQL("SELECT pk_id_vendas, fk_cliente, venda_data, venda_valor_liquido, venda_valor_bruto, venda_desconto FROM tbl_vendas;");
+            this.executarSQL("SELECT pk_id_vendas, "
+                    + "fk_cliente, "
+                    + "venda_data, "
+                    + "venda_valor_liquido, "
+                    + "venda_valor_bruto, "
+                    + "venda_desconto "
+                    + "FROM tbl_vendas;");
             while (this.getResultSet().next()) {
                 modelVenda = new ModelVenda();
                 modelVenda.setIdVenda(this.getResultSet().getInt(1));
@@ -138,8 +145,8 @@ public class DaoVenda extends ConexaoMySql {
                 modelVenda.setVendaDesconto(this.getResultSet().getDouble(6));
                 listaModelVendas.add(modelVenda);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
             this.fecharConexao();
         }

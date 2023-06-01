@@ -6,12 +6,16 @@ package view;
 
 import controller.ControllerCliente;
 import controller.ControllerProduto;
+import controller.ControllerVendasCliente;
 import java.awt.event.KeyEvent;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 import model.ModelCliente;
 import model.ModelProdutos;
+import model.ModelVendasCliente;
 
 /**
  * @author Diego Barbosa da Silva
@@ -27,6 +31,10 @@ public class ViewVenda extends javax.swing.JFrame {
     ModelProdutos modelProdutos = new ModelProdutos();
     ControllerProduto controllerProduto = new ControllerProduto();
     ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<>();
+    
+    ControllerVendasCliente controllerVendasCliente = new ControllerVendasCliente();
+    ArrayList<ModelVendasCliente> listalModelVendasClientes = new ArrayList<>();
+    
 
     DefaultListModel modelo;
     int Enter = 0;
@@ -43,6 +51,7 @@ public class ViewVenda extends javax.swing.JFrame {
         this.listaPesquisarProduto.setModel(modelo);
         listarPesquisaClientes();
         listarPesquisaProdutos();
+        listarVendasClientes();
     }
 
     /**
@@ -502,6 +511,23 @@ public class ViewVenda extends javax.swing.JFrame {
             this.listaPesquisarCliente.setVisible(false);
         } else {
             this.listaPesquisarCliente.setVisible(true);
+        }
+    }
+    
+    private void listarVendasClientes() {
+        DefaultTableModel tabela = (DefaultTableModel) this.jtVendas.getModel();
+        listalModelVendasClientes = controllerVendasCliente.retornaListaVendasClientesController();
+        
+        NumberFormat total = NumberFormat.getCurrencyInstance(localeBR);
+        
+        int contador = listalModelVendasClientes.size();
+        for (int c = 0; c < contador; c++) {
+            tabela.addRow(new Object[]{
+                listalModelVendasClientes.get(c).getModelVenda().getIdVenda(),
+                listalModelVendasClientes.get(c).getModelCliente().getClienteNome(),
+                total.format(listalModelVendasClientes.get(c).getModelVenda().getVendaValorLiquido()),
+                listalModelVendasClientes.get(c).getModelVenda().getVendaData()
+            });
         }
     }
     

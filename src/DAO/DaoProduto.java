@@ -98,7 +98,6 @@ public class DaoProduto extends ConexaoMySql {
      */
     public ModelProdutos retornarProdutoDAO(int pIdProduto) {
         ModelProdutos modelProdutos = new ModelProdutos();
-
         try {
             this.conectar();
             this.executarSQL("SELECT "
