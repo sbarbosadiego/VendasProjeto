@@ -6,12 +6,14 @@ package view;
 
 import controller.ControllerCliente;
 import controller.ControllerProduto;
+import controller.ControllerVenda;
 import controller.ControllerVendasCliente;
 import java.awt.event.KeyEvent;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.ModelCliente;
 import model.ModelProdutos;
@@ -34,6 +36,8 @@ public class ViewVenda extends javax.swing.JFrame {
     
     ControllerVendasCliente controllerVendasCliente = new ControllerVendasCliente();
     ArrayList<ModelVendasCliente> listalModelVendasClientes = new ArrayList<>();
+    
+    ControllerVenda controllerVenda = new ControllerVenda();
     
 
     DefaultListModel modelo;
@@ -316,6 +320,11 @@ public class ViewVenda extends javax.swing.JFrame {
         jbExcluir.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jbExcluir.setForeground(new java.awt.Color(255, 0, 0));
         jbExcluir.setText("Excluir");
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
 
         jbEditar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jbEditar.setText("Editar");
@@ -461,6 +470,22 @@ public class ViewVenda extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfCodigoClienteActionPerformed
 
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
+        int linha = this.jtVendas.getSelectedRow();
+        int codigo = (int) this.jtVendas.getValueAt(linha, 0);
+        if (JOptionPane.showConfirmDialog(this, "Excluir Venda?", "Excluir",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (controllerVenda.excluirVendaController(codigo)) {
+                JOptionPane.showMessageDialog(this, "Venda excluída", "ATENÇÃO",
+                        JOptionPane.WARNING_MESSAGE);
+                listarVendasClientes();
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jbExcluirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -515,9 +540,10 @@ public class ViewVenda extends javax.swing.JFrame {
     }
     
     private void listarVendasClientes() {
-        DefaultTableModel tabela = (DefaultTableModel) this.jtVendas.getModel();
         listalModelVendasClientes = controllerVendasCliente.retornaListaVendasClientesController();
-        
+        DefaultTableModel tabela = (DefaultTableModel) this.jtVendas.getModel();
+        tabela.setNumRows(0);
+                
         NumberFormat total = NumberFormat.getCurrencyInstance(localeBR);
         
         int contador = listalModelVendasClientes.size();
