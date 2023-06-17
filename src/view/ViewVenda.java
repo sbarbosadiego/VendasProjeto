@@ -203,6 +203,11 @@ public class ViewVenda extends javax.swing.JFrame {
 
         btnAdicionar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnAdicionar.setText("Adicionar");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnAdicionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 103, 115, 30));
 
         jtfQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
@@ -462,7 +467,7 @@ public class ViewVenda extends javax.swing.JFrame {
                 Enter = 0;
             }
         } catch (Exception e) {
-
+            
         }
     }//GEN-LAST:event_jtfCodigoProdutoKeyReleased
 
@@ -485,6 +490,31 @@ public class ViewVenda extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jbExcluirActionPerformed
+
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        if (jtfQuantidade.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe a quantidade", "ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            modelProdutos = controllerProduto.retornarProdutoController(Integer.parseInt(jtfCodigoProduto.getText()));
+            // Inicia a linha na tabela
+            DefaultTableModel modeloCadastro = (DefaultTableModel) this.jtProdutosVenda.getModel();
+            double quantidade = Double.parseDouble(this.jtfQuantidade.getText());
+            NumberFormat valorReal = NumberFormat.getCurrencyInstance(localeBR);
+            int contador = 0;
+            for (int i = 0; i < contador; i++) {
+                modeloCadastro.setNumRows(0);
+            }
+
+            modeloCadastro.addRow(new Object[]{
+                modelProdutos.getIdProduto(),
+                modelProdutos.getProdutoNome(),
+                this.jtfQuantidade.getText(),
+                valorReal.format(modelProdutos.getProdutoPreco()),
+                valorReal.format(quantidade * modelProdutos.getProdutoPreco())
+            });
+        }
+    }//GEN-LAST:event_btnAdicionarActionPerformed
 
     /**
      * @param args the command line arguments
