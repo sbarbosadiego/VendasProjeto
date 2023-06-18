@@ -92,6 +92,7 @@ public class ViewVenda extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtProdutosVenda = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jtPesquisar = new javax.swing.JTextField();
@@ -171,7 +172,7 @@ public class ViewVenda extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel2.setText("Cliente:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 10, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 10, -1, -1));
 
         jtfCodigoVenda.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jPanel1.add(jtfCodigoVenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(717, 35, 150, 30));
@@ -221,14 +222,14 @@ public class ViewVenda extends javax.swing.JFrame {
 
         jtfValorTotal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
         jtfValorTotal.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jPanel1.add(jtfValorTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(687, 558, 180, 30));
+        jPanel1.add(jtfValorTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(677, 558, 190, 30));
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel6.setText("Valor Total:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(594, 557, -1, 30));
 
         jtfDesconto.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jPanel1.add(jtfDesconto, new org.netbeans.lib.awtextra.AbsoluteConstraints(476, 558, 100, 30));
+        jPanel1.add(jtfDesconto, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 558, 110, 30));
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel7.setText("Desconto:");
@@ -283,6 +284,10 @@ public class ViewVenda extends javax.swing.JFrame {
         }
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 145, 857, 400));
+
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jLabel9.setText("Produto:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 78, -1, -1));
 
         jTabbedPane1.addTab("Cadastro", jPanel1);
 
@@ -513,6 +518,8 @@ public class ViewVenda extends javax.swing.JFrame {
                 valorReal.format(modelProdutos.getProdutoPreco()),
                 valorReal.format(quantidade * modelProdutos.getProdutoPreco())
             });
+            
+            limparCamposProduto();
         }
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
@@ -569,6 +576,9 @@ public class ViewVenda extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Lista produtos adicionados a venda
+     */
     private void listarVendasClientes() {
         listalModelVendasClientes = controllerVendasCliente.retornaListaVendasClientesController();
         DefaultTableModel tabela = (DefaultTableModel) this.jtVendas.getModel();
@@ -641,6 +651,17 @@ public class ViewVenda extends javax.swing.JFrame {
         modelProdutos = controllerProduto.retornarProdutoController(codigo);
         this.campoPesquisaProduto.setText(modelProdutos.getProdutoNome());
     }
+    
+    /**
+     * Método para limpar campos do produto e quantidade
+     */
+    private void limparCamposProduto() { 
+        this.jtfCodigoProduto.setText("");
+        this.campoPesquisaProduto.setText("");
+        this.jtfQuantidade.setText("");
+    }
+        
+          
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
@@ -658,6 +679,7 @@ public class ViewVenda extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
