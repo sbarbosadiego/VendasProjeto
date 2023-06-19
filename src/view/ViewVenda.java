@@ -10,6 +10,7 @@ import controller.ControllerVenda;
 import controller.ControllerVendasCliente;
 import java.awt.event.KeyEvent;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Locale;
 import javax.swing.DefaultListModel;
@@ -92,7 +93,7 @@ public class ViewVenda extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtProdutosVenda = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jtfValorTotal = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jtPesquisar = new javax.swing.JTextField();
@@ -179,7 +180,7 @@ public class ViewVenda extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel3.setText("Cód. da Venda:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(717, 10, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(719, 10, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel4.setText("Cód. do Produto:");
@@ -211,7 +212,7 @@ public class ViewVenda extends javax.swing.JFrame {
         });
         jPanel1.add(btnAdicionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 103, 115, 30));
 
-        jtfQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        jtfQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         jtfQuantidade.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jtfQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -225,6 +226,16 @@ public class ViewVenda extends javax.swing.JFrame {
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(594, 557, -1, 30));
 
         jtfDesconto.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jtfDesconto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtfDescontoFocusLost(evt);
+            }
+        });
+        jtfDesconto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfDescontoActionPerformed(evt);
+            }
+        });
         jPanel1.add(jtfDesconto, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 558, 110, 30));
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
@@ -233,6 +244,11 @@ public class ViewVenda extends javax.swing.JFrame {
 
         btnNovo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnNovo, new org.netbeans.lib.awtextra.AbsoluteConstraints(767, 600, 100, 30));
 
         btnSalvar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -271,12 +287,12 @@ public class ViewVenda extends javax.swing.JFrame {
             jtProdutosVenda.getColumnModel().getColumn(2).setMinWidth(70);
             jtProdutosVenda.getColumnModel().getColumn(2).setPreferredWidth(70);
             jtProdutosVenda.getColumnModel().getColumn(2).setMaxWidth(70);
-            jtProdutosVenda.getColumnModel().getColumn(3).setMinWidth(90);
-            jtProdutosVenda.getColumnModel().getColumn(3).setPreferredWidth(90);
-            jtProdutosVenda.getColumnModel().getColumn(3).setMaxWidth(90);
-            jtProdutosVenda.getColumnModel().getColumn(4).setMinWidth(90);
-            jtProdutosVenda.getColumnModel().getColumn(4).setPreferredWidth(90);
-            jtProdutosVenda.getColumnModel().getColumn(4).setMaxWidth(90);
+            jtProdutosVenda.getColumnModel().getColumn(3).setMinWidth(100);
+            jtProdutosVenda.getColumnModel().getColumn(3).setPreferredWidth(100);
+            jtProdutosVenda.getColumnModel().getColumn(3).setMaxWidth(100);
+            jtProdutosVenda.getColumnModel().getColumn(4).setMinWidth(100);
+            jtProdutosVenda.getColumnModel().getColumn(4).setPreferredWidth(100);
+            jtProdutosVenda.getColumnModel().getColumn(4).setMaxWidth(100);
         }
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 145, 857, 400));
@@ -285,8 +301,9 @@ public class ViewVenda extends javax.swing.JFrame {
         jLabel9.setText("Produto:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 78, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(677, 558, 190, 30));
+        jtfValorTotal.setEditable(false);
+        jtfValorTotal.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jPanel1.add(jtfValorTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(677, 558, 190, 30));
 
         jTabbedPane1.addTab("Cadastro", jPanel1);
 
@@ -519,8 +536,21 @@ public class ViewVenda extends javax.swing.JFrame {
             });
             
             limparCamposProduto();
+            somaValorTotalProdutos();
         }
     }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private void jtfDescontoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfDescontoFocusLost
+        somaValorTotalProdutos();
+    }//GEN-LAST:event_jtfDescontoFocusLost
+
+    private void jtfDescontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDescontoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfDescontoActionPerformed
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        limparTela();
+    }//GEN-LAST:event_btnNovoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -576,7 +606,7 @@ public class ViewVenda extends javax.swing.JFrame {
     }
     
     /**
-     * Listar vendas
+     * Listar vendas.
      */
     private void listarVendasClientes() {
         listalModelVendasClientes = controllerVendasCliente.retornaListaVendasClientesController();
@@ -659,6 +689,66 @@ public class ViewVenda extends javax.swing.JFrame {
         this.campoPesquisaProduto.setText("");
         this.jtfQuantidade.setText("");
     }
+    
+    /**
+     * Limpar tela de cadastro.
+     */
+    private void limparTela() {
+        this.jtfCodigoCliente.setText("");
+        this.campoPesquisaCliente.setText("");
+        this.jtfCodigoProduto.setText("");
+        this.campoPesquisaProduto.setText("");
+        this.jtfQuantidade.setText("");
+        this.jtfValorTotal.setText("");
+        this.jtfDesconto.setText("");
+        DefaultTableModel tabela = (DefaultTableModel) this.jtProdutosVenda.getModel();
+        tabela.setNumRows(0);
+    }
+    
+    /**
+     * Realiza a soma dos produtos.
+     */
+    private void somaValorTotalProdutos() {
+        double somaTotal = 0, valor;
+        int contador = jtProdutosVenda.getRowCount();
+        NumberFormat valorReal = NumberFormat.getCurrencyInstance(localeBR);
+
+        for (int i = 0; i < contador; i++) {
+            String valorString = jtProdutosVenda.getValueAt(i, 4).toString();
+            try {
+                Number number = valorReal.parse(valorString);
+                valor = number.doubleValue();
+                somaTotal += valor;
+            } catch (ParseException e) {
+                System.out.println("Erro ao converter o valor: " + e.getMessage());
+            }
+        }
+
+        jtfValorTotal.setText(valorReal.format(somaTotal));
+        try {
+            descontoVenda();
+        } catch (NumberFormatException e) {
+
+        }
+    }
+    
+    /**
+     * Aplicar desconto no valor total da venda.
+     */
+    private void descontoVenda() {
+        NumberFormat valorReal = NumberFormat.getCurrencyInstance(localeBR);
+        String valorString = jtfValorTotal.getText();
+        double valorTotal = 0;
+        double desconto = Double.parseDouble(jtfDesconto.getText());
+        try {
+            Number number = valorReal.parse(valorString);
+            valorTotal = number.doubleValue();
+            valorTotal = valorTotal - (valorTotal * (desconto / 100));
+        } catch (ParseException e) {
+            System.out.println("Erro ao converter o valor: " + e.getMessage());
+        }
+        jtfValorTotal.setText(valorReal.format(valorTotal));
+    }
         
           
 
@@ -684,7 +774,6 @@ public class ViewVenda extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton jbEditar;
     private javax.swing.JButton jbExcluir;
     private javax.swing.JTextField jtPesquisar;
@@ -695,6 +784,7 @@ public class ViewVenda extends javax.swing.JFrame {
     private javax.swing.JTextField jtfCodigoVenda;
     private javax.swing.JFormattedTextField jtfDesconto;
     private javax.swing.JFormattedTextField jtfQuantidade;
+    private javax.swing.JTextField jtfValorTotal;
     private javax.swing.JList<String> listaPesquisarCliente;
     private javax.swing.JList<String> listaPesquisarProduto;
     // End of variables declaration//GEN-END:variables
