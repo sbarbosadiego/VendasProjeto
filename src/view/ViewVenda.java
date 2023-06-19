@@ -83,7 +83,6 @@ public class ViewVenda extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         btnAdicionar = new javax.swing.JButton();
         jtfQuantidade = new javax.swing.JFormattedTextField();
-        jtfValorTotal = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         jtfDesconto = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -93,6 +92,7 @@ public class ViewVenda extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtProdutosVenda = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jtPesquisar = new javax.swing.JTextField();
@@ -220,10 +220,6 @@ public class ViewVenda extends javax.swing.JFrame {
         });
         jPanel1.add(jtfQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 103, 144, 30));
 
-        jtfValorTotal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
-        jtfValorTotal.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jPanel1.add(jtfValorTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(677, 558, 190, 30));
-
         jLabel6.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel6.setText("Valor Total:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(594, 557, -1, 30));
@@ -289,6 +285,9 @@ public class ViewVenda extends javax.swing.JFrame {
         jLabel9.setText("Produto:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(182, 78, -1, -1));
 
+        jTextField1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(677, 558, 190, 30));
+
         jTabbedPane1.addTab("Cadastro", jPanel1);
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
@@ -353,7 +352,7 @@ public class ViewVenda extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -577,7 +576,7 @@ public class ViewVenda extends javax.swing.JFrame {
     }
     
     /**
-     * Lista produtos adicionados a venda
+     * Listar vendas
      */
     private void listarVendasClientes() {
         listalModelVendasClientes = controllerVendasCliente.retornaListaVendasClientesController();
@@ -685,6 +684,7 @@ public class ViewVenda extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton jbEditar;
     private javax.swing.JButton jbExcluir;
     private javax.swing.JTextField jtPesquisar;
@@ -695,7 +695,6 @@ public class ViewVenda extends javax.swing.JFrame {
     private javax.swing.JTextField jtfCodigoVenda;
     private javax.swing.JFormattedTextField jtfDesconto;
     private javax.swing.JFormattedTextField jtfQuantidade;
-    private javax.swing.JFormattedTextField jtfValorTotal;
     private javax.swing.JList<String> listaPesquisarCliente;
     private javax.swing.JList<String> listaPesquisarProduto;
     // End of variables declaration//GEN-END:variables
