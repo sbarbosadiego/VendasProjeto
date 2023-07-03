@@ -40,7 +40,6 @@ public class ViewVenda extends javax.swing.JFrame {
     
     ControllerVenda controllerVenda = new ControllerVenda();
     
-
     DefaultListModel modelo;
     int Enter = 0;
 
@@ -225,6 +224,7 @@ public class ViewVenda extends javax.swing.JFrame {
         jLabel6.setText("Valor Total:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(594, 557, -1, 30));
 
+        jtfDesconto.setToolTipText("Desconto sobre o total");
         jtfDesconto.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jtfDesconto.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {

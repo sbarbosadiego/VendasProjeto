@@ -6,10 +6,7 @@ package view;
 
 import controller.ControllerProduto;
 import java.awt.event.KeyEvent;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Locale;
 import javax.swing.JOptionPane;
@@ -19,6 +16,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import model.ModelProdutos;
 import util.CampoDePesquisa;
+import util.FormataValorReal;
 
 /**
  * @author Diego Barbosa da Silva
@@ -27,6 +25,7 @@ public class ViewProduto extends javax.swing.JFrame {
     
     Locale localeBR = new Locale("pt","BR");
     NumberFormat valorReal = NumberFormat.getCurrencyInstance(localeBR);
+    
     ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<>();
     ControllerProduto controllerProdutos = new ControllerProduto();
     ModelProdutos modelProduto = new ModelProdutos();
@@ -71,8 +70,8 @@ public class ViewProduto extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jtfFabricante = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jtfCusto = new javax.swing.JFormattedTextField();
         jtfPreco = new javax.swing.JTextField();
+        jtfCusto = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Produto");
@@ -207,13 +206,17 @@ public class ViewProduto extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel7.setText("Preço:");
 
-        jtfCusto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
-        jtfCusto.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-
         jtfPreco.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jtfPreco.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jtfPrecoFocusLost(evt);
+            }
+        });
+
+        jtfCusto.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jtfCusto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtfCustoFocusLost(evt);
             }
         });
 
@@ -383,9 +386,8 @@ public class ViewProduto extends javax.swing.JFrame {
             this.jtfNomeProduto.setText(modelProduto.getProdutoNome());
             this.jtfFabricante.setText(modelProduto.getProdutoFabricante());
             this.jtfEstoque.setText(String.valueOf(modelProduto.getProdutoEstoque()));
-            preco = modelProduto.getProdutoPreco();
-            this.jtfPreco.setText(valorReal.format(preco));
-            this.jtfCusto.setText(String.valueOf(modelProduto.getProdutoCusto()));
+            this.jtfPreco.setText(FormataValorReal.formatarDoubleReal(modelProduto.getProdutoPreco()));
+            this.jtfCusto.setText(FormataValorReal.formatarDoubleReal(modelProduto.getProdutoCusto()));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nenhum registro selecionado");
         }
@@ -407,8 +409,12 @@ public class ViewProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfPesquisaKeyPressed
 
     private void jtfPrecoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfPrecoFocusLost
-        formatarPreco();
+        jtfPreco.setText(FormataValorReal.formatarReal(this.jtfPreco.getText()));
     }//GEN-LAST:event_jtfPrecoFocusLost
+
+    private void jtfCustoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfCustoFocusLost
+        jtfCusto.setText(FormataValorReal.formatarReal(this.jtfCusto.getText()));
+    }//GEN-LAST:event_jtfCustoFocusLost
 
     /**
      * @param args the command line arguments
@@ -459,18 +465,8 @@ public class ViewProduto extends javax.swing.JFrame {
             modelProduto.setProdutoNome(this.jtfNomeProduto.getText().toUpperCase());
             modelProduto.setProdutoFabricante(this.jtfFabricante.getText().toUpperCase());
             modelProduto.setProdutoEstoque(Integer.parseInt(this.jtfEstoque.getText()));
-            try {
-                DecimalFormat format = new DecimalFormat("#,###.00");
-                DecimalFormatSymbols decimalSimbol = new DecimalFormatSymbols();
-                decimalSimbol.setDecimalSeparator('.');
-                String valorString = jtfPreco.getText();
-                Number number = valorReal.parse(valorString);
-                modelProduto.setProdutoPreco(number.doubleValue());
-                modelProduto.setProdutoCusto(format.parse(this.jtfCusto.getText()).doubleValue());
-            } catch (ParseException e) {
-                JOptionPane.showMessageDialog(this, "Não foi possível formatar campo", "ERRO",
-                        JOptionPane.ERROR_MESSAGE);
-            }
+            modelProduto.setProdutoPreco(FormataValorReal.retornarRealDouble(this.jtfPreco.getText()));
+            modelProduto.setProdutoCusto(FormataValorReal.retornarRealDouble(this.jtfCusto.getText()));
             if (controllerProdutos.salvarProdutoController(modelProduto) > 0) {
                 JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!!", "ATENÇÃO",
                         JOptionPane.INFORMATION_MESSAGE);
@@ -498,18 +494,8 @@ public class ViewProduto extends javax.swing.JFrame {
             modelProduto.setProdutoNome(this.jtfNomeProduto.getText().toUpperCase());
             modelProduto.setProdutoFabricante(this.jtfFabricante.getText().toUpperCase());
             modelProduto.setProdutoEstoque(Integer.parseInt(this.jtfEstoque.getText()));
-            try {
-                DecimalFormat format = new DecimalFormat("#,###.00");
-                DecimalFormatSymbols decimalSimbol = new DecimalFormatSymbols();
-                decimalSimbol.setDecimalSeparator('.');
-                String valorString = jtfPreco.getText();
-                Number number = valorReal.parse(valorString);
-                modelProduto.setProdutoPreco(number.doubleValue());
-                modelProduto.setProdutoCusto(format.parse(this.jtfCusto.getText()).doubleValue());
-            } catch (ParseException e) {
-                JOptionPane.showMessageDialog(this, "Não foi possível formatar campo", "ERRO",
-                        JOptionPane.ERROR_MESSAGE);
-            }
+            modelProduto.setProdutoPreco(FormataValorReal.retornarRealDouble(this.jtfPreco.getText()));
+            modelProduto.setProdutoCusto(FormataValorReal.retornarRealDouble(this.jtfCusto.getText()));
             if (controllerProdutos.editarProdutoController(modelProduto)) {
                 JOptionPane.showMessageDialog(this, "Editado com sucesso!!", "ATENÇÃO",
                         JOptionPane.INFORMATION_MESSAGE);
@@ -555,8 +541,6 @@ public class ViewProduto extends javax.swing.JFrame {
         listaModelProdutos = controllerProdutos.retornaListaProdutosController();
         DefaultTableModel tabela = (DefaultTableModel) jtableProdutos.getModel();
         tabela.setNumRows(0);
-        NumberFormat preco = NumberFormat.getCurrencyInstance(localeBR);
-        NumberFormat custo = NumberFormat.getCurrencyInstance(localeBR);
 
         int contador = listaModelProdutos.size();
         for (int c = 0; c < contador; c++) {
@@ -565,26 +549,10 @@ public class ViewProduto extends javax.swing.JFrame {
                 listaModelProdutos.get(c).getProdutoFabricante(),
                 listaModelProdutos.get(c).getProdutoNome(),
                 listaModelProdutos.get(c).getProdutoEstoque(),
-                preco.format(listaModelProdutos.get(c).getProdutoPreco()),
-                custo.format(listaModelProdutos.get(c).getProdutoCusto())
+                valorReal.format(listaModelProdutos.get(c).getProdutoPreco()),
+                valorReal.format(listaModelProdutos.get(c).getProdutoCusto())
             });
         }
-    }
-    
-    /**
-     * Formatar campo de preço.
-     */
-    private void formatarPreco() {
-        double valor = 0;
-        String valorString = jtfPreco.getText();
-        try {
-            Number number = valorReal.parse(valorString);
-            valor = number.doubleValue();
-        } catch (ParseException e) {
-            System.out.println("Erro ao converter o valor: " + e.getMessage());
-        }
-        
-        jtfPreco.setText(valorReal.format(valor));
     }
 
 
@@ -606,7 +574,7 @@ public class ViewProduto extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtableProdutos;
     private javax.swing.JTextField jtfCodigo;
-    private javax.swing.JFormattedTextField jtfCusto;
+    private javax.swing.JTextField jtfCusto;
     private javax.swing.JFormattedTextField jtfEstoque;
     private javax.swing.JTextField jtfFabricante;
     private javax.swing.JTextField jtfNomeProduto;
