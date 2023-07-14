@@ -4,7 +4,7 @@ Criado utilizando java com interface Swing/Desktop, e banco de dados MySql.
 
 ##
 ### Configurações de Ambiente
-SO: Pop!_OS (Linux) / Windows 10<br>
+SO: Xubuntu 22.04 / Pop!_OS 22.04<br>
 JDK: 17.0.6<br>
 MySQL: 8.0.32 Community
 
