@@ -1,10 +1,12 @@
+DELIMITER $
+
 CREATE SCHEMA bdvendasprojeto
 DEFAULT CHARACTER SET utf8
 DEFAULT COLLATE utf8_general_ci;
 
-/* Usar show databases para conferir se a mesma foi criada corretamente */
-
 USE bdvendasprojeto;
+
+/* Criando as Tabelas*/
 
 CREATE TABLE IF NOT EXISTS tbl_cliente (
 pk_id_cliente SERIAL NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -52,6 +54,12 @@ venda_produto_valor DECIMAL(10,2),
 venda_produto_quantidade INT
 );
 
+/* Inserindo user admin para login */
+INSERT INTO tbl_usuario
+(usuario_nome, usuario_login, usuario_senha)
+VALUES
+('admin','admin','admin');
+
 /* Criar chaves estrangeiras */
 ALTER TABLE tbl_vendas
 ADD FOREIGN KEY (fk_cliente)
@@ -64,3 +72,8 @@ REFERENCES tbl_produto(pk_id_produto);
 ALTER TABLE tbl_vendas_produtos
 ADD FOREIGN KEY (fk_produto)
 REFERENCES tbl_vendas(pk_id_vendas);
+
+SHOW DATABASES;
+SHOW TABLES;
+
+$
