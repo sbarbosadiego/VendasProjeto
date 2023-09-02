@@ -527,14 +527,28 @@ public class ViewVenda extends javax.swing.JFrame {
                 modeloCadastro.setNumRows(0);
             }
 
-            modeloCadastro.addRow(new Object[]{
-                modelProdutos.getIdProduto(),
-                modelProdutos.getProdutoNome(),
-                this.jtfQuantidade.getText(),
-                valorReal.format(modelProdutos.getProdutoPreco()),
-                valorReal.format(quantidade * modelProdutos.getProdutoPreco())
-            });
-            
+            // Verifica se há um produto já está na tabela
+            boolean produtoEncontrado = false;
+            for (int i = 0; i < modeloCadastro.getRowCount(); i++) {
+                int idProdutoTabela = (int) modeloCadastro.getValueAt(i, 0);
+                int quantidadeAtual = Integer.parseInt(modeloCadastro.getValueAt(i, 2).toString());
+                if (idProdutoTabela == modelProdutos.getIdProduto()) {
+                    modeloCadastro.setValueAt(quantidadeAtual + (int) quantidade, i, 2);
+                    produtoEncontrado = true;
+                    break;
+                }
+            }
+
+            if (!produtoEncontrado) {
+                modeloCadastro.addRow(new Object[]{
+                    modelProdutos.getIdProduto(),
+                    modelProdutos.getProdutoNome(),
+                    this.jtfQuantidade.getText(),
+                    valorReal.format(modelProdutos.getProdutoPreco()),
+                    valorReal.format(quantidade * modelProdutos.getProdutoPreco())
+                });
+            }
+
             limparCamposProduto();
             somaValorTotalProdutos();
         }

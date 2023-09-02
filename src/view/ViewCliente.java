@@ -83,7 +83,6 @@ public class ViewCliente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Cliente");
         setLocation(new java.awt.Point(600, 150));
-        setPreferredSize(new java.awt.Dimension(800, 570));
         setResizable(false);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 540));
