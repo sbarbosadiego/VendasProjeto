@@ -56,6 +56,7 @@ public class ViewVenda extends javax.swing.JFrame {
         listarPesquisaClientes();
         listarPesquisaProdutos();
         listarVendasClientes();
+        habilitarDesabilitarCampos(false);
     }
 
     /**
@@ -211,7 +212,7 @@ public class ViewVenda extends javax.swing.JFrame {
         });
         jPanel1.add(btnAdicionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 103, 115, 30));
 
-        jtfQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jtfQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         jtfQuantidade.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jtfQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -259,6 +260,11 @@ public class ViewVenda extends javax.swing.JFrame {
         btnCancelar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 0, 0));
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, 100, 30));
 
         jtProdutosVenda.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -533,7 +539,10 @@ public class ViewVenda extends javax.swing.JFrame {
                 int idProdutoTabela = (int) modeloCadastro.getValueAt(i, 0);
                 int quantidadeAtual = Integer.parseInt(modeloCadastro.getValueAt(i, 2).toString());
                 if (idProdutoTabela == modelProdutos.getIdProduto()) {
-                    modeloCadastro.setValueAt(quantidadeAtual + (int) quantidade, i, 2);
+                    int quantidadeNova = quantidadeAtual + (int) quantidade;
+                    modeloCadastro.setValueAt(quantidadeNova, i, 2);
+                    modeloCadastro.setValueAt(valorReal.format(modelProdutos.getProdutoPreco()), i, 3);
+                    modeloCadastro.setValueAt(valorReal.format(quantidadeNova * modelProdutos.getProdutoPreco()), i, 4);
                     produtoEncontrado = true;
                     break;
                 }
@@ -563,8 +572,12 @@ public class ViewVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfDescontoActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        limparTela();
+        this.habilitarDesabilitarCampos(true);
     }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        limparTela();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -696,7 +709,7 @@ public class ViewVenda extends javax.swing.JFrame {
     }
     
     /**
-     * Método para limpar campos do produto e quantidade
+     * Método para limpar campos do produto e quantidade.
      */
     private void limparCamposProduto() { 
         this.jtfCodigoProduto.setText("");
@@ -715,8 +728,20 @@ public class ViewVenda extends javax.swing.JFrame {
         this.jtfQuantidade.setText("");
         this.jtfValorTotal.setText("");
         this.jtfDesconto.setText("");
+        this.jtfCodigoVenda.setText("");
         DefaultTableModel tabela = (DefaultTableModel) this.jtProdutosVenda.getModel();
         tabela.setNumRows(0);
+    }
+    
+    private void habilitarDesabilitarCampos(boolean condicao) {
+        this.jtfCodigoCliente.setEnabled(condicao);
+        this.campoPesquisaCliente.setEnabled(condicao);
+        this.jtfCodigoProduto.setEnabled(condicao);
+        this.campoPesquisaProduto.setEnabled(condicao);
+        this.jtfQuantidade.setEnabled(condicao);
+        this.jtfValorTotal.setEnabled(condicao);
+        this.jtfDesconto.setEnabled(condicao);
+        this.jtfCodigoVenda.setEnabled(condicao);
     }
     
     /**
