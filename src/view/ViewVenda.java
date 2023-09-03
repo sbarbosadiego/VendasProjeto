@@ -105,6 +105,7 @@ public class ViewVenda extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vendas");
+        setMinimumSize(new java.awt.Dimension(820, 600));
         setResizable(false);
 
         jTabbedPane1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
@@ -225,7 +226,7 @@ public class ViewVenda extends javax.swing.JFrame {
         jLabel6.setText("Valor Total:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(594, 557, -1, 30));
 
-        jtfDesconto.setToolTipText("Desconto sobre o total");
+        jtfDesconto.setToolTipText("Aplica a porcentagem de desconto");
         jtfDesconto.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jtfDesconto.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
