@@ -26,7 +26,6 @@ public class ViewCliente extends javax.swing.JFrame {
     ControllerCliente controllerCliente = new ControllerCliente();
     ModelCliente modelCliente = new ModelCliente();
     String editarSalvar;
-    
 
     /**
      * Creates new form ViewCliente

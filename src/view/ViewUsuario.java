@@ -445,7 +445,7 @@ public class ViewUsuario extends javax.swing.JFrame {
             }
         }
     }
-    
+
     /**
      * Método para limpar os campos de texto.
      */
@@ -455,10 +455,11 @@ public class ViewUsuario extends javax.swing.JFrame {
         this.jtfLogin.setText("");
         this.jtfSenha.setText("");
     }
-    
+
     /**
      * Método que habilita e desabilita campos de texto.
-     * @param condicao 
+     *
+     * @param condicao
      */
     private void habilitarDesabilitarCampos(boolean condicao) {
         this.jtfNomeUsuario.setEnabled(condicao);
@@ -479,8 +480,7 @@ public class ViewUsuario extends javax.swing.JFrame {
             tabela.addRow(new Object[]{
                 listaModelUsuarios.get(c).getIdUsuario(),
                 listaModelUsuarios.get(c).getUsuarioNome(),
-                listaModelUsuarios.get(c).getUsuarioLogin(),
-            });
+                listaModelUsuarios.get(c).getUsuarioLogin(),});
         }
     }
 

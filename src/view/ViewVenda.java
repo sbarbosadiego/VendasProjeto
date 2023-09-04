@@ -94,6 +94,8 @@ public class ViewVenda extends javax.swing.JFrame {
         jtProdutosVenda = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         jtfValorTotal = new javax.swing.JTextField();
+        btnExcluir = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jtPesquisar = new javax.swing.JTextField();
@@ -311,6 +313,26 @@ public class ViewVenda extends javax.swing.JFrame {
         jtfValorTotal.setEditable(false);
         jtfValorTotal.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jPanel1.add(jtfValorTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(677, 558, 190, 30));
+
+        btnExcluir.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnExcluir.setForeground(new java.awt.Color(255, 0, 0));
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 600, 100, 30));
+
+        btnEditar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(51, 51, 255));
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 600, 100, 30));
 
         jTabbedPane1.addTab("Cadastro", jPanel1);
 
@@ -580,6 +602,21 @@ public class ViewVenda extends javax.swing.JFrame {
         limparTela();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int linha = jtProdutosVenda.getSelectedRow();
+        DefaultTableModel modeloCadastro = (DefaultTableModel) this.jtProdutosVenda.getModel();
+        
+        if (linha != -1) {
+            modeloCadastro.removeRow(linha);
+            somaValorTotalProdutos();
+        }
+        
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        
+    }//GEN-LAST:event_btnEditarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -795,6 +832,8 @@ public class ViewVenda extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSalvar;

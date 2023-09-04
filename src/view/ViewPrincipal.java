@@ -189,10 +189,10 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmProjetoMouseClicked
 
     private void jmProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmProjetoActionPerformed
-        try{
+        try {
             URI link = new URI("https://github.com/sbarbosadiego/VendasProjeto");
             Desktop.getDesktop().browse(link);
-        }catch(IOException | URISyntaxException e){
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jmProjetoActionPerformed

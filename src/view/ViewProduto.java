@@ -22,10 +22,10 @@ import util.FormataValorReal;
  * @author Diego Barbosa da Silva
  */
 public class ViewProduto extends javax.swing.JFrame {
-    
-    Locale localeBR = new Locale("pt","BR");
+
+    Locale localeBR = new Locale("pt", "BR");
     NumberFormat valorReal = NumberFormat.getCurrencyInstance(localeBR);
-    
+
     ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<>();
     ControllerProduto controllerProdutos = new ControllerProduto();
     ModelProdutos modelProduto = new ModelProdutos();
@@ -333,17 +333,17 @@ public class ViewProduto extends javax.swing.JFrame {
         int linha = jtableProdutos.getSelectedRow();
         int codigoProduto = (int) jtableProdutos.getValueAt(linha, 0);
         if (JOptionPane.showConfirmDialog(this, "Excluir Produto?", "Excluir",
-            JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-        if (controllerProdutos.excluirProdutoController(codigoProduto)) {
-            JOptionPane.showMessageDialog(this, "Produto excluído", "ATENÇÃO",
-                JOptionPane.WARNING_MESSAGE);
-            this.listarProdutos();
-            this.limparCampos();
-            this.habilitarDesabilitarCampos(false);
-        } else {
-            JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
-                JOptionPane.ERROR_MESSAGE);
-        }
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (controllerProdutos.excluirProdutoController(codigoProduto)) {
+                JOptionPane.showMessageDialog(this, "Produto excluído", "ATENÇÃO",
+                        JOptionPane.WARNING_MESSAGE);
+                this.listarProdutos();
+                this.limparCampos();
+                this.habilitarDesabilitarCampos(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
