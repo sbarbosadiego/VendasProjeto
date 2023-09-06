@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.ModelCliente;
 import model.ModelProdutos;
+import model.ModelVenda;
 import model.ModelVendasCliente;
 
 /**
@@ -34,6 +35,8 @@ public class ViewVenda extends javax.swing.JFrame {
     ModelProdutos modelProdutos = new ModelProdutos();
     ControllerProduto controllerProduto = new ControllerProduto();
     ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<>();
+    
+    ModelVenda modelVenda = new ModelVenda();
     
     ControllerVendasCliente controllerVendasCliente = new ControllerVendasCliente();
     ArrayList<ModelVendasCliente> listalModelVendasClientes = new ArrayList<>();
@@ -75,7 +78,6 @@ public class ViewVenda extends javax.swing.JFrame {
         campoPesquisaProduto = new javax.swing.JTextField();
         campoPesquisaCliente = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jtfCodigoCliente = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jtfCodigoVenda = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -96,6 +98,7 @@ public class ViewVenda extends javax.swing.JFrame {
         jtfValorTotal = new javax.swing.JTextField();
         btnExcluir = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
+        jtfCodigoCliente = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jtPesquisar = new javax.swing.JTextField();
@@ -160,19 +163,6 @@ public class ViewVenda extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel1.setText("Cód. do Cliente:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jtfCodigoCliente.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jtfCodigoCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfCodigoClienteActionPerformed(evt);
-            }
-        });
-        jtfCodigoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtfCodigoClienteKeyReleased(evt);
-            }
-        });
-        jPanel1.add(jtfCodigoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 35, 150, 31));
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel2.setText("Cliente:");
@@ -334,6 +324,15 @@ public class ViewVenda extends javax.swing.JFrame {
         });
         jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 600, 100, 30));
 
+        jtfCodigoCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        jtfCodigoCliente.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jtfCodigoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfCodigoClienteKeyReleased(evt);
+            }
+        });
+        jPanel1.add(jtfCodigoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 35, 150, 30));
+
         jTabbedPane1.addTab("Cadastro", jPanel1);
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
@@ -479,18 +478,6 @@ public class ViewVenda extends javax.swing.JFrame {
         this.listaPesquisarCliente.setVisible(false);
     }//GEN-LAST:event_listaPesquisarClienteMousePressed
 
-    private void jtfCodigoClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoClienteKeyReleased
-        try {
-            if (Enter == 0) {
-                this.recuperarClienteCodigo();
-            } else {
-                Enter = 0;
-            }
-        } catch (Exception e) {
-            
-        }
-    }//GEN-LAST:event_jtfCodigoClienteKeyReleased
-
     private void campoPesquisaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPesquisaProdutoActionPerformed
         this.listaPesquisarProduto.setVisible(true);
         Enter = 1;
@@ -521,10 +508,6 @@ public class ViewVenda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jtfCodigoProdutoKeyReleased
 
-    private void jtfCodigoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCodigoClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfCodigoClienteActionPerformed
-
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
         int linha = this.jtVendas.getSelectedRow();
         int codigo = (int) this.jtVendas.getValueAt(linha, 0);
@@ -549,7 +532,7 @@ public class ViewVenda extends javax.swing.JFrame {
             modelProdutos = controllerProduto.retornarProdutoController(Integer.parseInt(jtfCodigoProduto.getText()));
             // Inicia a linha na tabela
             DefaultTableModel modeloCadastro = (DefaultTableModel) this.jtProdutosVenda.getModel();
-            double quantidade = Double.parseDouble(this.jtfQuantidade.getText());
+            int quantidade = Integer.parseInt(this.jtfQuantidade.getText());
             NumberFormat valorReal = NumberFormat.getCurrencyInstance(localeBR);
             int contador = 0;
             for (int i = 0; i < contador; i++) {
@@ -616,6 +599,18 @@ public class ViewVenda extends javax.swing.JFrame {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void jtfCodigoClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoClienteKeyReleased
+        try {
+            if (Enter == 0) {
+                this.recuperarClienteCodigo();
+            } else {
+                Enter = 0;
+            }
+        } catch (Exception e) {
+
+        }
+    }//GEN-LAST:event_jtfCodigoClienteKeyReleased
 
     /**
      * @param args the command line arguments
@@ -715,7 +710,7 @@ public class ViewVenda extends javax.swing.JFrame {
         String nome = this.listaPesquisarCliente.getSelectedValue();
         this.campoPesquisaCliente.setText(nome);
         modelCliente = controllerCliente.retornarClienteNomeController(nome);
-        this.jtfCodigoCliente.setText(String.valueOf(modelCliente.getIdCliente()));
+        this.jtfCodigoCliente.setValue(modelCliente.getIdCliente());
     }
     
     /**
@@ -858,7 +853,7 @@ public class ViewVenda extends javax.swing.JFrame {
     private javax.swing.JTextField jtPesquisar;
     private javax.swing.JTable jtProdutosVenda;
     private javax.swing.JTable jtVendas;
-    private javax.swing.JTextField jtfCodigoCliente;
+    private javax.swing.JFormattedTextField jtfCodigoCliente;
     private javax.swing.JTextField jtfCodigoProduto;
     private javax.swing.JTextField jtfCodigoVenda;
     private javax.swing.JFormattedTextField jtfDesconto;

@@ -12,7 +12,7 @@ public class ModelVendaProduto {
     private int idVendaProduto;
     private int produto;
     private int venda;
-    private Double vendaProdutoValor;
+    private double vendaProdutoValor;
     private int vendaProdutoQuantidade;
 
     public ModelVendaProduto() {
