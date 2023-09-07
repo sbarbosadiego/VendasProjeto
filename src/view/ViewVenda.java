@@ -269,12 +269,24 @@ public class ViewVenda extends javax.swing.JFrame {
                 "Cód. Prod.", "Produto", "Qtd.", "Valor Un.", "Valor Total"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jtProdutosVenda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtProdutosVendaKeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(jtProdutosVenda);
@@ -611,6 +623,31 @@ public class ViewVenda extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jtfCodigoClienteKeyReleased
+
+    private void jtProdutosVendaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtProdutosVendaKeyReleased
+        int linha = jtProdutosVenda.getSelectedRow();
+        DefaultTableModel modeloCadastro = (DefaultTableModel) this.jtProdutosVenda.getModel();
+        NumberFormat valorReal = NumberFormat.getCurrencyInstance(localeBR);
+        int quantidade = Integer.parseInt(jtProdutosVenda.getValueAt(linha, 2).toString());
+
+        try {
+            if (Enter == 0) {
+                if (quantidade > 0) {
+                    modeloCadastro.setValueAt(quantidade, linha, 2);
+                    modeloCadastro.setValueAt(valorReal.format(modelProdutos.getProdutoPreco()), linha, 3);
+                    modeloCadastro.setValueAt(valorReal.format(quantidade * modelProdutos.getProdutoPreco()), linha, 4);
+                    somaValorTotalProdutos();
+                } else if (quantidade == 0 || quantidade < 0) {
+                    modeloCadastro.removeRow(linha);
+                    somaValorTotalProdutos();
+                }
+            } else {
+                Enter = 0;
+            }
+        } catch (Exception e) {
+            
+        }
+    }//GEN-LAST:event_jtProdutosVendaKeyReleased
 
     /**
      * @param args the command line arguments

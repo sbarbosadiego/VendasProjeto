@@ -379,7 +379,7 @@
                       <Table columnCount="5" rowCount="0">
                         <Column editable="false" title="C&#xf3;d. Prod." type="java.lang.Object"/>
                         <Column editable="false" title="Produto" type="java.lang.Object"/>
-                        <Column editable="false" title="Qtd." type="java.lang.Object"/>
+                        <Column editable="true" title="Qtd." type="java.lang.Integer"/>
                         <Column editable="false" title="Valor Un." type="java.lang.Object"/>
                         <Column editable="false" title="Valor Total" type="java.lang.Object"/>
                       </Table>
@@ -417,6 +417,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtProdutosVendaKeyReleased"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
