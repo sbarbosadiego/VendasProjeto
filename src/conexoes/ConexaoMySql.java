@@ -4,6 +4,7 @@ package conexoes;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,18 +29,30 @@ public class ConexaoMySql {
     }
 
     /**
-     * Retorna os dados de acesso configurados no properties.
-     *
-     * @return prop
+     * Método para carregar as configurações do properties.
+     * @return properties
      */
     private static Properties loadProperties() {
-        try {
-            Properties prop = new Properties();
-            String caminho = "/db.properties";
-            prop.load(ConexaoMySql.class.getResourceAsStream(caminho));
-            return prop;
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Fueda");
+        Properties properties = new Properties();
+        FileInputStream caminho = null;
+        String distro = System.getProperty("os.name");
+        String path = System.getProperty("user.home");
+        if (distro.equals("Linux")) {
+            try {
+                caminho = new FileInputStream(path + "/VendasProjeto/db.properties");
+                properties.load(caminho);
+                return properties;
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Arquivo properties não encontrado.");
+            }
+        } else {
+            try {
+                caminho = new FileInputStream("C:/VendasProjeto/db.properties");
+                properties.load(caminho);
+                return properties;
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Arquivo properties não encontrado.");
+            }
         }
         return null;
     }
