@@ -11,15 +11,15 @@ import java.util.ArrayList;
  */
 public class ModelVendasCliente {
     
-    private ModelVenda modelvenda;
+    private ModelVendas modelvenda;
     private ModelCliente modelcliente;
     private ArrayList<ModelVendasCliente> listaModelVendasClientes;
     
-    public ModelVenda getModelVenda() {
+    public ModelVendas getModelVenda() {
         return modelvenda;
     }
 
-    public void setModelVenda(ModelVenda modelvenda) {
+    public void setModelVenda(ModelVendas modelvenda) {
         this.modelvenda = modelvenda;
     }
 

@@ -6,7 +6,7 @@ package controller;
 
 import DAO.DaoVenda;
 import java.util.ArrayList;
-import model.ModelVenda;
+import model.ModelVendas;
 
 /**
  *
@@ -20,7 +20,7 @@ public class ControllerVenda {
      * Salvar Venda controller
      * @return int
      */
-    public int salvarVendaController(ModelVenda pModelVenda) {
+    public int salvarVendaController(ModelVendas pModelVenda) {
         return this.daoVenda.salvarVendaDAO(pModelVenda);
     }
     
@@ -38,16 +38,16 @@ public class ControllerVenda {
      * @param pModelVenda
      * @return boolean
      */
-    public boolean editarVendaController(ModelVenda pModelVenda) {
+    public boolean editarVendaController(ModelVendas pModelVenda) {
         return this.daoVenda.alterarVendaDAO(pModelVenda);
     }
     
     /**
      * Retornar pelo código de Venda
      * @param pIdVenda
-     * @return ModelVenda
+     * @return ModelVendas
      */
-    public ModelVenda retornarVendaController(int pIdVenda) {
+    public ModelVendas retornarVendaController(int pIdVenda) {
         return this.daoVenda.retornarVendaDAO(pIdVenda);
     }
     
@@ -55,7 +55,7 @@ public class ControllerVenda {
      * Retornar lista de Vendas
      * @return ArrayList
      */
-    public ArrayList<ModelVenda> retornaListaVendaController() {
+    public ArrayList<ModelVendas> retornaListaVendaController() {
         return this.daoVenda.retornarListaVendaDAO();
     }
     

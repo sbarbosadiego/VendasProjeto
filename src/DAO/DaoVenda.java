@@ -8,7 +8,7 @@ import conexoes.ConexaoMySql;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import model.ModelVenda;
+import model.ModelVendas;
 
 /**
  * @author Diego Barbosa da Silva
@@ -20,7 +20,7 @@ public class DaoVenda extends ConexaoMySql {
      * @param pModelVenda
      * @return int
      */
-    public int salvarVendaDAO(ModelVenda pModelVenda) {
+    public int salvarVendaDAO(ModelVendas pModelVenda) {
         try {
             this.conectar();
             return this.insertSQL("INSERT INTO tbl_vendas ("
@@ -67,7 +67,7 @@ public class DaoVenda extends ConexaoMySql {
      * @param pModelVenda
      * @return boolean
      */
-    public boolean alterarVendaDAO(ModelVenda pModelVenda) {
+    public boolean alterarVendaDAO(ModelVendas pModelVenda) {
         try {
             this.conectar();
             return this.executarUpdateDeleteSQL(
@@ -91,8 +91,8 @@ public class DaoVenda extends ConexaoMySql {
      * @param pIdVenda
      * @return modelVenda
      */
-    public ModelVenda retornarVendaDAO(int pIdVenda) {
-        ModelVenda modelVenda = new ModelVenda();
+    public ModelVendas retornarVendaDAO(int pIdVenda) {
+        ModelVendas modelVenda = new ModelVendas();
         try {
             this.conectar();
             this.executarSQL("SELECT "
@@ -123,9 +123,9 @@ public class DaoVenda extends ConexaoMySql {
      * Retornar lista de vendas.
      * @return listaModelVendas
      */
-    public ArrayList<ModelVenda> retornarListaVendaDAO() {
-        ArrayList<ModelVenda> listaModelVendas = new ArrayList<>();
-        ModelVenda modelVenda = new ModelVenda();
+    public ArrayList<ModelVendas> retornarListaVendaDAO() {
+        ArrayList<ModelVendas> listaModelVendas = new ArrayList<>();
+        ModelVendas modelVenda = new ModelVendas();
         try {
             this.conectar();
             this.executarSQL("SELECT pk_id_vendas, "
@@ -136,7 +136,7 @@ public class DaoVenda extends ConexaoMySql {
                     + "venda_desconto "
                     + "FROM tbl_vendas;");
             while (this.getResultSet().next()) {
-                modelVenda = new ModelVenda();
+                modelVenda = new ModelVendas();
                 modelVenda.setIdVenda(this.getResultSet().getInt(1));
                 modelVenda.setCliente(this.getResultSet().getString(2));
                 modelVenda.setVendaData(this.getResultSet().getDate(3));

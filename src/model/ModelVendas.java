@@ -9,7 +9,7 @@ import java.sql.Date;
 /**
  * @author Diego Barbosa da Silva
  */
-public class ModelVenda {
+public class ModelVendas {
 
     private int idVenda;
     private String cliente;
@@ -18,7 +18,7 @@ public class ModelVenda {
     private Double vendaValorBruto;
     private Double vendaDesconto;
 
-    public ModelVenda() {
+    public ModelVendas() {
         
     }
 

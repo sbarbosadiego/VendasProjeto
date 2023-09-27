@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.ModelCliente;
 import model.ModelProdutos;
-import model.ModelVenda;
+import model.ModelVendas;
 import model.ModelVendasCliente;
 
 /**
@@ -36,7 +36,7 @@ public class ViewVenda extends javax.swing.JFrame {
     ControllerProduto controllerProduto = new ControllerProduto();
     ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<>();
     
-    ModelVenda modelVenda = new ModelVenda();
+    ModelVendas modelVenda = new ModelVendas();
     
     ControllerVendasCliente controllerVendasCliente = new ControllerVendasCliente();
     ArrayList<ModelVendasCliente> listalModelVendasClientes = new ArrayList<>();
@@ -82,7 +82,6 @@ public class ViewVenda extends javax.swing.JFrame {
         jtfCodigoVenda = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jtfCodigoProduto = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         btnAdicionar = new javax.swing.JButton();
         jtfQuantidade = new javax.swing.JFormattedTextField();
@@ -97,8 +96,8 @@ public class ViewVenda extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jtfValorTotal = new javax.swing.JTextField();
         btnExcluir = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
         jtfCodigoCliente = new javax.swing.JFormattedTextField();
+        jtfCodigoProduto = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jtPesquisar = new javax.swing.JTextField();
@@ -179,19 +178,6 @@ public class ViewVenda extends javax.swing.JFrame {
         jLabel4.setText("Cód. do Produto:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 78, -1, -1));
 
-        jtfCodigoProduto.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        jtfCodigoProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfCodigoProdutoActionPerformed(evt);
-            }
-        });
-        jtfCodigoProduto.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtfCodigoProdutoKeyReleased(evt);
-            }
-        });
-        jPanel1.add(jtfCodigoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 103, 150, 30));
-
         jLabel5.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel5.setText("Quantidade:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 78, -1, -1));
@@ -230,6 +216,11 @@ public class ViewVenda extends javax.swing.JFrame {
                 jtfDescontoActionPerformed(evt);
             }
         });
+        jtfDesconto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfDescontoKeyReleased(evt);
+            }
+        });
         jPanel1.add(jtfDesconto, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 558, 110, 30));
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
@@ -248,6 +239,11 @@ public class ViewVenda extends javax.swing.JFrame {
         btnSalvar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnSalvar.setForeground(new java.awt.Color(0, 153, 51));
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(649, 600, 100, 30));
 
         btnCancelar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -326,16 +322,6 @@ public class ViewVenda extends javax.swing.JFrame {
         });
         jPanel1.add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 600, 100, 30));
 
-        btnEditar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnEditar.setForeground(new java.awt.Color(51, 51, 255));
-        btnEditar.setText("Editar");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 600, 100, 30));
-
         jtfCodigoCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         jtfCodigoCliente.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jtfCodigoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -344,6 +330,15 @@ public class ViewVenda extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jtfCodigoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 35, 150, 30));
+
+        jtfCodigoProduto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        jtfCodigoProduto.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jtfCodigoProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfCodigoProdutoKeyReleased(evt);
+            }
+        });
+        jPanel1.add(jtfCodigoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 103, 150, 30));
 
         jTabbedPane1.addTab("Cadastro", jPanel1);
 
@@ -452,10 +447,6 @@ public class ViewVenda extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtfCodigoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCodigoProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfCodigoProdutoActionPerformed
-
     private void jtPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPesquisarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtPesquisarActionPerformed
@@ -507,18 +498,6 @@ public class ViewVenda extends javax.swing.JFrame {
         this.recuperarPesquisaProduto();
         this.listaPesquisarProduto.setVisible(false);
     }//GEN-LAST:event_listaPesquisarProdutoMousePressed
-
-    private void jtfCodigoProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoProdutoKeyReleased
-        try {
-            if (Enter == 0) {
-                this.recuperarProdutoCodigo();
-            } else {
-                Enter = 0;
-            }
-        } catch (Exception e) {
-            
-        }
-    }//GEN-LAST:event_jtfCodigoProdutoKeyReleased
 
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
         int linha = this.jtVendas.getSelectedRow();
@@ -582,7 +561,7 @@ public class ViewVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void jtfDescontoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfDescontoFocusLost
-        somaValorTotalProdutos();
+        this.somaValorTotalProdutos();
     }//GEN-LAST:event_jtfDescontoFocusLost
 
     private void jtfDescontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDescontoActionPerformed
@@ -607,10 +586,6 @@ public class ViewVenda extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnExcluirActionPerformed
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
-    }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jtfCodigoClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoClienteKeyReleased
         try {
@@ -648,6 +623,34 @@ public class ViewVenda extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_jtProdutosVendaKeyReleased
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void jtfCodigoProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoProdutoKeyReleased
+        try {
+            if (Enter == 0) {
+                this.recuperarProdutoCodigo();
+            } else {
+                Enter = 0;
+            }
+        } catch (Exception e) {
+
+        }
+    }//GEN-LAST:event_jtfCodigoProdutoKeyReleased
+
+    private void jtfDescontoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfDescontoKeyReleased
+        try {
+            if (Enter == 0) {
+                this.somaValorTotalProdutos();
+            } else {
+                Enter = 0;
+            }
+        } catch (Exception e) {
+
+        }
+    }//GEN-LAST:event_jtfDescontoKeyReleased
 
     /**
      * @param args the command line arguments
@@ -864,7 +867,6 @@ public class ViewVenda extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnPesquisar;
@@ -891,7 +893,7 @@ public class ViewVenda extends javax.swing.JFrame {
     private javax.swing.JTable jtProdutosVenda;
     private javax.swing.JTable jtVendas;
     private javax.swing.JFormattedTextField jtfCodigoCliente;
-    private javax.swing.JTextField jtfCodigoProduto;
+    private javax.swing.JFormattedTextField jtfCodigoProduto;
     private javax.swing.JTextField jtfCodigoVenda;
     private javax.swing.JFormattedTextField jtfDesconto;
     private javax.swing.JFormattedTextField jtfQuantidade;

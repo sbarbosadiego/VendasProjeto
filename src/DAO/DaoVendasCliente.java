@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.ModelCliente;
-import model.ModelVenda;
+import model.ModelVendas;
 import model.ModelVendasCliente;
 
 /**
@@ -20,7 +20,7 @@ public class DaoVendasCliente extends ConexaoMySql {
     
     public ArrayList<ModelVendasCliente> retornarListaVendasClienteDAO() {
         ArrayList<ModelVendasCliente> listaModelVendasClientes = new ArrayList<>();
-        ModelVenda modelVenda = new ModelVenda();
+        ModelVendas modelVenda = new ModelVendas();
         ModelCliente modelClientes = new ModelCliente();
         ModelVendasCliente modelVendasCliente = new ModelVendasCliente();
         try {
@@ -46,7 +46,7 @@ public class DaoVendasCliente extends ConexaoMySql {
                     + "INNER JOIN tbl_cliente Cliente "
                     + "ON Cliente.pk_id_cliente = Vendas.fk_cliente;");
             while (this.getResultSet().next()) {
-                modelVenda = new ModelVenda();
+                modelVenda = new ModelVendas();
                 modelClientes = new ModelCliente();
                 modelVendasCliente = new ModelVendasCliente();
                 
