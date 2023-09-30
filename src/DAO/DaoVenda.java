@@ -105,7 +105,7 @@ public class DaoVenda extends ConexaoMySql {
                     + "FROM tbl_vendas WHERE pk_id_Venda = '"+pIdVenda+"'");
             while (this.getResultSet().next()) {
                 modelVenda.setIdVenda(this.getResultSet().getInt(1));
-                modelVenda.setCliente(this.getResultSet().getString(2));
+                modelVenda.setCliente(this.getResultSet().getInt(2));
                 modelVenda.setVendaData(this.getResultSet().getDate(3));
                 modelVenda.setVendaValorLiquido(this.getResultSet().getDouble(4));
                 modelVenda.setVendaValorBruto(this.getResultSet().getDouble(5));
@@ -138,7 +138,7 @@ public class DaoVenda extends ConexaoMySql {
             while (this.getResultSet().next()) {
                 modelVenda = new ModelVendas();
                 modelVenda.setIdVenda(this.getResultSet().getInt(1));
-                modelVenda.setCliente(this.getResultSet().getString(2));
+                modelVenda.setCliente(this.getResultSet().getInt(2));
                 modelVenda.setVendaData(this.getResultSet().getDate(3));
                 modelVenda.setVendaValorLiquido(this.getResultSet().getDouble(4));
                 modelVenda.setVendaValorBruto(this.getResultSet().getDouble(5));

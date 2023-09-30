@@ -13,6 +13,8 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +22,8 @@ import model.ModelCliente;
 import model.ModelProdutos;
 import model.ModelVendas;
 import model.ModelVendasCliente;
+import util.Datas;
+import util.FormataValorReal;
 
 /**
  * @author Diego Barbosa da Silva
@@ -27,22 +31,22 @@ import model.ModelVendasCliente;
 public class ViewVenda extends javax.swing.JFrame {
 
     Locale localeBR = new Locale("pt", "BR");
-
+    Datas datas = new Datas();
+    
     ModelCliente modelCliente = new ModelCliente();
     ControllerCliente controllerCliente = new ControllerCliente();
     ArrayList<ModelCliente> listaModelCliente = new ArrayList<>();
-
+    
     ModelProdutos modelProdutos = new ModelProdutos();
     ControllerProduto controllerProduto = new ControllerProduto();
     ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<>();
-    
-    ModelVendas modelVenda = new ModelVendas();
+
+    ModelVendas modelVendas = new ModelVendas();
+    ControllerVenda controllerVendas = new ControllerVenda();
     
     ControllerVendasCliente controllerVendasCliente = new ControllerVendasCliente();
     ArrayList<ModelVendasCliente> listalModelVendasClientes = new ArrayList<>();
-    
-    ControllerVenda controllerVenda = new ControllerVenda();
-    
+
     DefaultListModel modelo;
     int Enter = 0;
 
@@ -504,7 +508,7 @@ public class ViewVenda extends javax.swing.JFrame {
         int codigo = (int) this.jtVendas.getValueAt(linha, 0);
         if (JOptionPane.showConfirmDialog(this, "Excluir Venda?", "Excluir",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            if (controllerVenda.excluirVendaController(codigo)) {
+            if (controllerVendas.excluirVendaController(codigo)) {
                 JOptionPane.showMessageDialog(this, "Venda excluída", "ATENÇÃO",
                         JOptionPane.WARNING_MESSAGE);
                 listarVendasClientes();
@@ -579,12 +583,12 @@ public class ViewVenda extends javax.swing.JFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         int linha = jtProdutosVenda.getSelectedRow();
         DefaultTableModel modeloCadastro = (DefaultTableModel) this.jtProdutosVenda.getModel();
-        
+
         if (linha != -1) {
             modeloCadastro.removeRow(linha);
             somaValorTotalProdutos();
         }
-        
+
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void jtfCodigoClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoClienteKeyReleased
@@ -620,12 +624,12 @@ public class ViewVenda extends javax.swing.JFrame {
                 Enter = 0;
             }
         } catch (Exception e) {
-            
+
         }
     }//GEN-LAST:event_jtProdutosVendaKeyReleased
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        
+        this.salvarVenda();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void jtfCodigoProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoProdutoKeyReleased
@@ -704,7 +708,7 @@ public class ViewVenda extends javax.swing.JFrame {
             this.listaPesquisarCliente.setVisible(true);
         }
     }
-    
+
     /**
      * Listar vendas.
      */
@@ -712,9 +716,9 @@ public class ViewVenda extends javax.swing.JFrame {
         listalModelVendasClientes = controllerVendasCliente.retornaListaVendasClientesController();
         DefaultTableModel tabela = (DefaultTableModel) this.jtVendas.getModel();
         tabela.setNumRows(0);
-                
+
         NumberFormat total = NumberFormat.getCurrencyInstance(localeBR);
-        
+
         int contador = listalModelVendasClientes.size();
         for (int c = 0; c < contador; c++) {
             tabela.addRow(new Object[]{
@@ -725,7 +729,7 @@ public class ViewVenda extends javax.swing.JFrame {
             });
         }
     }
-    
+
     /**
      * Lista os produtos na pesquisa dinâmica.
      */
@@ -752,7 +756,7 @@ public class ViewVenda extends javax.swing.JFrame {
         modelCliente = controllerCliente.retornarClienteNomeController(nome);
         this.jtfCodigoCliente.setValue(modelCliente.getIdCliente());
     }
-    
+
     /**
      * Recupera informações do produto na pesquisa dinâmica.
      */
@@ -771,7 +775,7 @@ public class ViewVenda extends javax.swing.JFrame {
         modelCliente = controllerCliente.retornarClienteController(codigo);
         this.campoPesquisaCliente.setText(modelCliente.getClienteNome());
     }
-    
+
     /**
      * Recupera informações do produto pelo código.
      */
@@ -780,16 +784,16 @@ public class ViewVenda extends javax.swing.JFrame {
         modelProdutos = controllerProduto.retornarProdutoController(codigo);
         this.campoPesquisaProduto.setText(modelProdutos.getProdutoNome());
     }
-    
+
     /**
      * Método para limpar campos do produto e quantidade.
      */
-    private void limparCamposProduto() { 
+    private void limparCamposProduto() {
         this.jtfCodigoProduto.setText("");
         this.campoPesquisaProduto.setText("");
         this.jtfQuantidade.setText("");
     }
-    
+
     /**
      * Limpar tela de cadastro.
      */
@@ -816,9 +820,9 @@ public class ViewVenda extends javax.swing.JFrame {
         this.jtfDesconto.setEnabled(condicao);
         this.jtfCodigoVenda.setEnabled(condicao);
     }
-    
+
     /**
-     * Realiza a soma dos produtos.
+     * Realiza a soma do valor líquido dos produtos.
      */
     private void somaValorTotalProdutos() {
         double somaTotal = 0, valor;
@@ -843,7 +847,7 @@ public class ViewVenda extends javax.swing.JFrame {
 
         }
     }
-    
+
     /**
      * Aplicar desconto no valor total da venda.
      */
@@ -861,8 +865,29 @@ public class ViewVenda extends javax.swing.JFrame {
         }
         jtfValorTotal.setText(valorReal.format(valorTotal));
     }
-        
-          
+    
+    private void salvarVenda() {
+        modelVendas.setCliente(Integer.parseInt(jtfCodigoCliente.getText()));
+        try {
+            modelVendas.setVendaData(datas.converterDataParaDateUS(new java.util.Date(System.currentTimeMillis())));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        modelVendas.setVendaValorLiquido(FormataValorReal.retornarRealDouble(jtfValorTotal.getText()));
+        modelVendas.setVendaValorBruto(FormataValorReal.retornarRealDouble(jtfValorTotal.getText()) + FormataValorReal.retornarRealDouble(jtfDesconto.getText()));
+        modelVendas.setVendaDesconto(Double.parseDouble(jtfDesconto.getText()));
+
+        if (controllerVendas.salvarVendaController(modelVendas) > 0) {
+            JOptionPane.showMessageDialog(this, "Venda registrada!", "ATENÇÃO",
+                    JOptionPane.INFORMATION_MESSAGE);
+            limparTela();
+        } else {
+            JOptionPane.showMessageDialog(this, "Venda não registrada!", "ERRO",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;

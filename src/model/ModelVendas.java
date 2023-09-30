@@ -12,7 +12,7 @@ import java.sql.Date;
 public class ModelVendas {
 
     private int idVenda;
-    private String cliente;
+    private int cliente;
     private Date vendaData;
     private Double vendaValorLiquido;
     private Double vendaValorBruto;
@@ -30,11 +30,11 @@ public class ModelVendas {
         this.idVenda = idVenda;
     }
 
-    public String getCliente() {
+    public int getCliente() {
         return cliente;
     }
 
-    public void setCliente(String cliente) {
+    public void setCliente(int cliente) {
         this.cliente = cliente;
     }
 

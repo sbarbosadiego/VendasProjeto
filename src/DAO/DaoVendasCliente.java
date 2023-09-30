@@ -51,7 +51,7 @@ public class DaoVendasCliente extends ConexaoMySql {
                 modelVendasCliente = new ModelVendasCliente();
                 
                 modelVenda.setIdVenda(this.getResultSet().getInt(1));
-                modelVenda.setCliente(this.getResultSet().getString(2));
+                modelVenda.setCliente(this.getResultSet().getInt(2));
                 modelVenda.setVendaData(this.getResultSet().getDate(3));
                 modelVenda.setVendaValorLiquido(this.getResultSet().getDouble(4));
                 modelVenda.setVendaValorBruto(this.getResultSet().getDouble(5));
