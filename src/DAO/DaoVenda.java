@@ -22,8 +22,8 @@ public class DaoVenda extends ConexaoMySql {
      */
     public int salvarVendaDAO(ModelVendas pModelVenda) {
         try {
-            this.conectar();
-            return this.insertSQL("INSERT INTO tbl_vendas ("
+            conectar();
+            return insertSQL("INSERT INTO tbl_vendas ("
                     + "fk_cliente,"
                     + "venda_data,"
                     + "venda_valor_liquido,"
@@ -40,7 +40,7 @@ public class DaoVenda extends ConexaoMySql {
             JOptionPane.showMessageDialog(null, e.getMessage());
             return 0;
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
     }
     
@@ -51,14 +51,14 @@ public class DaoVenda extends ConexaoMySql {
      */
     public boolean excluirVendaDAO(int pIdVenda) {
         try {
-            this.conectar();
-            return this.executarUpdateDeleteSQL(
+            conectar();
+            return executarUpdateDeleteSQL(
                     "DELETE FROM tbl_vendas WHERE pk_id_vendas = '" + pIdVenda + "';");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
             return false;
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
     }
     
@@ -69,8 +69,8 @@ public class DaoVenda extends ConexaoMySql {
      */
     public boolean alterarVendaDAO(ModelVendas pModelVenda) {
         try {
-            this.conectar();
-            return this.executarUpdateDeleteSQL(
+            conectar();
+            return executarUpdateDeleteSQL(
                     "UPDATE tbl_vendas SET "
                             + "fk_cliente = '"+pModelVenda.getCliente()+"',"
                             + "venda_valor_liquido = '"+pModelVenda.getVendaValorLiquido()+"',"
@@ -82,7 +82,7 @@ public class DaoVenda extends ConexaoMySql {
             JOptionPane.showMessageDialog(null, e.getMessage());
             return false;
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
     }
     
@@ -94,8 +94,8 @@ public class DaoVenda extends ConexaoMySql {
     public ModelVendas retornarVendaDAO(int pIdVenda) {
         ModelVendas modelVenda = new ModelVendas();
         try {
-            this.conectar();
-            this.executarSQL("SELECT "
+            conectar();
+            executarSQL("SELECT "
                     + "pk_id_vendas, "
                     + "fk_cliente, "
                     + "venda_data, "
@@ -103,18 +103,18 @@ public class DaoVenda extends ConexaoMySql {
                     + "venda_valor_bruto, "
                     + "venda_desconto "
                     + "FROM tbl_vendas WHERE pk_id_Venda = '"+pIdVenda+"'");
-            while (this.getResultSet().next()) {
-                modelVenda.setIdVenda(this.getResultSet().getInt(1));
-                modelVenda.setCliente(this.getResultSet().getInt(2));
-                modelVenda.setVendaData(this.getResultSet().getDate(3));
-                modelVenda.setVendaValorLiquido(this.getResultSet().getDouble(4));
-                modelVenda.setVendaValorBruto(this.getResultSet().getDouble(5));
-                modelVenda.setVendaDesconto(this.getResultSet().getDouble(6));
+            while (getResultSet().next()) {
+                modelVenda.setIdVenda(getResultSet().getInt(1));
+                modelVenda.setCliente(getResultSet().getInt(2));
+                modelVenda.setVendaData(getResultSet().getDate(3));
+                modelVenda.setVendaValorLiquido(getResultSet().getDouble(4));
+                modelVenda.setVendaValorBruto(getResultSet().getDouble(5));
+                modelVenda.setVendaDesconto(getResultSet().getDouble(6));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
         return modelVenda;
     }
@@ -127,28 +127,28 @@ public class DaoVenda extends ConexaoMySql {
         ArrayList<ModelVendas> listaModelVendas = new ArrayList<>();
         ModelVendas modelVenda = new ModelVendas();
         try {
-            this.conectar();
-            this.executarSQL("SELECT pk_id_vendas, "
+            conectar();
+            executarSQL("SELECT pk_id_vendas, "
                     + "fk_cliente, "
                     + "venda_data, "
                     + "venda_valor_liquido, "
                     + "venda_valor_bruto, "
                     + "venda_desconto "
                     + "FROM tbl_vendas;");
-            while (this.getResultSet().next()) {
+            while (getResultSet().next()) {
                 modelVenda = new ModelVendas();
-                modelVenda.setIdVenda(this.getResultSet().getInt(1));
-                modelVenda.setCliente(this.getResultSet().getInt(2));
-                modelVenda.setVendaData(this.getResultSet().getDate(3));
-                modelVenda.setVendaValorLiquido(this.getResultSet().getDouble(4));
-                modelVenda.setVendaValorBruto(this.getResultSet().getDouble(5));
-                modelVenda.setVendaDesconto(this.getResultSet().getDouble(6));
+                modelVenda.setIdVenda(getResultSet().getInt(1));
+                modelVenda.setCliente(getResultSet().getInt(2));
+                modelVenda.setVendaData(getResultSet().getDate(3));
+                modelVenda.setVendaValorLiquido(getResultSet().getDouble(4));
+                modelVenda.setVendaValorBruto(getResultSet().getDouble(5));
+                modelVenda.setVendaDesconto(getResultSet().getDouble(6));
                 listaModelVendas.add(modelVenda);
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
         return listaModelVendas;
     }

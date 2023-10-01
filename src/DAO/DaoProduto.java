@@ -23,8 +23,8 @@ public class DaoProduto extends ConexaoMySql {
      */
     public int salvarProdutosDAO(ModelProdutos pModelProdutos) {
         try {
-            this.conectar();
-            return this.insertSQL("INSERT INTO tbl_produto ("
+            conectar();
+            return insertSQL("INSERT INTO tbl_produto ("
                     + "produto_nome,"
                     + "produto_fabricante,"
                     + "produto_preco,"
@@ -41,7 +41,7 @@ public class DaoProduto extends ConexaoMySql {
             JOptionPane.showMessageDialog(null, e.getMessage());
             return 0;
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
     }
 
@@ -53,14 +53,14 @@ public class DaoProduto extends ConexaoMySql {
      */
     public boolean excluirProdutoDAO(int pIdProduto) {
         try {
-            this.conectar();
-            return this.executarUpdateDeleteSQL(
+            conectar();
+            return executarUpdateDeleteSQL(
                     "DELETE FROM tbl_produto WHERE pk_id_produto = '" + pIdProduto + "';");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
             return false;
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
     }
 
@@ -72,8 +72,8 @@ public class DaoProduto extends ConexaoMySql {
      */
     public boolean alterarProdutoDAO(ModelProdutos pModelProdutos) {
         try {
-            this.conectar();
-            return this.executarUpdateDeleteSQL(
+            conectar();
+            return executarUpdateDeleteSQL(
                     "UPDATE tbl_produto SET "
                     + "produto_nome = '" + pModelProdutos.getProdutoNome() + "',"
                     + "produto_fabricante = '" + pModelProdutos.getProdutoFabricante() + "',"
@@ -86,7 +86,7 @@ public class DaoProduto extends ConexaoMySql {
             JOptionPane.showMessageDialog(null, e.getMessage());
             return false;
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
     }
 
@@ -99,8 +99,8 @@ public class DaoProduto extends ConexaoMySql {
     public ModelProdutos retornarProdutoDAO(int pIdProduto) {
         ModelProdutos modelProdutos = new ModelProdutos();
         try {
-            this.conectar();
-            this.executarSQL("SELECT "
+            conectar();
+            executarSQL("SELECT "
                     + "pk_id_produto, "
                     + "produto_nome, "
                     + "produto_fabricante, "
@@ -108,18 +108,18 @@ public class DaoProduto extends ConexaoMySql {
                     + "produto_custo, "
                     + "produto_estoque "
                     + "FROM tbl_produto WHERE pk_id_produto = '" + pIdProduto + "'");
-            while (this.getResultSet().next()) {
-                modelProdutos.setIdProduto(this.getResultSet().getInt(1));
-                modelProdutos.setProdutoNome(this.getResultSet().getString(2));
-                modelProdutos.setProdutoFabricante(this.getResultSet().getString(3));
-                modelProdutos.setProdutoPreco(this.getResultSet().getDouble(4));
-                modelProdutos.setProdutoCusto(this.getResultSet().getDouble(5));
-                modelProdutos.setProdutoEstoque(this.getResultSet().getInt(6));
+            while (getResultSet().next()) {
+                modelProdutos.setIdProduto(getResultSet().getInt(1));
+                modelProdutos.setProdutoNome(getResultSet().getString(2));
+                modelProdutos.setProdutoFabricante(getResultSet().getString(3));
+                modelProdutos.setProdutoPreco(getResultSet().getDouble(4));
+                modelProdutos.setProdutoCusto(getResultSet().getDouble(5));
+                modelProdutos.setProdutoEstoque(getResultSet().getInt(6));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
         return modelProdutos;
     }
@@ -133,20 +133,20 @@ public class DaoProduto extends ConexaoMySql {
     public ModelProdutos retornarProdutoNomeDAO(String nome) {
         ModelProdutos modelProdutos = new ModelProdutos();
         try {
-            this.conectar();
-            this.executarSQL("SELECT * FROM tbl_produto WHERE produto_nome LIKE '" + nome + "%' LIMIT 1;");
-            while (this.getResultSet().next()) {
-                modelProdutos.setIdProduto(this.getResultSet().getInt(1));
-                modelProdutos.setProdutoNome(this.getResultSet().getString(2));
-                modelProdutos.setProdutoFabricante(this.getResultSet().getString(3));
-                modelProdutos.setProdutoPreco(this.getResultSet().getDouble(4));
-                modelProdutos.setProdutoCusto(this.getResultSet().getDouble(5));
-                modelProdutos.setProdutoEstoque(this.getResultSet().getInt(6));
+            conectar();
+            executarSQL("SELECT * FROM tbl_produto WHERE produto_nome LIKE '" + nome + "%' LIMIT 1;");
+            while (getResultSet().next()) {
+                modelProdutos.setIdProduto(getResultSet().getInt(1));
+                modelProdutos.setProdutoNome(getResultSet().getString(2));
+                modelProdutos.setProdutoFabricante(getResultSet().getString(3));
+                modelProdutos.setProdutoPreco(getResultSet().getDouble(4));
+                modelProdutos.setProdutoCusto(getResultSet().getDouble(5));
+                modelProdutos.setProdutoEstoque(getResultSet().getInt(6));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
         return modelProdutos;
     }
@@ -160,22 +160,22 @@ public class DaoProduto extends ConexaoMySql {
         ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<>();
         ModelProdutos modelProdutos = new ModelProdutos();
         try {
-            this.conectar();
-            this.executarSQL("SELECT pk_id_produto, produto_nome, produto_fabricante, produto_preco, produto_custo, produto_estoque FROM tbl_produto;");
-            while (this.getResultSet().next()) {
+            conectar();
+            executarSQL("SELECT pk_id_produto, produto_nome, produto_fabricante, produto_preco, produto_custo, produto_estoque FROM tbl_produto;");
+            while (getResultSet().next()) {
                 modelProdutos = new ModelProdutos();
-                modelProdutos.setIdProduto(this.getResultSet().getInt(1));
-                modelProdutos.setProdutoNome(this.getResultSet().getString(2));
-                modelProdutos.setProdutoFabricante(this.getResultSet().getString(3));
-                modelProdutos.setProdutoPreco(this.getResultSet().getDouble(4));
-                modelProdutos.setProdutoCusto(this.getResultSet().getDouble(5));
-                modelProdutos.setProdutoEstoque(this.getResultSet().getInt(6));
+                modelProdutos.setIdProduto(getResultSet().getInt(1));
+                modelProdutos.setProdutoNome(getResultSet().getString(2));
+                modelProdutos.setProdutoFabricante(getResultSet().getString(3));
+                modelProdutos.setProdutoPreco(getResultSet().getDouble(4));
+                modelProdutos.setProdutoCusto(getResultSet().getDouble(5));
+                modelProdutos.setProdutoEstoque(getResultSet().getInt(6));
                 listaModelProdutos.add(modelProdutos);
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
         return listaModelProdutos;
     }
@@ -189,23 +189,23 @@ public class DaoProduto extends ConexaoMySql {
     public ArrayList<ModelProdutos> listarPesquisaProduto(String cliente) {
         ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<>();
         try {
-            this.conectar();
-            this.executarSQL("SELECT * FROM tbl_produto WHERE produto_nome LIKE '" + cliente + "%' ORDER BY produto_nome;");
-            while (this.getResultSet().next()) {
+            conectar();
+            executarSQL("SELECT * FROM tbl_produto WHERE produto_nome LIKE '" + cliente + "%' ORDER BY produto_nome;");
+            while (getResultSet().next()) {
                 ModelProdutos modelProdutos = new ModelProdutos();
                 modelProdutos = new ModelProdutos();
-                modelProdutos.setIdProduto(this.getResultSet().getInt(1));
-                modelProdutos.setProdutoNome(this.getResultSet().getString(2));
-                modelProdutos.setProdutoFabricante(this.getResultSet().getString(3));
-                modelProdutos.setProdutoPreco(this.getResultSet().getDouble(4));
-                modelProdutos.setProdutoCusto(this.getResultSet().getDouble(5));
-                modelProdutos.setProdutoEstoque(this.getResultSet().getInt(6));
+                modelProdutos.setIdProduto(getResultSet().getInt(1));
+                modelProdutos.setProdutoNome(getResultSet().getString(2));
+                modelProdutos.setProdutoFabricante(getResultSet().getString(3));
+                modelProdutos.setProdutoPreco(getResultSet().getDouble(4));
+                modelProdutos.setProdutoCusto(getResultSet().getDouble(5));
+                modelProdutos.setProdutoEstoque(getResultSet().getInt(6));
                 listaModelProdutos.add(modelProdutos);
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
         return listaModelProdutos;
     }

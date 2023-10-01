@@ -20,8 +20,8 @@ public class DaoUsuario extends ConexaoMySql {
      */
     public int salvarUsuariosDAO(ModelUsuario pModelUsuarios) {
         try {
-            this.conectar();
-            return this.insertSQL("INSERT INTO tbl_usuario ("
+            conectar();
+            return insertSQL("INSERT INTO tbl_usuario ("
                     + "usuario_nome,"
                     + "usuario_login,"
                     + "usuario_senha"
@@ -34,7 +34,7 @@ public class DaoUsuario extends ConexaoMySql {
             e.printStackTrace();
             return 0;
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
     }
 
@@ -46,14 +46,14 @@ public class DaoUsuario extends ConexaoMySql {
      */
     public boolean excluirUsuarioDAO(int pIdUsuario) {
         try {
-            this.conectar();
-            return this.executarUpdateDeleteSQL(
+            conectar();
+            return executarUpdateDeleteSQL(
                     "DELETE FROM tbl_usuario WHERE pk_id_usuario = '" + pIdUsuario + "';");
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
     }
 
@@ -65,8 +65,8 @@ public class DaoUsuario extends ConexaoMySql {
      */
     public boolean alterarUsuarioDAO(ModelUsuario pModelUsuarios) {
         try {
-            this.conectar();
-            return this.executarUpdateDeleteSQL(
+            conectar();
+            return executarUpdateDeleteSQL(
                     "UPDATE tbl_usuario SET "
                     + "usuario_nome = '" + pModelUsuarios.getUsuarioNome() + "',"
                     + "usuario_login = '" + pModelUsuarios.getUsuarioLogin() + "',"
@@ -77,7 +77,7 @@ public class DaoUsuario extends ConexaoMySql {
             e.printStackTrace();
             return false;
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
     }
 
@@ -90,21 +90,21 @@ public class DaoUsuario extends ConexaoMySql {
     public ModelUsuario retornarUsuarioDAO(int pIdUsuario) {
         ModelUsuario modelUsuarios = new ModelUsuario();
         try {
-            this.conectar();
-            this.executarSQL("SELECT "
+            conectar();
+            executarSQL("SELECT "
                     + "pk_id_usuario, "
                     + "usuario_nome, "
                     + "usuario_login "
                     + "FROM tbl_usuario WHERE pk_id_usuario = '" + pIdUsuario + "'");
-            while (this.getResultSet().next()) {
-                modelUsuarios.setIdUsuario(this.getResultSet().getInt(1));
-                modelUsuarios.setUsuarioNome(this.getResultSet().getString(2));
-                modelUsuarios.setUsuarioLogin(this.getResultSet().getString(3));
+            while (getResultSet().next()) {
+                modelUsuarios.setIdUsuario(getResultSet().getInt(1));
+                modelUsuarios.setUsuarioNome(getResultSet().getString(2));
+                modelUsuarios.setUsuarioLogin(getResultSet().getString(3));
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
         return modelUsuarios;
     }
@@ -118,19 +118,19 @@ public class DaoUsuario extends ConexaoMySql {
         ArrayList<ModelUsuario> listaModelUsuarios = new ArrayList<>();
         ModelUsuario modelUsuarios = new ModelUsuario();
         try {
-            this.conectar();
-            this.executarSQL("SELECT pk_id_usuario, usuario_nome, usuario_login FROM tbl_usuario;");
-            while (this.getResultSet().next()) {
+            conectar();
+            executarSQL("SELECT pk_id_usuario, usuario_nome, usuario_login FROM tbl_usuario;");
+            while (getResultSet().next()) {
                 modelUsuarios = new ModelUsuario();
-                modelUsuarios.setIdUsuario(this.getResultSet().getInt(1));
-                modelUsuarios.setUsuarioNome(this.getResultSet().getString(2));
-                modelUsuarios.setUsuarioLogin(this.getResultSet().getString(3));
+                modelUsuarios.setIdUsuario(getResultSet().getInt(1));
+                modelUsuarios.setUsuarioNome(getResultSet().getString(2));
+                modelUsuarios.setUsuarioLogin(getResultSet().getString(3));
                 listaModelUsuarios.add(modelUsuarios);
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
         return listaModelUsuarios;
     }
@@ -142,8 +142,8 @@ public class DaoUsuario extends ConexaoMySql {
      */
     public boolean getValidarUsuarioDAO(ModelUsuario pModelUsuario) {
         try {
-            this.conectar();
-            this.executarSQL("SELECT "
+            conectar();
+            executarSQL("SELECT "
                     + "pk_id_usuario, "
                     + "usuario_nome, "
                     + "usuario_login "
@@ -158,7 +158,7 @@ public class DaoUsuario extends ConexaoMySql {
             e.printStackTrace();
             return false;
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
     }
 

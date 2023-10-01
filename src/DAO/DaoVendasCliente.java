@@ -24,8 +24,8 @@ public class DaoVendasCliente extends ConexaoMySql {
         ModelCliente modelClientes = new ModelCliente();
         ModelVendasCliente modelVendasCliente = new ModelVendasCliente();
         try {
-            this.conectar();
-            this.executarSQL("SELECT "
+            conectar();
+            executarSQL("SELECT "
                     + "Vendas.pk_id_vendas, "
                     + "Vendas.fk_cliente, "
                     + "Vendas.venda_data, "
@@ -45,28 +45,28 @@ public class DaoVendasCliente extends ConexaoMySql {
                     + "FROM tbl_vendas Vendas "
                     + "INNER JOIN tbl_cliente Cliente "
                     + "ON Cliente.pk_id_cliente = Vendas.fk_cliente;");
-            while (this.getResultSet().next()) {
+            while (getResultSet().next()) {
                 modelVenda = new ModelVendas();
                 modelClientes = new ModelCliente();
                 modelVendasCliente = new ModelVendasCliente();
                 
-                modelVenda.setIdVenda(this.getResultSet().getInt(1));
-                modelVenda.setCliente(this.getResultSet().getInt(2));
-                modelVenda.setVendaData(this.getResultSet().getDate(3));
-                modelVenda.setVendaValorLiquido(this.getResultSet().getDouble(4));
-                modelVenda.setVendaValorBruto(this.getResultSet().getDouble(5));
-                modelVenda.setVendaDesconto(this.getResultSet().getDouble(6));
+                modelVenda.setIdVenda(getResultSet().getInt(1));
+                modelVenda.setCliente(getResultSet().getInt(2));
+                modelVenda.setVendaData(getResultSet().getDate(3));
+                modelVenda.setVendaValorLiquido(getResultSet().getDouble(4));
+                modelVenda.setVendaValorBruto(getResultSet().getDouble(5));
+                modelVenda.setVendaDesconto(getResultSet().getDouble(6));
                 
-                modelClientes.setIdCliente(this.getResultSet().getInt(1));
-                modelClientes.setClienteNome(this.getResultSet().getString(2));
-                modelClientes.setClienteEndereco(this.getResultSet().getString(3));
-                modelClientes.setClienteBairro(this.getResultSet().getString(4));
-                modelClientes.setClienteNumero(this.getResultSet().getString(5));
-                modelClientes.setClienteCidade(this.getResultSet().getString(6));
-                modelClientes.setClienteUf(this.getResultSet().getString(7));
-                modelClientes.setClienteCep(this.getResultSet().getString(8));
-                modelClientes.setClienteTelefone(this.getResultSet().getString(9));
-                modelClientes.setClienteComplemento(this.getResultSet().getString(10));
+                modelClientes.setIdCliente(getResultSet().getInt(1));
+                modelClientes.setClienteNome(getResultSet().getString(2));
+                modelClientes.setClienteEndereco(getResultSet().getString(3));
+                modelClientes.setClienteBairro(getResultSet().getString(4));
+                modelClientes.setClienteNumero(getResultSet().getString(5));
+                modelClientes.setClienteCidade(getResultSet().getString(6));
+                modelClientes.setClienteUf(getResultSet().getString(7));
+                modelClientes.setClienteCep(getResultSet().getString(8));
+                modelClientes.setClienteTelefone(getResultSet().getString(9));
+                modelClientes.setClienteComplemento(getResultSet().getString(10));
                 
                 modelVendasCliente.setModelVenda(modelVenda);
                 modelVendasCliente.setModelCliente(modelClientes);
@@ -76,7 +76,7 @@ public class DaoVendasCliente extends ConexaoMySql {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
         return listaModelVendasClientes;
     }

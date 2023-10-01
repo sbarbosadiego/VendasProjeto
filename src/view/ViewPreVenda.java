@@ -13,8 +13,6 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -28,7 +26,7 @@ import util.FormataValorReal;
 /**
  * @author Diego Barbosa da Silva
  */
-public class ViewVenda extends javax.swing.JFrame {
+public class ViewPreVenda extends javax.swing.JFrame {
 
     Locale localeBR = new Locale("pt", "BR");
     Datas datas = new Datas();
@@ -53,13 +51,13 @@ public class ViewVenda extends javax.swing.JFrame {
     /**
      * Creates new form ViewVendas
      */
-    public ViewVenda() {
+    public ViewPreVenda() {
         initComponents();
         modelo = new DefaultListModel();
-        this.listaPesquisarCliente.setVisible(false);
-        this.listaPesquisarProduto.setVisible(false);
-        this.listaPesquisarCliente.setModel(modelo);
-        this.listaPesquisarProduto.setModel(modelo);
+        listaPesquisarCliente.setVisible(false);
+        listaPesquisarProduto.setVisible(false);
+        listaPesquisarCliente.setModel(modelo);
+        listaPesquisarProduto.setModel(modelo);
         listarPesquisaClientes();
         listarPesquisaProdutos();
         listarVendasClientes();
@@ -457,55 +455,55 @@ public class ViewVenda extends javax.swing.JFrame {
 
     private void jtPesquisarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPesquisarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            this.btnPesquisar.requestFocus();
+            btnPesquisar.requestFocus();
         }
     }//GEN-LAST:event_jtPesquisarKeyPressed
 
     private void jtfQuantidadeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfQuantidadeKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            this.btnAdicionar.requestFocus();
+            btnAdicionar.requestFocus();
         }
     }//GEN-LAST:event_jtfQuantidadeKeyPressed
 
     private void campoPesquisaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPesquisaClienteActionPerformed
-        this.listaPesquisarCliente.setVisible(true);
+        listaPesquisarCliente.setVisible(true);
         Enter = 1;
     }//GEN-LAST:event_campoPesquisaClienteActionPerformed
 
     private void campoPesquisaClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoPesquisaClienteKeyReleased
         if (Enter == 0) {
-            this.listarPesquisaClientes();
+            listarPesquisaClientes();
         } else {
             Enter = 0;
         }
     }//GEN-LAST:event_campoPesquisaClienteKeyReleased
 
     private void listaPesquisarClienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaPesquisarClienteMousePressed
-        this.recuperarPesquisaCliente();
-        this.listaPesquisarCliente.setVisible(false);
+        recuperarPesquisaCliente();
+        listaPesquisarCliente.setVisible(false);
     }//GEN-LAST:event_listaPesquisarClienteMousePressed
 
     private void campoPesquisaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPesquisaProdutoActionPerformed
-        this.listaPesquisarProduto.setVisible(true);
+        listaPesquisarProduto.setVisible(true);
         Enter = 1;
     }//GEN-LAST:event_campoPesquisaProdutoActionPerformed
 
     private void campoPesquisaProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoPesquisaProdutoKeyReleased
         if (Enter == 0) {
-            this.listarPesquisaProdutos();
+            listarPesquisaProdutos();
         } else {
             Enter = 0;
         }
     }//GEN-LAST:event_campoPesquisaProdutoKeyReleased
 
     private void listaPesquisarProdutoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaPesquisarProdutoMousePressed
-        this.recuperarPesquisaProduto();
-        this.listaPesquisarProduto.setVisible(false);
+        recuperarPesquisaProduto();
+        listaPesquisarProduto.setVisible(false);
     }//GEN-LAST:event_listaPesquisarProdutoMousePressed
 
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
-        int linha = this.jtVendas.getSelectedRow();
-        int codigo = (int) this.jtVendas.getValueAt(linha, 0);
+        int linha = jtVendas.getSelectedRow();
+        int codigo = (int) jtVendas.getValueAt(linha, 0);
         if (JOptionPane.showConfirmDialog(this, "Excluir Venda?", "Excluir",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             if (controllerVendas.excluirVendaController(codigo)) {
@@ -526,8 +524,8 @@ public class ViewVenda extends javax.swing.JFrame {
         } else {
             modelProdutos = controllerProduto.retornarProdutoController(Integer.parseInt(jtfCodigoProduto.getText()));
             // Inicia a linha na tabela
-            DefaultTableModel modeloCadastro = (DefaultTableModel) this.jtProdutosVenda.getModel();
-            int quantidade = Integer.parseInt(this.jtfQuantidade.getText());
+            DefaultTableModel modeloCadastro = (DefaultTableModel) jtProdutosVenda.getModel();
+            int quantidade = Integer.parseInt(jtfQuantidade.getText());
             NumberFormat valorReal = NumberFormat.getCurrencyInstance(localeBR);
             int contador = 0;
             for (int i = 0; i < contador; i++) {
@@ -553,7 +551,7 @@ public class ViewVenda extends javax.swing.JFrame {
                 modeloCadastro.addRow(new Object[]{
                     modelProdutos.getIdProduto(),
                     modelProdutos.getProdutoNome(),
-                    this.jtfQuantidade.getText(),
+                    jtfQuantidade.getText(),
                     valorReal.format(modelProdutos.getProdutoPreco()),
                     valorReal.format(quantidade * modelProdutos.getProdutoPreco())
                 });
@@ -565,7 +563,7 @@ public class ViewVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void jtfDescontoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfDescontoFocusLost
-        this.somaValorTotalProdutos();
+        somaValorTotalProdutos();
     }//GEN-LAST:event_jtfDescontoFocusLost
 
     private void jtfDescontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDescontoActionPerformed
@@ -573,7 +571,7 @@ public class ViewVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfDescontoActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        this.habilitarDesabilitarCampos(true);
+        habilitarDesabilitarCampos(true);
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -582,7 +580,7 @@ public class ViewVenda extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         int linha = jtProdutosVenda.getSelectedRow();
-        DefaultTableModel modeloCadastro = (DefaultTableModel) this.jtProdutosVenda.getModel();
+        DefaultTableModel modeloCadastro = (DefaultTableModel) jtProdutosVenda.getModel();
 
         if (linha != -1) {
             modeloCadastro.removeRow(linha);
@@ -594,7 +592,7 @@ public class ViewVenda extends javax.swing.JFrame {
     private void jtfCodigoClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoClienteKeyReleased
         try {
             if (Enter == 0) {
-                this.recuperarClienteCodigo();
+                recuperarClienteCodigo();
             } else {
                 Enter = 0;
             }
@@ -605,7 +603,7 @@ public class ViewVenda extends javax.swing.JFrame {
 
     private void jtProdutosVendaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtProdutosVendaKeyReleased
         int linha = jtProdutosVenda.getSelectedRow();
-        DefaultTableModel modeloCadastro = (DefaultTableModel) this.jtProdutosVenda.getModel();
+        DefaultTableModel modeloCadastro = (DefaultTableModel) jtProdutosVenda.getModel();
         NumberFormat valorReal = NumberFormat.getCurrencyInstance(localeBR);
         int quantidade = Integer.parseInt(jtProdutosVenda.getValueAt(linha, 2).toString());
 
@@ -629,13 +627,13 @@ public class ViewVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jtProdutosVendaKeyReleased
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        this.salvarVenda();
+        salvarVenda();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void jtfCodigoProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoProdutoKeyReleased
         try {
             if (Enter == 0) {
-                this.recuperarProdutoCodigo();
+                recuperarProdutoCodigo();
             } else {
                 Enter = 0;
             }
@@ -647,7 +645,7 @@ public class ViewVenda extends javax.swing.JFrame {
     private void jtfDescontoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfDescontoKeyReleased
         try {
             if (Enter == 0) {
-                this.somaValorTotalProdutos();
+                somaValorTotalProdutos();
             } else {
                 Enter = 0;
             }
@@ -673,21 +671,23 @@ public class ViewVenda extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewPreVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewPreVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewPreVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewPreVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewVenda().setVisible(true);
+                new ViewPreVenda().setVisible(true);
             }
         });
     }
@@ -696,16 +696,16 @@ public class ViewVenda extends javax.swing.JFrame {
      * Lista os clientes na pesquisa dinâmica.
      */
     private void listarPesquisaClientes() {
-        String nomeCliente = this.campoPesquisaCliente.getText();
+        String nomeCliente = campoPesquisaCliente.getText();
         listaModelCliente = controllerCliente.retornarListarPesquisaClientesController(nomeCliente);
         modelo.removeAllElements();
         for (int c = 0; c < listaModelCliente.size(); c++) {
             modelo.addElement(listaModelCliente.get(c).getClienteNome());
         }
-        if (this.campoPesquisaCliente.getText().isEmpty()) {
-            this.listaPesquisarCliente.setVisible(false);
+        if (campoPesquisaCliente.getText().isEmpty()) {
+            listaPesquisarCliente.setVisible(false);
         } else {
-            this.listaPesquisarCliente.setVisible(true);
+            listaPesquisarCliente.setVisible(true);
         }
     }
 
@@ -714,7 +714,7 @@ public class ViewVenda extends javax.swing.JFrame {
      */
     private void listarVendasClientes() {
         listalModelVendasClientes = controllerVendasCliente.retornaListaVendasClientesController();
-        DefaultTableModel tabela = (DefaultTableModel) this.jtVendas.getModel();
+        DefaultTableModel tabela = (DefaultTableModel) jtVendas.getModel();
         tabela.setNumRows(0);
 
         NumberFormat total = NumberFormat.getCurrencyInstance(localeBR);
@@ -734,16 +734,16 @@ public class ViewVenda extends javax.swing.JFrame {
      * Lista os produtos na pesquisa dinâmica.
      */
     private void listarPesquisaProdutos() {
-        String nomeProduto = this.campoPesquisaProduto.getText();
+        String nomeProduto = campoPesquisaProduto.getText();
         listaModelProdutos = controllerProduto.retornarListarPesquisaProdutosController(nomeProduto);
         modelo.removeAllElements();
         for (int c = 0; c < listaModelProdutos.size(); c++) {
             modelo.addElement(listaModelProdutos.get(c).getProdutoNome());
         }
-        if (this.campoPesquisaProduto.getText().isEmpty()) {
-            this.listaPesquisarProduto.setVisible(false);
+        if (campoPesquisaProduto.getText().isEmpty()) {
+            listaPesquisarProduto.setVisible(false);
         } else {
-            this.listaPesquisarProduto.setVisible(true);
+            listaPesquisarProduto.setVisible(true);
         }
     }
 
@@ -751,74 +751,74 @@ public class ViewVenda extends javax.swing.JFrame {
      * Recupera informações do cliente na pesquisa dinâmica.
      */
     private void recuperarPesquisaCliente() {
-        String nome = this.listaPesquisarCliente.getSelectedValue();
-        this.campoPesquisaCliente.setText(nome);
+        String nome = listaPesquisarCliente.getSelectedValue();
+        campoPesquisaCliente.setText(nome);
         modelCliente = controllerCliente.retornarClienteNomeController(nome);
-        this.jtfCodigoCliente.setValue(modelCliente.getIdCliente());
+        jtfCodigoCliente.setValue(modelCliente.getIdCliente());
     }
 
     /**
      * Recupera informações do produto na pesquisa dinâmica.
      */
     private void recuperarPesquisaProduto() {
-        String produto = this.listaPesquisarProduto.getSelectedValue();
-        this.campoPesquisaProduto.setText(produto);
+        String produto = listaPesquisarProduto.getSelectedValue();
+        campoPesquisaProduto.setText(produto);
         modelProdutos = controllerProduto.retornarProdutoNomeController(produto);
-        this.jtfCodigoProduto.setText(String.valueOf(modelProdutos.getIdProduto()));
+        jtfCodigoProduto.setText(String.valueOf(modelProdutos.getIdProduto()));
     }
 
     /**
      * Recupera informações do cliente pelo código.
      */
     private void recuperarClienteCodigo() {
-        int codigo = Integer.parseInt(this.jtfCodigoCliente.getText());
+        int codigo = Integer.parseInt(jtfCodigoCliente.getText());
         modelCliente = controllerCliente.retornarClienteController(codigo);
-        this.campoPesquisaCliente.setText(modelCliente.getClienteNome());
+        campoPesquisaCliente.setText(modelCliente.getClienteNome());
     }
 
     /**
      * Recupera informações do produto pelo código.
      */
     private void recuperarProdutoCodigo() {
-        int codigo = Integer.parseInt(this.jtfCodigoProduto.getText());
+        int codigo = Integer.parseInt(jtfCodigoProduto.getText());
         modelProdutos = controllerProduto.retornarProdutoController(codigo);
-        this.campoPesquisaProduto.setText(modelProdutos.getProdutoNome());
+        campoPesquisaProduto.setText(modelProdutos.getProdutoNome());
     }
 
     /**
      * Método para limpar campos do produto e quantidade.
      */
     private void limparCamposProduto() {
-        this.jtfCodigoProduto.setText("");
-        this.campoPesquisaProduto.setText("");
-        this.jtfQuantidade.setText("");
+        jtfCodigoProduto.setText("");
+        campoPesquisaProduto.setText("");
+        jtfQuantidade.setText("");
     }
 
     /**
      * Limpar tela de cadastro.
      */
     private void limparTela() {
-        this.jtfCodigoCliente.setText("");
-        this.campoPesquisaCliente.setText("");
-        this.jtfCodigoProduto.setText("");
-        this.campoPesquisaProduto.setText("");
-        this.jtfQuantidade.setText("");
-        this.jtfValorTotal.setText("");
-        this.jtfDesconto.setText("");
-        this.jtfCodigoVenda.setText("");
-        DefaultTableModel tabela = (DefaultTableModel) this.jtProdutosVenda.getModel();
+        jtfCodigoCliente.setText("");
+        campoPesquisaCliente.setText("");
+        jtfCodigoProduto.setText("");
+        campoPesquisaProduto.setText("");
+        jtfQuantidade.setText("");
+        jtfValorTotal.setText("");
+        jtfDesconto.setText("");
+        jtfCodigoVenda.setText("");
+        DefaultTableModel tabela = (DefaultTableModel) jtProdutosVenda.getModel();
         tabela.setNumRows(0);
     }
     
     private void habilitarDesabilitarCampos(boolean condicao) {
-        this.jtfCodigoCliente.setEnabled(condicao);
-        this.campoPesquisaCliente.setEnabled(condicao);
-        this.jtfCodigoProduto.setEnabled(condicao);
-        this.campoPesquisaProduto.setEnabled(condicao);
-        this.jtfQuantidade.setEnabled(condicao);
-        this.jtfValorTotal.setEnabled(condicao);
-        this.jtfDesconto.setEnabled(condicao);
-        this.jtfCodigoVenda.setEnabled(condicao);
+        jtfCodigoCliente.setEnabled(condicao);
+        campoPesquisaCliente.setEnabled(condicao);
+        jtfCodigoProduto.setEnabled(condicao);
+        campoPesquisaProduto.setEnabled(condicao);
+        jtfQuantidade.setEnabled(condicao);
+        jtfValorTotal.setEnabled(condicao);
+        jtfDesconto.setEnabled(condicao);
+        jtfCodigoVenda.setEnabled(condicao);
     }
 
     /**
@@ -866,7 +866,12 @@ public class ViewVenda extends javax.swing.JFrame {
         jtfValorTotal.setText(valorReal.format(valorTotal));
     }
     
+    /**
+     * Método para salvar o registro de uma pré-venda.
+     */
     private void salvarVenda() {
+        int codigoVenda = 0;
+        
         modelVendas.setCliente(Integer.parseInt(jtfCodigoCliente.getText()));
         try {
             modelVendas.setVendaData(datas.converterDataParaDateUS(new java.util.Date(System.currentTimeMillis())));
@@ -876,13 +881,14 @@ public class ViewVenda extends javax.swing.JFrame {
         modelVendas.setVendaValorLiquido(FormataValorReal.retornarRealDouble(jtfValorTotal.getText()));
         modelVendas.setVendaValorBruto(FormataValorReal.retornarRealDouble(jtfValorTotal.getText()) + FormataValorReal.retornarRealDouble(jtfDesconto.getText()));
         modelVendas.setVendaDesconto(Double.parseDouble(jtfDesconto.getText()));
-
-        if (controllerVendas.salvarVendaController(modelVendas) > 0) {
-            JOptionPane.showMessageDialog(this, "Venda registrada!", "ATENÇÃO",
+        
+        codigoVenda = controllerVendas.salvarVendaController(modelVendas);
+        if (codigoVenda > 0) {
+            JOptionPane.showMessageDialog(this, "Pré-Venda registrada!", "ATENÇÃO",
                     JOptionPane.INFORMATION_MESSAGE);
             limparTela();
         } else {
-            JOptionPane.showMessageDialog(this, "Venda não registrada!", "ERRO",
+            JOptionPane.showMessageDialog(this, "Pré-Venda não registrada!", "ERRO",
                     JOptionPane.ERROR_MESSAGE);
         }
 

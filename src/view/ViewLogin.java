@@ -160,15 +160,15 @@ public class ViewLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtSairActionPerformed
 
     private void jbtEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtEntrarActionPerformed
-        modelUsuario.setUsuarioLogin(this.jtfLogin.getText());
-        modelUsuario.setUsuarioSenha(String.valueOf(this.jtfSenha.getPassword()));
-        if (this.jtfLogin.getText().isEmpty() || String.valueOf(this.jtfSenha.getPassword()).isEmpty()) {
+        modelUsuario.setUsuarioLogin(jtfLogin.getText());
+        modelUsuario.setUsuarioSenha(String.valueOf(jtfSenha.getPassword()));
+        if (jtfLogin.getText().isEmpty() || String.valueOf(jtfSenha.getPassword()).isEmpty()) {
             JOptionPane.showMessageDialog(null, "Digite o usuário e senha", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
         } else {
             if (controllerUsuario.getUsuarioController(modelUsuario)) {
                 new ViewPrincipal().setVisible(true);
-                this.dispose();
+                dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Não foi encontrado o usuário", "ATENÇÃO",
                         JOptionPane.WARNING_MESSAGE);
@@ -179,27 +179,27 @@ public class ViewLogin extends javax.swing.JFrame {
 
     private void jtfLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfLoginKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            this.jtfSenha.requestFocus();
+            jtfSenha.requestFocus();
         }
     }//GEN-LAST:event_jtfLoginKeyPressed
 
     private void jtfSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfSenhaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            this.jbtEntrar.requestFocus();
+            jbtEntrar.requestFocus();
         }
     }//GEN-LAST:event_jtfSenhaKeyPressed
 
     private void jbtEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jbtEntrarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            modelUsuario.setUsuarioLogin(this.jtfLogin.getText());
-            modelUsuario.setUsuarioSenha(String.valueOf(this.jtfSenha.getPassword()));
-            if (this.jtfLogin.getText().isEmpty() || String.valueOf(this.jtfSenha.getPassword()).isEmpty()) {
+            modelUsuario.setUsuarioLogin(jtfLogin.getText());
+            modelUsuario.setUsuarioSenha(String.valueOf(jtfSenha.getPassword()));
+            if (jtfLogin.getText().isEmpty() || String.valueOf(jtfSenha.getPassword()).isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Digite o usuário e senha", "ATENÇÃO",
                         JOptionPane.WARNING_MESSAGE);
             } else {
                 if (controllerUsuario.getUsuarioController(modelUsuario)) {
                     new ViewPrincipal().setVisible(true);
-                    this.dispose();
+                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Não foi encontrado o usuário", "ATENÇÃO",
                             JOptionPane.WARNING_MESSAGE);

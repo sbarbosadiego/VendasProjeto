@@ -30,8 +30,8 @@ public class ViewUsuario extends javax.swing.JFrame {
      */
     public ViewUsuario() {
         initComponents();
-        this.listarUsuarios();
-        this.habilitarDesabilitarCampos(false);
+        listarUsuarios();
+        habilitarDesabilitarCampos(false);
     }
 
     /**
@@ -278,10 +278,10 @@ public class ViewUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        DefaultTableModel modelo = (DefaultTableModel) this.jtableUsuarios.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jtableUsuarios.getModel();
         final TableRowSorter<TableModel> classifica = new TableRowSorter<>(modelo);
-        this.jtableUsuarios.setRowSorter(classifica);
-        String pesquisa = this.jtfPesquisa.getText();
+        jtableUsuarios.setRowSorter(classifica);
+        String pesquisa = jtfPesquisa.getText();
         if (CampoDePesquisa.testaString(pesquisa) == true) {
             classifica.setRowFilter(RowFilter.regexFilter(pesquisa, 0));
         } else {
@@ -291,9 +291,9 @@ public class ViewUsuario extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if (editarSalvar.equals("salvar")) {
-            this.salvarUsuario();
+            salvarUsuario();
         } else if (editarSalvar.equals("editar")) {
-            this.editarUsuario();
+            editarUsuario();
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -305,9 +305,9 @@ public class ViewUsuario extends javax.swing.JFrame {
             if (controllerUsuarios.excluirUsuarioController(codigoUsuario)) {
                 JOptionPane.showMessageDialog(this, "Usuario excluído", "ATENÇÃO",
                         JOptionPane.WARNING_MESSAGE);
-                this.listarUsuarios();
-                this.limparCampos();
-                this.habilitarDesabilitarCampos(false);
+                listarUsuarios();
+                limparCampos();
+                habilitarDesabilitarCampos(false);
             } else {
                 JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
                         JOptionPane.ERROR_MESSAGE);
@@ -317,28 +317,28 @@ public class ViewUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        this.habilitarDesabilitarCampos(true);
+        habilitarDesabilitarCampos(true);
         editarSalvar = "salvar";
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.habilitarDesabilitarCampos(false);
-        this.limparCampos();
+        habilitarDesabilitarCampos(false);
+        limparCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         editarSalvar = "editar";
-        int linha = this.jtableUsuarios.getSelectedRow();
-        this.habilitarDesabilitarCampos(true);
+        int linha = jtableUsuarios.getSelectedRow();
+        habilitarDesabilitarCampos(true);
         try {
-            int codigoUsuario = (int) this.jtableUsuarios.getValueAt(linha, 0);
+            int codigoUsuario = (int) jtableUsuarios.getValueAt(linha, 0);
             // Recupera as informações do Usuario no banco de dados
             modelUsuario = controllerUsuarios.retornarUsuarioController(codigoUsuario);
             // Seta os dados recuperados no banco nos campos
-            this.jtfCodigo.setText(String.valueOf(modelUsuario.getIdUsuario()));
-            this.jtfNomeUsuario.setText(modelUsuario.getUsuarioNome());
-            this.jtfLogin.setText(String.valueOf(modelUsuario.getUsuarioLogin()));
-            this.jtfSenha.setText(String.valueOf(modelUsuario.getUsuarioSenha()));
+            jtfCodigo.setText(String.valueOf(modelUsuario.getIdUsuario()));
+            jtfNomeUsuario.setText(modelUsuario.getUsuarioNome());
+            jtfLogin.setText(String.valueOf(modelUsuario.getUsuarioLogin()));
+            jtfSenha.setText(String.valueOf(modelUsuario.getUsuarioSenha()));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nenhum registro selecionado");
         }
@@ -346,7 +346,7 @@ public class ViewUsuario extends javax.swing.JFrame {
 
     private void jtfPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            this.btnPesquisar.requestFocus();
+            btnPesquisar.requestFocus();
         }
     }//GEN-LAST:event_jtfPesquisaKeyPressed
 
@@ -390,25 +390,25 @@ public class ViewUsuario extends javax.swing.JFrame {
      * Método para salvar o cadastro de um usuário no banco de dados.
      */
     private void salvarUsuario() {
-        if (this.jtfNomeUsuario.getText().isEmpty() || this.jtfLogin.getText().isEmpty()) {
+        if (jtfNomeUsuario.getText().isEmpty() || jtfLogin.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo vazio", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
-        } else if (this.jtfLogin.getText().length() >= 51) {
+        } else if (jtfLogin.getText().length() >= 51) {
             JOptionPane.showMessageDialog(null, "Campo Login excede o limite de caractes 50 caracteres!!", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
-        } else if (this.jtfNomeUsuario.getText().length() >= 61) {
+        } else if (jtfNomeUsuario.getText().length() >= 61) {
             JOptionPane.showMessageDialog(null, "Campo Nome excede o limite de caractes 60 caracteres!!", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
         } else {
-            modelUsuario.setUsuarioNome(this.jtfNomeUsuario.getText().toUpperCase());
-            modelUsuario.setUsuarioLogin(this.jtfLogin.getText());
-            modelUsuario.setUsuarioSenha(String.valueOf(this.jtfSenha.getPassword()));
+            modelUsuario.setUsuarioNome(jtfNomeUsuario.getText().toUpperCase());
+            modelUsuario.setUsuarioLogin(jtfLogin.getText());
+            modelUsuario.setUsuarioSenha(String.valueOf(jtfSenha.getPassword()));
             if (controllerUsuarios.salvarUsuarioController(modelUsuario) > 0) {
                 JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!!", "ATENÇÃO",
                         JOptionPane.INFORMATION_MESSAGE);
-                this.listarUsuarios();
-                this.habilitarDesabilitarCampos(false);
-                this.limparCampos();
+                listarUsuarios();
+                habilitarDesabilitarCampos(false);
+                limparCampos();
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario não cadastrado, verifique as informações", "ERRO",
                         JOptionPane.ERROR_MESSAGE);
@@ -420,25 +420,25 @@ public class ViewUsuario extends javax.swing.JFrame {
      * Método para salvar a edição de um registro no banco de dados.
      */
     private void editarUsuario() {
-        if (this.jtfNomeUsuario.getText().isEmpty() || this.jtfLogin.getText().isEmpty()) {
+        if (jtfNomeUsuario.getText().isEmpty() || jtfLogin.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo vazio", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
-        } else if (this.jtfLogin.getText().length() >= 51) {
+        } else if (jtfLogin.getText().length() >= 51) {
             JOptionPane.showMessageDialog(null, "Campo Login excede o limite de caractes 50 caracteres!!", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
-        } else if (this.jtfNomeUsuario.getText().length() >= 61) {
+        } else if (jtfNomeUsuario.getText().length() >= 61) {
             JOptionPane.showMessageDialog(null, "Campo Nome excede o limite de caractes 60 caracteres!!", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
         } else {
-            modelUsuario.setUsuarioNome(this.jtfNomeUsuario.getText().toUpperCase());
-            modelUsuario.setUsuarioLogin(this.jtfLogin.getText());
-            modelUsuario.setUsuarioSenha(String.valueOf(this.jtfSenha.getPassword()));
+            modelUsuario.setUsuarioNome(jtfNomeUsuario.getText().toUpperCase());
+            modelUsuario.setUsuarioLogin(jtfLogin.getText());
+            modelUsuario.setUsuarioSenha(String.valueOf(jtfSenha.getPassword()));
             if (controllerUsuarios.editarUsuarioController(modelUsuario)) {
                 JOptionPane.showMessageDialog(this, "Editado com sucesso!!", "ATENÇÃO",
                         JOptionPane.INFORMATION_MESSAGE);
-                this.listarUsuarios();
-                this.habilitarDesabilitarCampos(false);
-                this.limparCampos();
+                listarUsuarios();
+                habilitarDesabilitarCampos(false);
+                limparCampos();
             } else {
                 JOptionPane.showMessageDialog(this, "Não foi aplicado a edição, verifique as informações", "ERRO",
                         JOptionPane.ERROR_MESSAGE);
@@ -450,10 +450,10 @@ public class ViewUsuario extends javax.swing.JFrame {
      * Método para limpar os campos de texto.
      */
     private void limparCampos() {
-        this.jtfCodigo.setText("");
-        this.jtfNomeUsuario.setText("");
-        this.jtfLogin.setText("");
-        this.jtfSenha.setText("");
+        jtfCodigo.setText("");
+        jtfNomeUsuario.setText("");
+        jtfLogin.setText("");
+        jtfSenha.setText("");
     }
 
     /**
@@ -462,9 +462,9 @@ public class ViewUsuario extends javax.swing.JFrame {
      * @param condicao
      */
     private void habilitarDesabilitarCampos(boolean condicao) {
-        this.jtfNomeUsuario.setEnabled(condicao);
-        this.jtfLogin.setEnabled(condicao);
-        this.jtfSenha.setEnabled(condicao);
+        jtfNomeUsuario.setEnabled(condicao);
+        jtfLogin.setEnabled(condicao);
+        jtfSenha.setEnabled(condicao);
     }
 
     /**

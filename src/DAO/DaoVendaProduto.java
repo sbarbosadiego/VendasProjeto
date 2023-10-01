@@ -20,8 +20,8 @@ public class DaoVendaProduto extends ConexaoMySql {
      */
     public int salvarVendaProdutoDAO(ModelVendaProduto pModelVendaProduto) {
         try {
-            this.conectar();
-            return this.insertSQL("INSERT INTO tbl_vendas_produtos ("
+            conectar();
+            return insertSQL("INSERT INTO tbl_vendas_produtos ("
                     + "fk_produto,"
                     + "venda_venda,"
                     + "venda_produto_valor,"
@@ -36,7 +36,7 @@ public class DaoVendaProduto extends ConexaoMySql {
             e.printStackTrace();
             return 0;
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
     }
     
@@ -47,14 +47,14 @@ public class DaoVendaProduto extends ConexaoMySql {
      */
     public boolean excluirVendaProdutoDAO(int pIdVendaProduto) {
         try {
-            this.conectar();
-            return this.executarUpdateDeleteSQL(
+            conectar();
+            return executarUpdateDeleteSQL(
                     "DELETE FROM tbl_vendas_produtos WHERE pk_id_venda_produto = '" + pIdVendaProduto + "';");
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
     }
     
@@ -65,8 +65,8 @@ public class DaoVendaProduto extends ConexaoMySql {
      */
     public boolean alterarVendaProdutoDAO(ModelVendaProduto pModelVendaProduto) {
         try {
-            this.conectar();
-            return this.executarUpdateDeleteSQL(
+            conectar();
+            return executarUpdateDeleteSQL(
                     "UPDATE tbl_vendas_produtos SET "
                             + "fk_produto = '"+pModelVendaProduto.getProduto()+"',"
                             + "fk_venda = '"+pModelVendaProduto.getVenda()+"',"
@@ -78,7 +78,7 @@ public class DaoVendaProduto extends ConexaoMySql {
             e.printStackTrace();
             return false;
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
     }
     
@@ -91,25 +91,25 @@ public class DaoVendaProduto extends ConexaoMySql {
         ModelVendaProduto modelVendaProduto = new ModelVendaProduto();
         
         try {
-            this.conectar();
-            this.executarSQL("SELECT "
+            conectar();
+            executarSQL("SELECT "
                     + "pk_id_venda_produto, "
                     + "fk_produto, "
                     + "fk_venda, "
                     + "venda_produto_valor, "
                     + "venda_produto_quantidade "
                     + "FROM tbl_vendas_produtos WHERE pk_id_venda_produto = '"+pIdVendaProduto+"'");
-            while (this.getResultSet().next()) {
-                modelVendaProduto.setIdVendaProduto(this.getResultSet().getInt(1));
-                modelVendaProduto.setProduto(this.getResultSet().getInt(2));
-                modelVendaProduto.setVenda(this.getResultSet().getInt(3));
-                modelVendaProduto.setVendaProdutoValor(this.getResultSet().getDouble(4));
-                modelVendaProduto.setVendaProdutoQuantidade(this.getResultSet().getInt(5));
+            while (getResultSet().next()) {
+                modelVendaProduto.setIdVendaProduto(getResultSet().getInt(1));
+                modelVendaProduto.setProduto(getResultSet().getInt(2));
+                modelVendaProduto.setVenda(getResultSet().getInt(3));
+                modelVendaProduto.setVendaProdutoValor(getResultSet().getDouble(4));
+                modelVendaProduto.setVendaProdutoQuantidade(getResultSet().getInt(5));
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
         return modelVendaProduto;
     }
@@ -122,21 +122,21 @@ public class DaoVendaProduto extends ConexaoMySql {
         ArrayList<ModelVendaProduto> listaModelVendaProdutos = new ArrayList<>();
         ModelVendaProduto modelVendaProduto = new ModelVendaProduto();
         try {
-            this.conectar();
-            this.executarSQL("SELECT pk_id_vendas, fk_cliente, venda_data, venda_valor_liquido, venda_valor_bruto, venda_desconto FROM tbl_vendas_produtos;");
-            while (this.getResultSet().next()) {
+            conectar();
+            executarSQL("SELECT pk_id_vendas, fk_cliente, venda_data, venda_valor_liquido, venda_valor_bruto, venda_desconto FROM tbl_vendas_produtos;");
+            while (getResultSet().next()) {
                 modelVendaProduto = new ModelVendaProduto();
-                modelVendaProduto.setIdVendaProduto(this.getResultSet().getInt(1));
-                modelVendaProduto.setProduto(this.getResultSet().getInt(2));
-                modelVendaProduto.setVenda(this.getResultSet().getInt(3));
-                modelVendaProduto.setVendaProdutoValor(this.getResultSet().getDouble(4));
-                modelVendaProduto.setVendaProdutoQuantidade(this.getResultSet().getInt(5));
+                modelVendaProduto.setIdVendaProduto(getResultSet().getInt(1));
+                modelVendaProduto.setProduto(getResultSet().getInt(2));
+                modelVendaProduto.setVenda(getResultSet().getInt(3));
+                modelVendaProduto.setVendaProdutoValor(getResultSet().getDouble(4));
+                modelVendaProduto.setVendaProdutoQuantidade(getResultSet().getInt(5));
                 listaModelVendaProdutos.add(modelVendaProduto);
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            this.fecharConexao();
+            fecharConexao();
         }
         return listaModelVendaProdutos;
     }

@@ -126,7 +126,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jmVenda.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
 
         jMenuItem1.setFont(new java.awt.Font("Fira Sans", 0, 14)); // NOI18N
-        jMenuItem1.setText("Vendas");
+        jMenuItem1.setText("Pré-Venda");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -206,7 +206,7 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmUsuariosActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        new ViewVenda().setVisible(true);
+        new ViewPreVenda().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**

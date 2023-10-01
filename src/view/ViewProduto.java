@@ -36,8 +36,8 @@ public class ViewProduto extends javax.swing.JFrame {
      */
     public ViewProduto() {
         initComponents();
-        this.listarProdutos();
-        this.habilitarDesabilitarCampos(false);
+        listarProdutos();
+        habilitarDesabilitarCampos(false);
     }
 
     /**
@@ -337,9 +337,9 @@ public class ViewProduto extends javax.swing.JFrame {
             if (controllerProdutos.excluirProdutoController(codigoProduto)) {
                 JOptionPane.showMessageDialog(this, "Produto excluído", "ATENÇÃO",
                         JOptionPane.WARNING_MESSAGE);
-                this.listarProdutos();
-                this.limparCampos();
-                this.habilitarDesabilitarCampos(false);
+                listarProdutos();
+                limparCampos();
+                habilitarDesabilitarCampos(false);
             } else {
                 JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
                         JOptionPane.ERROR_MESSAGE);
@@ -348,10 +348,10 @@ public class ViewProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        DefaultTableModel modelo = (DefaultTableModel) this.jtableProdutos.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jtableProdutos.getModel();
         final TableRowSorter<TableModel> classifica = new TableRowSorter<>(modelo);
-        this.jtableProdutos.setRowSorter(classifica);
-        String pesquisa = this.jtfPesquisa.getText();
+        jtableProdutos.setRowSorter(classifica);
+        String pesquisa = jtfPesquisa.getText();
         if (CampoDePesquisa.testaString(pesquisa) == true) {
             classifica.setRowFilter(RowFilter.regexFilter(pesquisa, 0));
         } else {
@@ -360,41 +360,41 @@ public class ViewProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.habilitarDesabilitarCampos(false);
-        this.limparCampos();
+        habilitarDesabilitarCampos(false);
+        limparCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if (editarSalvar.equals("salvar")) {
-            this.salvarProduto();
+            salvarProduto();
         } else if (editarSalvar.equals("editar")) {
-            this.editarProduto();
+            editarProduto();
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         editarSalvar = "editar";
-        int linha = this.jtableProdutos.getSelectedRow();
-        this.habilitarDesabilitarCampos(true);
+        int linha = jtableProdutos.getSelectedRow();
+        habilitarDesabilitarCampos(true);
         double preco = 0;
         try {
-            int codigoProduto = (int) this.jtableProdutos.getValueAt(linha, 0);
+            int codigoProduto = (int) jtableProdutos.getValueAt(linha, 0);
             // Recupera as informações do produto no banco de dados
             modelProduto = controllerProdutos.retornarProdutoController(codigoProduto);
             // Seta os dados recuperados no banco nos campos
-            this.jtfCodigo.setText(String.valueOf(modelProduto.getIdProduto()));
-            this.jtfNomeProduto.setText(modelProduto.getProdutoNome());
-            this.jtfFabricante.setText(modelProduto.getProdutoFabricante());
-            this.jtfEstoque.setText(String.valueOf(modelProduto.getProdutoEstoque()));
-            this.jtfPreco.setText(FormataValorReal.formatarDoubleReal(modelProduto.getProdutoPreco()));
-            this.jtfCusto.setText(FormataValorReal.formatarDoubleReal(modelProduto.getProdutoCusto()));
+            jtfCodigo.setText(String.valueOf(modelProduto.getIdProduto()));
+            jtfNomeProduto.setText(modelProduto.getProdutoNome());
+            jtfFabricante.setText(modelProduto.getProdutoFabricante());
+            jtfEstoque.setText(String.valueOf(modelProduto.getProdutoEstoque()));
+            jtfPreco.setText(FormataValorReal.formatarDoubleReal(modelProduto.getProdutoPreco()));
+            jtfCusto.setText(FormataValorReal.formatarDoubleReal(modelProduto.getProdutoCusto()));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nenhum registro selecionado");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        this.habilitarDesabilitarCampos(true);
+        habilitarDesabilitarCampos(true);
         editarSalvar = "salvar";
     }//GEN-LAST:event_btnNovoActionPerformed
 
@@ -404,16 +404,16 @@ public class ViewProduto extends javax.swing.JFrame {
 
     private void jtfPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            this.btnPesquisar.requestFocus();
+            btnPesquisar.requestFocus();
         }
     }//GEN-LAST:event_jtfPesquisaKeyPressed
 
     private void jtfPrecoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfPrecoFocusLost
-        jtfPreco.setText(FormataValorReal.formatarReal(this.jtfPreco.getText()));
+        jtfPreco.setText(FormataValorReal.formatarReal(jtfPreco.getText()));
     }//GEN-LAST:event_jtfPrecoFocusLost
 
     private void jtfCustoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfCustoFocusLost
-        jtfCusto.setText(FormataValorReal.formatarReal(this.jtfCusto.getText()));
+        jtfCusto.setText(FormataValorReal.formatarReal(jtfCusto.getText()));
     }//GEN-LAST:event_jtfCustoFocusLost
 
     /**
@@ -455,24 +455,24 @@ public class ViewProduto extends javax.swing.JFrame {
      * Método para salvar um novo produto cadastrado no banco de dados.
      */
     private void salvarProduto() {
-        if (this.jtfNomeProduto.getText().isEmpty() || this.jtfEstoque.getText().isEmpty() || this.jtfPreco.getText().isEmpty()) {
+        if (jtfNomeProduto.getText().isEmpty() || jtfEstoque.getText().isEmpty() || jtfPreco.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo vazio", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
-        } else if (this.jtfNomeProduto.getText().length() >= 101) {
+        } else if (jtfNomeProduto.getText().length() >= 101) {
             JOptionPane.showMessageDialog(null, "Campo Produto excede o limite de 100 caracteres!!", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
         } else {
-            modelProduto.setProdutoNome(this.jtfNomeProduto.getText().toUpperCase());
-            modelProduto.setProdutoFabricante(this.jtfFabricante.getText().toUpperCase());
-            modelProduto.setProdutoEstoque(Integer.parseInt(this.jtfEstoque.getText()));
-            modelProduto.setProdutoPreco(FormataValorReal.retornarRealDouble(this.jtfPreco.getText()));
-            modelProduto.setProdutoCusto(FormataValorReal.retornarRealDouble(this.jtfCusto.getText()));
+            modelProduto.setProdutoNome(jtfNomeProduto.getText().toUpperCase());
+            modelProduto.setProdutoFabricante(jtfFabricante.getText().toUpperCase());
+            modelProduto.setProdutoEstoque(Integer.parseInt(jtfEstoque.getText()));
+            modelProduto.setProdutoPreco(FormataValorReal.retornarRealDouble(jtfPreco.getText()));
+            modelProduto.setProdutoCusto(FormataValorReal.retornarRealDouble(jtfCusto.getText()));
             if (controllerProdutos.salvarProdutoController(modelProduto) > 0) {
                 JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!!", "ATENÇÃO",
                         JOptionPane.INFORMATION_MESSAGE);
-                this.listarProdutos();
-                this.habilitarDesabilitarCampos(false);
-                this.limparCampos();
+                listarProdutos();
+                habilitarDesabilitarCampos(false);
+                limparCampos();
             } else {
                 JOptionPane.showMessageDialog(this, "Produto não cadastrado, verifique as informações", "ERRO",
                         JOptionPane.ERROR_MESSAGE);
@@ -484,24 +484,24 @@ public class ViewProduto extends javax.swing.JFrame {
      * Método para salvar a edição de um registro no banco de dados.
      */
     private void editarProduto() {
-        if (this.jtfNomeProduto.getText().isEmpty() || this.jtfEstoque.getText().isEmpty() || this.jtfPreco.getText().isEmpty()) {
+        if (jtfNomeProduto.getText().isEmpty() || jtfEstoque.getText().isEmpty() || jtfPreco.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo vazio", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
-        } else if (this.jtfNomeProduto.getText().length() >= 101) {
+        } else if (jtfNomeProduto.getText().length() >= 101) {
             JOptionPane.showMessageDialog(null, "Excede o limite de 100 caracteres!!", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
         } else {
-            modelProduto.setProdutoNome(this.jtfNomeProduto.getText().toUpperCase());
-            modelProduto.setProdutoFabricante(this.jtfFabricante.getText().toUpperCase());
-            modelProduto.setProdutoEstoque(Integer.parseInt(this.jtfEstoque.getText()));
-            modelProduto.setProdutoPreco(FormataValorReal.retornarRealDouble(this.jtfPreco.getText()));
-            modelProduto.setProdutoCusto(FormataValorReal.retornarRealDouble(this.jtfCusto.getText()));
+            modelProduto.setProdutoNome(jtfNomeProduto.getText().toUpperCase());
+            modelProduto.setProdutoFabricante(jtfFabricante.getText().toUpperCase());
+            modelProduto.setProdutoEstoque(Integer.parseInt(jtfEstoque.getText()));
+            modelProduto.setProdutoPreco(FormataValorReal.retornarRealDouble(jtfPreco.getText()));
+            modelProduto.setProdutoCusto(FormataValorReal.retornarRealDouble(jtfCusto.getText()));
             if (controllerProdutos.editarProdutoController(modelProduto)) {
                 JOptionPane.showMessageDialog(this, "Editado com sucesso!!", "ATENÇÃO",
                         JOptionPane.INFORMATION_MESSAGE);
-                this.listarProdutos();
-                this.habilitarDesabilitarCampos(false);
-                this.limparCampos();
+                listarProdutos();
+                habilitarDesabilitarCampos(false);
+                limparCampos();
             } else {
                 JOptionPane.showMessageDialog(this, "Não foi aplicado a edição, verifique as informações", "ERRO",
                         JOptionPane.ERROR_MESSAGE);
@@ -513,12 +513,12 @@ public class ViewProduto extends javax.swing.JFrame {
      * Método para limpar os campos de texto.
      */
     private void limparCampos() {
-        this.jtfCodigo.setText("");
-        this.jtfNomeProduto.setText("");
-        this.jtfEstoque.setText("");
-        this.jtfPreco.setText("");
-        this.jtfFabricante.setText("");
-        this.jtfCusto.setText("");
+        jtfCodigo.setText("");
+        jtfNomeProduto.setText("");
+        jtfEstoque.setText("");
+        jtfPreco.setText("");
+        jtfFabricante.setText("");
+        jtfCusto.setText("");
     }
 
     /**
@@ -527,11 +527,11 @@ public class ViewProduto extends javax.swing.JFrame {
      * @param condicao
      */
     private void habilitarDesabilitarCampos(boolean condicao) {
-        this.jtfNomeProduto.setEnabled(condicao);
-        this.jtfEstoque.setEnabled(condicao);
-        this.jtfPreco.setEnabled(condicao);
-        this.jtfCusto.setEnabled(condicao);
-        this.jtfFabricante.setEnabled(condicao);
+        jtfNomeProduto.setEnabled(condicao);
+        jtfEstoque.setEnabled(condicao);
+        jtfPreco.setEnabled(condicao);
+        jtfCusto.setEnabled(condicao);
+        jtfFabricante.setEnabled(condicao);
     }
 
     /**

@@ -32,10 +32,10 @@ public class ViewCliente extends javax.swing.JFrame {
      */
     public ViewCliente() {
         initComponents();
-        this.listarClientes();
-        this.habilitarDesabilitarCampos(false);
-        this.formatarCep();
-        this.formatarTelefone();
+        listarClientes();
+        habilitarDesabilitarCampos(false);
+        formatarCep();
+        formatarTelefone();
     }
 
     /**
@@ -401,9 +401,9 @@ public class ViewCliente extends javax.swing.JFrame {
             if (controllerCliente.excluirClienteController(codigoProduto)) {
                 JOptionPane.showMessageDialog(this, "Cliente excluído", "ATENÇÃO",
                         JOptionPane.WARNING_MESSAGE);
-                this.listarClientes();
-                this.limparCampos();
-                this.habilitarDesabilitarCampos(false);
+                listarClientes();
+                limparCampos();
+                habilitarDesabilitarCampos(false);
             } else {
                 JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
                         JOptionPane.ERROR_MESSAGE);
@@ -412,50 +412,50 @@ public class ViewCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        this.habilitarDesabilitarCampos(true);
+        habilitarDesabilitarCampos(true);
         editarSalvar = "salvar";
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if (editarSalvar.equals("salvar")) {
-            this.salvarCliente();
+            salvarCliente();
         } else if (editarSalvar.equals("editar")) {
-            this.editarProduto();
+            editarProduto();
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         editarSalvar = "editar";
-        int linha = this.jtableCliente.getSelectedRow();
-        this.habilitarDesabilitarCampos(true);
+        int linha = jtableCliente.getSelectedRow();
+        habilitarDesabilitarCampos(true);
         try {
-            int codigoCliente = (int) this.jtableCliente.getValueAt(linha, 0);
+            int codigoCliente = (int) jtableCliente.getValueAt(linha, 0);
             modelCliente = controllerCliente.retornarClienteController(codigoCliente);
-            this.jtfCodigo.setText(String.valueOf(modelCliente.getIdCliente()));
-            this.jtfNome.setText(modelCliente.getClienteNome());
-            this.jtfTelefone.setText(modelCliente.getClienteTelefone());
-            this.jtfEndereco.setText(modelCliente.getClienteEndereco());
-            this.jtfBairro.setText(modelCliente.getClienteBairro());
-            this.jtfCidade.setText(modelCliente.getClienteCidade());
-            this.jtfCep.setText(modelCliente.getClienteCep());
-            this.jtfNumero.setText(modelCliente.getClienteNumero());
-            this.jtfComplemento.setText(modelCliente.getClienteComplemento());
-            this.jcbUF.setSelectedItem(modelCliente.getClienteUf());
+            jtfCodigo.setText(String.valueOf(modelCliente.getIdCliente()));
+            jtfNome.setText(modelCliente.getClienteNome());
+            jtfTelefone.setText(modelCliente.getClienteTelefone());
+            jtfEndereco.setText(modelCliente.getClienteEndereco());
+            jtfBairro.setText(modelCliente.getClienteBairro());
+            jtfCidade.setText(modelCliente.getClienteCidade());
+            jtfCep.setText(modelCliente.getClienteCep());
+            jtfNumero.setText(modelCliente.getClienteNumero());
+            jtfComplemento.setText(modelCliente.getClienteComplemento());
+            jcbUF.setSelectedItem(modelCliente.getClienteUf());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nenhum registro selecionado");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.habilitarDesabilitarCampos(false);
-        this.limparCampos();
+        habilitarDesabilitarCampos(false);
+        limparCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        DefaultTableModel modelo = (DefaultTableModel) this.jtableCliente.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jtableCliente.getModel();
         final TableRowSorter<TableModel> classifica = new TableRowSorter<>(modelo);
-        this.jtableCliente.setRowSorter(classifica);
-        String pesquisa = this.jtfPesquisa.getText();
+        jtableCliente.setRowSorter(classifica);
+        String pesquisa = jtfPesquisa.getText();
         if (CampoDePesquisa.testaString(pesquisa) == true) {
             classifica.setRowFilter(RowFilter.regexFilter(pesquisa, 0));
         } else {
@@ -465,7 +465,7 @@ public class ViewCliente extends javax.swing.JFrame {
 
     private void jtfPesquisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPesquisaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            this.btnPesquisar.requestFocus();
+            btnPesquisar.requestFocus();
         }
     }//GEN-LAST:event_jtfPesquisaKeyPressed
 
@@ -508,28 +508,28 @@ public class ViewCliente extends javax.swing.JFrame {
      * Método para salvar o cadastro de um usuário no banco de dados.
      */
     private void salvarCliente() {
-        if (this.jtfNome.getText().isEmpty()) {
+        if (jtfNome.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo vazio", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
-        } else if (this.jtfNome.getText().length() >= 61) {
+        } else if (jtfNome.getText().length() >= 61) {
             JOptionPane.showMessageDialog(null, "Campo Nome excede o limite de 60 caracteres!!", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
         } else {
-            modelCliente.setClienteNome(this.jtfNome.getText().toUpperCase());
-            modelCliente.setClienteTelefone(this.jtfTelefone.getText());
-            modelCliente.setClienteEndereco(this.jtfEndereco.getText().toUpperCase());
-            modelCliente.setClienteBairro(this.jtfBairro.getText().toUpperCase());
-            modelCliente.setClienteCidade(this.jtfCidade.getText().toUpperCase());
-            modelCliente.setClienteCep(this.jtfCep.getText());
-            modelCliente.setClienteNumero(this.jtfNumero.getText());
-            modelCliente.setClienteComplemento(this.jtfComplemento.getText().toUpperCase());
-            modelCliente.setClienteUf(this.jcbUF.getSelectedItem().toString());
+            modelCliente.setClienteNome(jtfNome.getText().toUpperCase());
+            modelCliente.setClienteTelefone(jtfTelefone.getText());
+            modelCliente.setClienteEndereco(jtfEndereco.getText().toUpperCase());
+            modelCliente.setClienteBairro(jtfBairro.getText().toUpperCase());
+            modelCliente.setClienteCidade(jtfCidade.getText().toUpperCase());
+            modelCliente.setClienteCep(jtfCep.getText());
+            modelCliente.setClienteNumero(jtfNumero.getText());
+            modelCliente.setClienteComplemento(jtfComplemento.getText().toUpperCase());
+            modelCliente.setClienteUf(jcbUF.getSelectedItem().toString());
             if (controllerCliente.salvarClienteController(modelCliente) > 0) {
                 JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!!", "ATENÇÃO",
                         JOptionPane.INFORMATION_MESSAGE);
-                this.listarClientes();
-                this.habilitarDesabilitarCampos(false);
-                this.limparCampos();
+                listarClientes();
+                habilitarDesabilitarCampos(false);
+                limparCampos();
             } else {
                 JOptionPane.showMessageDialog(this, "Cliente não cadastrado, verifique as informações", "ERRO",
                         JOptionPane.ERROR_MESSAGE);
@@ -541,28 +541,28 @@ public class ViewCliente extends javax.swing.JFrame {
      * Método para salvar a edição de um registro no banco de dados.
      */
     private void editarProduto() {
-        if (this.jtfNome.getText().isEmpty()) {
+        if (jtfNome.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo vazio", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
-        } else if (this.jtfNome.getText().length() >= 61) {
+        } else if (jtfNome.getText().length() >= 61) {
             JOptionPane.showMessageDialog(null, "Campo Nome excede o limite de 60 caracteres!!", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
         } else {
-            modelCliente.setClienteNome(this.jtfNome.getText().toUpperCase());
-            modelCliente.setClienteTelefone(this.jtfTelefone.getText());
-            modelCliente.setClienteEndereco(this.jtfEndereco.getText().toUpperCase());
-            modelCliente.setClienteBairro(this.jtfBairro.getText().toUpperCase());
-            modelCliente.setClienteCidade(this.jtfCidade.getText().toUpperCase());
-            modelCliente.setClienteCep(this.jtfCep.getText());
-            modelCliente.setClienteNumero(this.jtfNumero.getText());
-            modelCliente.setClienteComplemento(this.jtfComplemento.getText().toUpperCase());
-            modelCliente.setClienteUf(this.jcbUF.getSelectedItem().toString());
+            modelCliente.setClienteNome(jtfNome.getText().toUpperCase());
+            modelCliente.setClienteTelefone(jtfTelefone.getText());
+            modelCliente.setClienteEndereco(jtfEndereco.getText().toUpperCase());
+            modelCliente.setClienteBairro(jtfBairro.getText().toUpperCase());
+            modelCliente.setClienteCidade(jtfCidade.getText().toUpperCase());
+            modelCliente.setClienteCep(jtfCep.getText());
+            modelCliente.setClienteNumero(jtfNumero.getText());
+            modelCliente.setClienteComplemento(jtfComplemento.getText().toUpperCase());
+            modelCliente.setClienteUf(jcbUF.getSelectedItem().toString());
             if (controllerCliente.editarClienteController(modelCliente)) {
                 JOptionPane.showMessageDialog(this, "Editado com sucesso!!", "ATENÇÃO",
                         JOptionPane.INFORMATION_MESSAGE);
-                this.listarClientes();
-                this.habilitarDesabilitarCampos(false);
-                this.limparCampos();
+                listarClientes();
+                habilitarDesabilitarCampos(false);
+                limparCampos();
             } else {
                 JOptionPane.showMessageDialog(this, "Não foi aplicado a edição, verifique as informações", "ERRO",
                         JOptionPane.ERROR_MESSAGE);
@@ -574,15 +574,15 @@ public class ViewCliente extends javax.swing.JFrame {
      * Método para limpar os campos de texto.
      */
     private void limparCampos() {
-        this.jtfCodigo.setText("");
-        this.jtfNome.setText("");
-        this.jtfTelefone.setText("");
-        this.jtfEndereco.setText("");
-        this.jtfBairro.setText("");
-        this.jtfCidade.setText("");
-        this.jtfCep.setText("");
-        this.jtfNumero.setText("");
-        this.jtfComplemento.setText("");
+        jtfCodigo.setText("");
+        jtfNome.setText("");
+        jtfTelefone.setText("");
+        jtfEndereco.setText("");
+        jtfBairro.setText("");
+        jtfCidade.setText("");
+        jtfCep.setText("");
+        jtfNumero.setText("");
+        jtfComplemento.setText("");
     }
 
     /**
@@ -591,15 +591,15 @@ public class ViewCliente extends javax.swing.JFrame {
      * @param condicao
      */
     private void habilitarDesabilitarCampos(boolean condicao) {
-        this.jtfNome.setEnabled(condicao);
-        this.jtfTelefone.setEnabled(condicao);
-        this.jtfEndereco.setEnabled(condicao);
-        this.jtfBairro.setEnabled(condicao);
-        this.jtfCidade.setEnabled(condicao);
-        this.jtfCep.setEnabled(condicao);
-        this.jcbUF.setEnabled(condicao);
-        this.jtfNumero.setEnabled(condicao);
-        this.jtfComplemento.setEnabled(condicao);
+        jtfNome.setEnabled(condicao);
+        jtfTelefone.setEnabled(condicao);
+        jtfEndereco.setEnabled(condicao);
+        jtfBairro.setEnabled(condicao);
+        jtfCidade.setEnabled(condicao);
+        jtfCep.setEnabled(condicao);
+        jcbUF.setEnabled(condicao);
+        jtfNumero.setEnabled(condicao);
+        jtfComplemento.setEnabled(condicao);
     }
 
     /**
