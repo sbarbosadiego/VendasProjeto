@@ -14,28 +14,37 @@ import model.ModelVendas;
  * @author Diego Barbosa da Silva
  */
 public class DaoVenda extends ConexaoMySql {
-    
+
     /**
      * Inseri o registro de venda no banco de dados.
+     *
      * @param pModelVenda
      * @return int
      */
     public int salvarVendaDAO(ModelVendas pModelVenda) {
         try {
             conectar();
-            return insertSQL("INSERT INTO tbl_vendas ("
+
+            String sql = "INSERT INTO tbl_vendas ("
                     + "fk_cliente,"
                     + "venda_data,"
                     + "venda_valor_liquido,"
                     + "venda_valor_bruto,"
                     + "venda_desconto"
-                    + ") VALUES ("
-                    + "'"+pModelVenda.getCliente()+"',"
-                    + "'"+pModelVenda.getVendaData()+"',"
-                    + "'"+pModelVenda.getVendaValorLiquido()+"',"
-                    + "'"+pModelVenda.getVendaValorBruto()+"',"
-                    + "'"+pModelVenda.getVendaDesconto()+"'"
-                    + ");");
+                    + ") VALUES (";
+
+            if (pModelVenda.getCliente() == 0) {
+                sql += "NULL,"; // Defina NULL se o ID do cliente for 0
+            } else {
+                sql += "'" + pModelVenda.getCliente() + "',";
+            }
+
+            sql += "'" + pModelVenda.getVendaData() + "',";
+            sql += "'" + pModelVenda.getVendaValorLiquido() + "',";
+            sql += "'" + pModelVenda.getVendaValorBruto() + "',";
+            sql += "'" + pModelVenda.getVendaDesconto() + "');";
+
+            return insertSQL(sql);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
             return 0;
@@ -43,9 +52,10 @@ public class DaoVenda extends ConexaoMySql {
             fecharConexao();
         }
     }
-    
+
     /**
      * Exclui um registro de venda.
+     *
      * @param pIdVenda
      * @return boolean
      */
@@ -61,9 +71,10 @@ public class DaoVenda extends ConexaoMySql {
             fecharConexao();
         }
     }
-    
+
     /**
      * Alterar registro de venda.
+     *
      * @param pModelVenda
      * @return boolean
      */
@@ -72,11 +83,11 @@ public class DaoVenda extends ConexaoMySql {
             conectar();
             return executarUpdateDeleteSQL(
                     "UPDATE tbl_vendas SET "
-                            + "fk_cliente = '"+pModelVenda.getCliente()+"',"
-                            + "venda_valor_liquido = '"+pModelVenda.getVendaValorLiquido()+"',"
-                            + "venda_valor_bruto = '"+pModelVenda.getVendaValorBruto()+"',"
-                            + "venda_desconto = '"+pModelVenda.getVendaDesconto()+"'"
-                            + "WHERE pk_id_vendas = '"+pModelVenda.getIdVenda()+"';"
+                    + "fk_cliente = '" + pModelVenda.getCliente() + "',"
+                    + "venda_valor_liquido = '" + pModelVenda.getVendaValorLiquido() + "',"
+                    + "venda_valor_bruto = '" + pModelVenda.getVendaValorBruto() + "',"
+                    + "venda_desconto = '" + pModelVenda.getVendaDesconto() + "'"
+                    + "WHERE pk_id_vendas = '" + pModelVenda.getIdVenda() + "';"
             );
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -85,9 +96,10 @@ public class DaoVenda extends ConexaoMySql {
             fecharConexao();
         }
     }
-    
+
     /**
      * Consulta de venda por código.
+     *
      * @param pIdVenda
      * @return modelVenda
      */
@@ -102,7 +114,7 @@ public class DaoVenda extends ConexaoMySql {
                     + "venda_valor_liquido, "
                     + "venda_valor_bruto, "
                     + "venda_desconto "
-                    + "FROM tbl_vendas WHERE pk_id_Venda = '"+pIdVenda+"'");
+                    + "FROM tbl_vendas WHERE pk_id_Venda = '" + pIdVenda + "'");
             while (getResultSet().next()) {
                 modelVenda.setIdVenda(getResultSet().getInt(1));
                 modelVenda.setCliente(getResultSet().getInt(2));
@@ -118,9 +130,10 @@ public class DaoVenda extends ConexaoMySql {
         }
         return modelVenda;
     }
-    
+
     /**
      * Retornar lista de vendas.
+     *
      * @return listaModelVendas
      */
     public ArrayList<ModelVendas> retornarListaVendaDAO() {
@@ -152,5 +165,5 @@ public class DaoVenda extends ConexaoMySql {
         }
         return listaModelVendas;
     }
-    
+
 }

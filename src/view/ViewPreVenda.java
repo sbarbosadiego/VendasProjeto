@@ -30,18 +30,18 @@ public class ViewPreVenda extends javax.swing.JFrame {
 
     Locale localeBR = new Locale("pt", "BR");
     Datas datas = new Datas();
-    
+
     ModelCliente modelCliente = new ModelCliente();
     ControllerCliente controllerCliente = new ControllerCliente();
     ArrayList<ModelCliente> listaModelCliente = new ArrayList<>();
-    
+
     ModelProdutos modelProdutos = new ModelProdutos();
     ControllerProduto controllerProduto = new ControllerProduto();
     ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<>();
 
     ModelVendas modelVendas = new ModelVendas();
     ControllerVenda controllerVendas = new ControllerVenda();
-    
+
     ControllerVendasCliente controllerVendasCliente = new ControllerVendasCliente();
     ArrayList<ModelVendasCliente> listalModelVendasClientes = new ArrayList<>();
 
@@ -361,6 +361,11 @@ public class ViewPreVenda extends javax.swing.JFrame {
 
         btnPesquisar.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         btnPesquisar.setText("Filtrar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         jtVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -518,48 +523,7 @@ public class ViewPreVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jbExcluirActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        if (jtfQuantidade.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Informe a quantidade", "ATENÇÃO",
-                    JOptionPane.WARNING_MESSAGE);
-        } else {
-            modelProdutos = controllerProduto.retornarProdutoController(Integer.parseInt(jtfCodigoProduto.getText()));
-            // Inicia a linha na tabela
-            DefaultTableModel modeloCadastro = (DefaultTableModel) jtProdutosVenda.getModel();
-            int quantidade = Integer.parseInt(jtfQuantidade.getText());
-            NumberFormat valorReal = NumberFormat.getCurrencyInstance(localeBR);
-            int contador = 0;
-            for (int i = 0; i < contador; i++) {
-                modeloCadastro.setNumRows(0);
-            }
-
-            // Verifica se há um produto já está na tabela
-            boolean produtoEncontrado = false;
-            for (int i = 0; i < modeloCadastro.getRowCount(); i++) {
-                int idProdutoTabela = (int) modeloCadastro.getValueAt(i, 0);
-                int quantidadeAtual = Integer.parseInt(modeloCadastro.getValueAt(i, 2).toString());
-                if (idProdutoTabela == modelProdutos.getIdProduto()) {
-                    int quantidadeNova = quantidadeAtual + (int) quantidade;
-                    modeloCadastro.setValueAt(quantidadeNova, i, 2);
-                    modeloCadastro.setValueAt(valorReal.format(modelProdutos.getProdutoPreco()), i, 3);
-                    modeloCadastro.setValueAt(valorReal.format(quantidadeNova * modelProdutos.getProdutoPreco()), i, 4);
-                    produtoEncontrado = true;
-                    break;
-                }
-            }
-
-            if (!produtoEncontrado) {
-                modeloCadastro.addRow(new Object[]{
-                    modelProdutos.getIdProduto(),
-                    modelProdutos.getProdutoNome(),
-                    jtfQuantidade.getText(),
-                    valorReal.format(modelProdutos.getProdutoPreco()),
-                    valorReal.format(quantidade * modelProdutos.getProdutoPreco())
-                });
-            }
-
-            limparCamposProduto();
-            somaValorTotalProdutos();
-        }
+        adicionarProduto();
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void jtfDescontoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfDescontoFocusLost
@@ -627,7 +591,13 @@ public class ViewPreVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jtProdutosVendaKeyReleased
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        salvarVenda();
+        DefaultTableModel tabela = (DefaultTableModel) jtProdutosVenda.getModel();
+        if (tabela.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Não dá produtos a serem salvos!", "ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            salvarVenda();
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void jtfCodigoProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoProdutoKeyReleased
@@ -653,6 +623,12 @@ public class ViewPreVenda extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jtfDescontoKeyReleased
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        if (jtPesquisar.getText().isBlank()) {
+            listarVendasClientes();
+        } 
+    }//GEN-LAST:event_btnPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -809,7 +785,7 @@ public class ViewPreVenda extends javax.swing.JFrame {
         DefaultTableModel tabela = (DefaultTableModel) jtProdutosVenda.getModel();
         tabela.setNumRows(0);
     }
-    
+
     private void habilitarDesabilitarCampos(boolean condicao) {
         jtfCodigoCliente.setEnabled(condicao);
         campoPesquisaCliente.setEnabled(condicao);
@@ -819,6 +795,7 @@ public class ViewPreVenda extends javax.swing.JFrame {
         jtfValorTotal.setEnabled(condicao);
         jtfDesconto.setEnabled(condicao);
         jtfCodigoVenda.setEnabled(condicao);
+        btnAdicionar.setEnabled(condicao);
     }
 
     /**
@@ -865,14 +842,18 @@ public class ViewPreVenda extends javax.swing.JFrame {
         }
         jtfValorTotal.setText(valorReal.format(valorTotal));
     }
-    
+
     /**
      * Método para salvar o registro de uma pré-venda.
      */
     private void salvarVenda() {
         int codigoVenda = 0;
-        
-        modelVendas.setCliente(Integer.parseInt(jtfCodigoCliente.getText()));
+        if (jtfCodigoCliente.getText().isBlank()) {
+            // Realmente nada é feito
+        } else {
+            modelVendas.setCliente(Integer.parseInt(jtfCodigoCliente.getText()));
+        }
+
         try {
             modelVendas.setVendaData(datas.converterDataParaDateUS(new java.util.Date(System.currentTimeMillis())));
         } catch (Exception e) {
@@ -880,18 +861,68 @@ public class ViewPreVenda extends javax.swing.JFrame {
         }
         modelVendas.setVendaValorLiquido(FormataValorReal.retornarRealDouble(jtfValorTotal.getText()));
         modelVendas.setVendaValorBruto(FormataValorReal.retornarRealDouble(jtfValorTotal.getText()) + FormataValorReal.retornarRealDouble(jtfDesconto.getText()));
-        modelVendas.setVendaDesconto(Double.parseDouble(jtfDesconto.getText()));
-        
+        if (jtfDesconto.getText().isBlank()) {
+            modelVendas.setVendaDesconto(0.00);
+        } else {
+            modelVendas.setVendaDesconto(Double.valueOf(jtfDesconto.getText()));
+        }
+
         codigoVenda = controllerVendas.salvarVendaController(modelVendas);
         if (codigoVenda > 0) {
             JOptionPane.showMessageDialog(this, "Pré-Venda registrada!", "ATENÇÃO",
                     JOptionPane.INFORMATION_MESSAGE);
             limparTela();
+            listarVendasClientes();
         } else {
             JOptionPane.showMessageDialog(this, "Pré-Venda não registrada!", "ERRO",
                     JOptionPane.ERROR_MESSAGE);
         }
 
+    }
+    
+    private void adicionarProduto() {
+        if (jtfQuantidade.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Informe a quantidade", "ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            modelProdutos = controllerProduto.retornarProdutoController(Integer.parseInt(jtfCodigoProduto.getText()));
+            // Inicia a linha na tabela
+            DefaultTableModel modeloCadastro = (DefaultTableModel) jtProdutosVenda.getModel();
+            int quantidade = Integer.parseInt(jtfQuantidade.getText());
+            NumberFormat valorReal = NumberFormat.getCurrencyInstance(localeBR);
+            int contador = 0;
+            for (int i = 0; i < contador; i++) {
+                modeloCadastro.setNumRows(0);
+            }
+
+            // Verifica se há um produto já está na tabela
+            boolean produtoEncontrado = false;
+            for (int i = 0; i < modeloCadastro.getRowCount(); i++) {
+                int idProdutoTabela = (int) modeloCadastro.getValueAt(i, 0);
+                int quantidadeAtual = Integer.parseInt(modeloCadastro.getValueAt(i, 2).toString());
+                if (idProdutoTabela == modelProdutos.getIdProduto()) {
+                    int quantidadeNova = quantidadeAtual + (int) quantidade;
+                    modeloCadastro.setValueAt(quantidadeNova, i, 2);
+                    modeloCadastro.setValueAt(valorReal.format(modelProdutos.getProdutoPreco()), i, 3);
+                    modeloCadastro.setValueAt(valorReal.format(quantidadeNova * modelProdutos.getProdutoPreco()), i, 4);
+                    produtoEncontrado = true;
+                    break;
+                }
+            }
+
+            if (!produtoEncontrado) {
+                modeloCadastro.addRow(new Object[]{
+                    modelProdutos.getIdProduto(),
+                    modelProdutos.getProdutoNome(),
+                    jtfQuantidade.getText(),
+                    valorReal.format(modelProdutos.getProdutoPreco()),
+                    valorReal.format(quantidade * modelProdutos.getProdutoPreco())
+                });
+            }
+
+            limparCamposProduto();
+            somaValorTotalProdutos();
+        }
     }
 
 

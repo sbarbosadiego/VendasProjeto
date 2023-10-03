@@ -43,7 +43,7 @@ public class DaoVendasCliente extends ConexaoMySql {
                     + "Cliente.cliente_telefone, "
                     + "Cliente.cliente_complemento "
                     + "FROM tbl_vendas Vendas "
-                    + "INNER JOIN tbl_cliente Cliente "
+                    + "LEFT JOIN tbl_cliente Cliente "
                     + "ON Cliente.pk_id_cliente = Vendas.fk_cliente;");
             while (getResultSet().next()) {
                 modelVenda = new ModelVendas();
@@ -57,16 +57,16 @@ public class DaoVendasCliente extends ConexaoMySql {
                 modelVenda.setVendaValorBruto(getResultSet().getDouble(5));
                 modelVenda.setVendaDesconto(getResultSet().getDouble(6));
                 
-                modelClientes.setIdCliente(getResultSet().getInt(1));
-                modelClientes.setClienteNome(getResultSet().getString(2));
-                modelClientes.setClienteEndereco(getResultSet().getString(3));
-                modelClientes.setClienteBairro(getResultSet().getString(4));
-                modelClientes.setClienteNumero(getResultSet().getString(5));
-                modelClientes.setClienteCidade(getResultSet().getString(6));
-                modelClientes.setClienteUf(getResultSet().getString(7));
-                modelClientes.setClienteCep(getResultSet().getString(8));
-                modelClientes.setClienteTelefone(getResultSet().getString(9));
-                modelClientes.setClienteComplemento(getResultSet().getString(10));
+                modelClientes.setIdCliente(getResultSet().getInt(7));
+                modelClientes.setClienteNome(getResultSet().getString(8));
+                modelClientes.setClienteEndereco(getResultSet().getString(9));
+                modelClientes.setClienteBairro(getResultSet().getString(10));
+                modelClientes.setClienteNumero(getResultSet().getString(11));
+                modelClientes.setClienteCidade(getResultSet().getString(12));
+                modelClientes.setClienteUf(getResultSet().getString(13));
+                modelClientes.setClienteCep(getResultSet().getString(14));
+                modelClientes.setClienteTelefone(getResultSet().getString(15));
+                modelClientes.setClienteComplemento(getResultSet().getString(16));
                 
                 modelVendasCliente.setModelVenda(modelVenda);
                 modelVendasCliente.setModelCliente(modelClientes);

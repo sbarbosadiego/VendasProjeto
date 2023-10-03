@@ -39,7 +39,7 @@ produto_estoque INT
 
 CREATE TABLE IF NOT EXISTS tbl_vendas (
 pk_id_vendas SERIAL NOT NULL AUTO_INCREMENT PRIMARY KEY,
-fk_cliente BIGINT UNSIGNED NOT NULL,
+fk_cliente BIGINT UNSIGNED,
 venda_data DATE,
 venda_valor_liquido DECIMAL(10,2),
 venda_valor_bruto DECIMAL(10,2),
