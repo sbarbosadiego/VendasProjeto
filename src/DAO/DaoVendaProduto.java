@@ -12,9 +12,10 @@ import model.ModelVendaProduto;
  * @author Diego Barbosa da Silva
  */
 public class DaoVendaProduto extends ConexaoMySql {
-    
+
     /**
      * Inseri produtos em uma venda.
+     *
      * @param pModelVendaProduto
      * @return int
      */
@@ -23,14 +24,14 @@ public class DaoVendaProduto extends ConexaoMySql {
             conectar();
             return insertSQL("INSERT INTO tbl_vendas_produtos ("
                     + "fk_produto,"
-                    + "venda_venda,"
+                    + "fk_venda,"
                     + "venda_produto_valor,"
                     + "venda_produto_quantidade"
                     + ") VALUES ("
-                    + "'"+pModelVendaProduto.getProduto()+"',"
-                    + "'"+pModelVendaProduto.getVenda()+"',"
-                    + "'"+pModelVendaProduto.getVendaProdutoValor()+"',"
-                    + "'"+pModelVendaProduto.getVendaProdutoQuantidade()+"'"
+                    + "'" + pModelVendaProduto.getProduto() + "',"
+                    + "'" + pModelVendaProduto.getVenda() + "',"
+                    + "'" + pModelVendaProduto.getVendaProdutoValor() + "',"
+                    + "'" + pModelVendaProduto.getVendaProdutoQuantidade() + "'"
                     + ");");
         } catch (Exception e) {
             e.printStackTrace();
@@ -39,9 +40,10 @@ public class DaoVendaProduto extends ConexaoMySql {
             fecharConexao();
         }
     }
-    
+
     /**
      * Exclui o produto de uma venda.
+     *
      * @param pIdVendaProduto
      * @return boolean
      */
@@ -57,9 +59,10 @@ public class DaoVendaProduto extends ConexaoMySql {
             fecharConexao();
         }
     }
-    
+
     /**
      * Alterar o produto de uma venda.
+     *
      * @param pModelVendaProduto
      * @return boolean
      */
@@ -68,11 +71,11 @@ public class DaoVendaProduto extends ConexaoMySql {
             conectar();
             return executarUpdateDeleteSQL(
                     "UPDATE tbl_vendas_produtos SET "
-                            + "fk_produto = '"+pModelVendaProduto.getProduto()+"',"
-                            + "fk_venda = '"+pModelVendaProduto.getVenda()+"',"
-                            + "venda_produto_valor = '"+pModelVendaProduto.getVendaProdutoValor()+"',"
-                            + "venda_produto_quantidade = '"+pModelVendaProduto.getVendaProdutoQuantidade()+"'"
-                            + "WHERE pk_id_vendas_produto = '"+pModelVendaProduto.getIdVendaProduto()+"';"
+                    + "fk_produto = '" + pModelVendaProduto.getProduto() + "',"
+                    + "fk_venda = '" + pModelVendaProduto.getVenda() + "',"
+                    + "venda_produto_valor = '" + pModelVendaProduto.getVendaProdutoValor() + "',"
+                    + "venda_produto_quantidade = '" + pModelVendaProduto.getVendaProdutoQuantidade() + "'"
+                    + "WHERE pk_id_vendas_produto = '" + pModelVendaProduto.getIdVendaProduto() + "';"
             );
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,15 +84,16 @@ public class DaoVendaProduto extends ConexaoMySql {
             fecharConexao();
         }
     }
-    
+
     /**
      * Consulta produto por código.
+     *
      * @param pIdVendaProduto
      * @return modelVenda
      */
     public ModelVendaProduto retornarVendaProdutoDAO(int pIdVendaProduto) {
         ModelVendaProduto modelVendaProduto = new ModelVendaProduto();
-        
+
         try {
             conectar();
             executarSQL("SELECT "
@@ -98,7 +102,7 @@ public class DaoVendaProduto extends ConexaoMySql {
                     + "fk_venda, "
                     + "venda_produto_valor, "
                     + "venda_produto_quantidade "
-                    + "FROM tbl_vendas_produtos WHERE pk_id_venda_produto = '"+pIdVendaProduto+"'");
+                    + "FROM tbl_vendas_produtos WHERE pk_id_venda_produto = '" + pIdVendaProduto + "'");
             while (getResultSet().next()) {
                 modelVendaProduto.setIdVendaProduto(getResultSet().getInt(1));
                 modelVendaProduto.setProduto(getResultSet().getInt(2));
@@ -113,9 +117,10 @@ public class DaoVendaProduto extends ConexaoMySql {
         }
         return modelVendaProduto;
     }
-    
+
     /**
      * Retornar lista de vendas.
+     *
      * @return listaModelVendas
      */
     public ArrayList<ModelVendaProduto> retornarListaVendaProdutoDAO() {
@@ -140,5 +145,37 @@ public class DaoVendaProduto extends ConexaoMySql {
         }
         return listaModelVendaProdutos;
     }
-    
+
+    /**
+     * Salvar uma lista de produtos de uma venda.
+     *
+     * @param pListaModelVendasProdutos
+     * @return
+     */
+    public boolean salvarVendaProdutoDAO(ArrayList<ModelVendaProduto> pListaModelVendasProdutos) {
+        try {
+            conectar();
+            int linhas = pListaModelVendasProdutos.size();
+            for (int i = 0; i < linhas; i++) {
+                this.insertSQL("INSERT INTO tbl_vendas_produtos ("
+                        + "fk_venda,"
+                        + "fk_produto,"
+                        + "venda_produto_valor,"
+                        + "venda_produto_quantidade"
+                        + ") VALUES ("
+                        + "'" + pListaModelVendasProdutos.get(i).getVenda() + "',"
+                        + "'" + pListaModelVendasProdutos.get(i).getProduto() + "',"        
+                        + "'" + pListaModelVendasProdutos.get(i).getVendaProdutoValor() + "',"
+                        + "'" + pListaModelVendasProdutos.get(i).getVendaProdutoQuantidade() + "'"
+                        + ");");
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            fecharConexao();
+        }
+    }
+
 }

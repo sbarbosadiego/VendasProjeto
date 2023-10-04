@@ -7,6 +7,7 @@ package view;
 import controller.ControllerCliente;
 import controller.ControllerProduto;
 import controller.ControllerVenda;
+import controller.ControllerVendaProduto;
 import controller.ControllerVendasCliente;
 import java.awt.event.KeyEvent;
 import java.text.NumberFormat;
@@ -18,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.ModelCliente;
 import model.ModelProdutos;
+import model.ModelVendaProduto;
 import model.ModelVendas;
 import model.ModelVendasCliente;
 import util.Datas;
@@ -27,21 +29,31 @@ import util.FormataValorReal;
  * @author Diego Barbosa da Silva
  */
 public class ViewPreVenda extends javax.swing.JFrame {
-
+    
+    // Idioma - Data
     Locale localeBR = new Locale("pt", "BR");
     Datas datas = new Datas();
-
+    
+    // Cliente
     ModelCliente modelCliente = new ModelCliente();
     ControllerCliente controllerCliente = new ControllerCliente();
     ArrayList<ModelCliente> listaModelCliente = new ArrayList<>();
-
+    
+    // Produtos
     ModelProdutos modelProdutos = new ModelProdutos();
     ControllerProduto controllerProduto = new ControllerProduto();
     ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<>();
-
+    
+    // Venda
     ModelVendas modelVendas = new ModelVendas();
     ControllerVenda controllerVendas = new ControllerVenda();
-
+    
+    // Venda Produtos
+    ModelVendaProduto modelVendaProdutos = new ModelVendaProduto();
+    ControllerVendaProduto controllerVendaProdutos = new ControllerVendaProduto();
+    ArrayList<ModelVendaProduto> listaModelVendaProdutos = new ArrayList<>();
+    
+    // Venda Clientes
     ControllerVendasCliente controllerVendasCliente = new ControllerVendasCliente();
     ArrayList<ModelVendasCliente> listalModelVendasClientes = new ArrayList<>();
 
@@ -848,6 +860,8 @@ public class ViewPreVenda extends javax.swing.JFrame {
      */
     private void salvarVenda() {
         int codigoVenda = 0;
+        listaModelVendaProdutos = new ArrayList<>();
+        
         if (jtfCodigoCliente.getText().isBlank()) {
             // Realmente nada é feito
         } else {
@@ -871,13 +885,31 @@ public class ViewPreVenda extends javax.swing.JFrame {
         if (codigoVenda > 0) {
             JOptionPane.showMessageDialog(this, "Pré-Venda registrada!", "ATENÇÃO",
                     JOptionPane.INFORMATION_MESSAGE);
-            limparTela();
-            listarVendasClientes();
         } else {
             JOptionPane.showMessageDialog(this, "Pré-Venda não registrada!", "ERRO",
                     JOptionPane.ERROR_MESSAGE);
         }
-
+        
+        int linhas = jtProdutosVenda.getRowCount();
+        for (int i = 0; i < linhas; i++) {
+            modelVendaProdutos = new ModelVendaProduto();
+            modelVendaProdutos.setProduto((int) jtProdutosVenda.getValueAt(i, 0));
+            modelVendaProdutos.setVenda(codigoVenda);
+            modelVendaProdutos.setVendaProdutoQuantidade(Integer.parseInt(jtProdutosVenda.getValueAt(i, 2).toString()));
+            modelVendaProdutos.setVendaProdutoValor(FormataValorReal.retornarRealDouble(jtProdutosVenda.getValueAt(i, 3).toString()));
+            listaModelVendaProdutos.add(modelVendaProdutos);
+        }
+        
+        if (controllerVendaProdutos.salvarVendasProdutosController(listaModelVendaProdutos)) {
+            JOptionPane.showMessageDialog(this, "Produtos salvos com sucesso", "ATENÇÃO",
+                    JOptionPane.INFORMATION_MESSAGE);
+            limparTela();
+            listarVendasClientes();
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar produtos!", "ERRO",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        
     }
     
     private void adicionarProduto() {

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import model.ModelVendas;
 
 /**
- *
  * @author Diego Barbosa da Silva
  */
 public class ControllerVenda {

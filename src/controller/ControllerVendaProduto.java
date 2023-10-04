@@ -4,23 +4,23 @@
  */
 package controller;
 
-import DAO.DaoVenda;
+import DAO.DaoVendaProduto;
 import java.util.ArrayList;
-import model.ModelVendas;
+import model.ModelVendaProduto;
 
 /**
  * @author Diego Barbosa da Silva
  */
 public class ControllerVendaProduto {
     
-    private DaoVenda daoVenda = new DaoVenda();
+    private DaoVendaProduto daoVendaProduto = new DaoVendaProduto();
     
     /**
      * Salvar Venda controller
      * @return int
      */
-    public int salvarVendaController(ModelVendas pModelVenda) {
-        return this.daoVenda.salvarVendaDAO(pModelVenda);
+    public int salvarVendaProdutosController(ModelVendaProduto pModelVendaProduto) {
+        return this.daoVendaProduto.salvarVendaProdutoDAO(pModelVendaProduto);
     }
     
     /**
@@ -28,8 +28,8 @@ public class ControllerVendaProduto {
      * @param pIdVenda
      * @return boolean
      */
-    public boolean excluirVendaController(int pIdVenda) {
-        return this.daoVenda.excluirVendaDAO(pIdVenda);
+    public boolean excluirVendaProdutosController(int pIdVendaProduto) {
+        return this.daoVendaProduto.excluirVendaProdutoDAO(pIdVendaProduto);
     }
     
     /**
@@ -37,8 +37,8 @@ public class ControllerVendaProduto {
      * @param pModelVenda
      * @return boolean
      */
-    public boolean editarVendaController(ModelVendas pModelVenda) {
-        return this.daoVenda.alterarVendaDAO(pModelVenda);
+    public boolean editarVendaProdutosController(ModelVendaProduto pModelVendaProduto) {
+        return this.daoVendaProduto.alterarVendaProdutoDAO(pModelVendaProduto);
     }
     
     /**
@@ -46,16 +46,25 @@ public class ControllerVendaProduto {
      * @param pIdVenda
      * @return ModelVendas
      */
-    public ModelVendas retornarVendaController(int pIdVenda) {
-        return this.daoVenda.retornarVendaDAO(pIdVenda);
+    public ModelVendaProduto retornarVendaProdutosController(int pIdVenda) {
+        return this.daoVendaProduto.retornarVendaProdutoDAO(pIdVenda);
     }
     
     /**
      * Retornar lista de Vendas
      * @return ArrayList
      */
-    public ArrayList<ModelVendas> retornaListaVendaController() {
-        return this.daoVenda.retornarListaVendaDAO();
+    public ArrayList<ModelVendaProduto> retornaListaVendaProdutosController() {
+        return this.daoVendaProduto.retornarListaVendaProdutoDAO();
+    }
+    
+    /**
+     * Salvar lista de produtos de uma venda.
+     * @param pListaModelVendasProdutos
+     * @return 
+     */
+    public boolean salvarVendasProdutosController(ArrayList<ModelVendaProduto> pListaModelVendasProdutos) {
+        return this.daoVendaProduto.salvarVendaProdutoDAO(pListaModelVendasProdutos);
     }
     
 }
