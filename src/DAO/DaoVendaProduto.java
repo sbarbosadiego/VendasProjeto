@@ -5,6 +5,7 @@
 package DAO;
 
 import conexoes.ConexaoMySql;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import model.ModelVendaProduto;
 
@@ -110,7 +111,7 @@ public class DaoVendaProduto extends ConexaoMySql {
                 modelVendaProduto.setVendaProdutoValor(getResultSet().getDouble(4));
                 modelVendaProduto.setVendaProdutoQuantidade(getResultSet().getInt(5));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             fecharConexao();
@@ -138,7 +139,7 @@ public class DaoVendaProduto extends ConexaoMySql {
                 modelVendaProduto.setVendaProdutoQuantidade(getResultSet().getInt(5));
                 listaModelVendaProdutos.add(modelVendaProduto);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             fecharConexao();

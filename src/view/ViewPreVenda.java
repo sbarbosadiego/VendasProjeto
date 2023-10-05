@@ -874,7 +874,7 @@ public class ViewPreVenda extends javax.swing.JFrame {
             e.printStackTrace();
         }
         modelVendas.setVendaValorLiquido(FormataValorReal.retornarRealDouble(jtfValorTotal.getText()));
-        modelVendas.setVendaValorBruto(FormataValorReal.retornarRealDouble(jtfValorTotal.getText()) + FormataValorReal.retornarRealDouble(jtfDesconto.getText()));
+        modelVendas.setVendaValorBruto((FormataValorReal.retornarRealDouble(jtfValorTotal.getText()) * 100) / Double.parseDouble(jtfDesconto.getText()));
         if (jtfDesconto.getText().isBlank()) {
             modelVendas.setVendaDesconto(0.00);
         } else {
