@@ -452,6 +452,9 @@ public class ViewCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        if (jtfPesquisa.getText().isBlank()) {
+            listarClientes();
+        }
         DefaultTableModel modelo = (DefaultTableModel) jtableCliente.getModel();
         final TableRowSorter<TableModel> classifica = new TableRowSorter<>(modelo);
         jtableCliente.setRowSorter(classifica);

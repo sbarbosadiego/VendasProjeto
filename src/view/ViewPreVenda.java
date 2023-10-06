@@ -22,7 +22,7 @@ import model.ModelProdutos;
 import model.ModelVendaProduto;
 import model.ModelVendas;
 import model.ModelVendasCliente;
-import util.Datas;
+import util.FormataDatas;
 import util.FormataValorReal;
 
 /**
@@ -32,7 +32,7 @@ public class ViewPreVenda extends javax.swing.JFrame {
     
     // Idioma - Data
     Locale localeBR = new Locale("pt", "BR");
-    Datas datas = new Datas();
+    FormataDatas datas = new FormataDatas();
     
     // Cliente
     ModelCliente modelCliente = new ModelCliente();

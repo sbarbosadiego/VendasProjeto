@@ -348,6 +348,10 @@ public class ViewProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        if (jtfPesquisa.getText().isBlank()) {
+            listarProdutos();
+        }
+        
         DefaultTableModel modelo = (DefaultTableModel) jtableProdutos.getModel();
         final TableRowSorter<TableModel> classifica = new TableRowSorter<>(modelo);
         jtableProdutos.setRowSorter(classifica);

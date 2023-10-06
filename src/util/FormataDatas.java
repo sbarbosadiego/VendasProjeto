@@ -7,7 +7,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class Datas {
+/**
+ * @author Leandro Nazareth
+ */
+public class FormataDatas {
 
     public String addBarras(String pString) {
         String dataRetorno = new String();

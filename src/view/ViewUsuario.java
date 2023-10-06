@@ -278,6 +278,10 @@ public class ViewUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        if (jtfPesquisa.getText().isBlank()) {
+            listarUsuarios();
+        }
+        
         DefaultTableModel modelo = (DefaultTableModel) jtableUsuarios.getModel();
         final TableRowSorter<TableModel> classifica = new TableRowSorter<>(modelo);
         jtableUsuarios.setRowSorter(classifica);
