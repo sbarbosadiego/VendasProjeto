@@ -605,7 +605,7 @@ public class ViewPreVenda extends javax.swing.JFrame {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         DefaultTableModel tabela = (DefaultTableModel) jtProdutosVenda.getModel();
         if (tabela.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(this, "Não dá produtos a serem salvos!", "ATENÇÃO",
+            JOptionPane.showMessageDialog(this, "Não há produtos na pré-venda!", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
         } else {
             salvarVenda();
@@ -860,43 +860,51 @@ public class ViewPreVenda extends javax.swing.JFrame {
      */
     private void salvarVenda() {
         int codigoVenda = 0;
-        listaModelVendaProdutos = new ArrayList<>();
+        //listaModelVendaProdutos = new ArrayList<>();
         
-        if (jtfCodigoCliente.getText().isBlank()) {
-            // Realmente nada é feito
-        } else {
-            modelVendas.setCliente(Integer.parseInt(jtfCodigoCliente.getText()));
-        }
-
         try {
+            // Ao não ser informado o cliente será atribuído null no banco de dados
+            if (jtfCodigoCliente.getText().isBlank()) {
+                // Realmente nada é feito
+            } else {
+                modelVendas.setCliente(Integer.parseInt(jtfCodigoCliente.getText()));
+            }
             modelVendas.setVendaData(datas.converterDataParaDateUS(new java.util.Date(System.currentTimeMillis())));
+            modelVendas.setVendaValorLiquido(FormataValorReal.retornarRealDouble(jtfValorTotal.getText()));
+            
+            if (jtfDesconto.getText().isBlank()) {
+                modelVendas.setVendaDesconto(0.00);
+                modelVendas.setVendaValorBruto(FormataValorReal.retornarRealDouble(jtfValorTotal.getText()));
+            } else {
+                modelVendas.setVendaDesconto(Double.valueOf(jtfDesconto.getText()));
+                double desconto = 100.00 - Double.parseDouble(jtfDesconto.getText());
+                modelVendas.setVendaValorBruto((FormataValorReal.retornarRealDouble(jtfValorTotal.getText()) * 100) / desconto);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        modelVendas.setVendaValorLiquido(FormataValorReal.retornarRealDouble(jtfValorTotal.getText()));
-        modelVendas.setVendaValorBruto((FormataValorReal.retornarRealDouble(jtfValorTotal.getText()) * 100) / Double.parseDouble(jtfDesconto.getText()));
-        if (jtfDesconto.getText().isBlank()) {
-            modelVendas.setVendaDesconto(0.00);
-        } else {
-            modelVendas.setVendaDesconto(Double.valueOf(jtfDesconto.getText()));
-        }
-
+        
         codigoVenda = controllerVendas.salvarVendaController(modelVendas);
+        
+        
         if (codigoVenda > 0) {
-            JOptionPane.showMessageDialog(this, "Pré-Venda registrada!", "ATENÇÃO",
-                    JOptionPane.INFORMATION_MESSAGE);
+            salvarVendasProdutos(codigoVenda);
         } else {
-            JOptionPane.showMessageDialog(this, "Pré-Venda não registrada!", "ERRO",
+            JOptionPane.showMessageDialog(this, "Código de venda gerado inválido", "ERRO",
                     JOptionPane.ERROR_MESSAGE);
         }
-        
+    }
+    
+    private void salvarVendasProdutos(int codigoVenda) {
+        listaModelVendaProdutos = new ArrayList<>();
+        int idVenda = codigoVenda;
         int linhas = jtProdutosVenda.getRowCount();
         for (int i = 0; i < linhas; i++) {
             modelVendaProdutos = new ModelVendaProduto();
             modelVendaProdutos.setProduto((int) jtProdutosVenda.getValueAt(i, 0));
-            modelVendaProdutos.setVenda(codigoVenda);
-            modelVendaProdutos.setVendaProdutoQuantidade(Integer.parseInt(jtProdutosVenda.getValueAt(i, 2).toString()));
+            modelVendaProdutos.setVenda(idVenda);
             modelVendaProdutos.setVendaProdutoValor(FormataValorReal.retornarRealDouble(jtProdutosVenda.getValueAt(i, 3).toString()));
+            modelVendaProdutos.setVendaProdutoQuantidade(Integer.parseInt(jtProdutosVenda.getValueAt(i, 2).toString()));
             listaModelVendaProdutos.add(modelVendaProdutos);
         }
         

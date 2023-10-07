@@ -1,8 +1,6 @@
 DELIMITER $
 
-CREATE SCHEMA bdvendasprojeto
-DEFAULT CHARACTER SET utf8
-DEFAULT COLLATE utf8_general_ci;
+CREATE SCHEMA bdvendasprojeto;
 
 USE bdvendasprojeto;
 
@@ -70,7 +68,7 @@ ADD FOREIGN KEY (fk_produto)
 REFERENCES tbl_produto(pk_id_produto);
 
 ALTER TABLE tbl_vendas_produtos
-ADD FOREIGN KEY (fk_produto)
+ADD FOREIGN KEY (fk_venda)
 REFERENCES tbl_vendas(pk_id_vendas);
 
 SHOW DATABASES;
