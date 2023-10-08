@@ -29,30 +29,30 @@ import util.FormataValorReal;
  * @author Diego Barbosa da Silva
  */
 public class ViewPreVenda extends javax.swing.JFrame {
-    
+
     // Idioma - Data
     Locale localeBR = new Locale("pt", "BR");
     FormataDatas datas = new FormataDatas();
-    
+
     // Cliente
     ModelCliente modelCliente = new ModelCliente();
     ControllerCliente controllerCliente = new ControllerCliente();
     ArrayList<ModelCliente> listaModelCliente = new ArrayList<>();
-    
+
     // Produtos
     ModelProdutos modelProdutos = new ModelProdutos();
     ControllerProduto controllerProduto = new ControllerProduto();
     ArrayList<ModelProdutos> listaModelProdutos = new ArrayList<>();
-    
+
     // Venda
     ModelVendas modelVendas = new ModelVendas();
     ControllerVenda controllerVendas = new ControllerVenda();
-    
+
     // Venda Produtos
     ModelVendaProduto modelVendaProdutos = new ModelVendaProduto();
     ControllerVendaProduto controllerVendaProdutos = new ControllerVendaProduto();
     ArrayList<ModelVendaProduto> listaModelVendaProdutos = new ArrayList<>();
-    
+
     // Venda Clientes
     ControllerVendasCliente controllerVendasCliente = new ControllerVendasCliente();
     ArrayList<ModelVendasCliente> listalModelVendasClientes = new ArrayList<>();
@@ -519,19 +519,7 @@ public class ViewPreVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_listaPesquisarProdutoMousePressed
 
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
-        int linha = jtVendas.getSelectedRow();
-        int codigo = (int) jtVendas.getValueAt(linha, 0);
-        if (JOptionPane.showConfirmDialog(this, "Excluir Venda?", "Excluir",
-                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            if (controllerVendas.excluirVendaController(codigo)) {
-                JOptionPane.showMessageDialog(this, "Venda excluída", "ATENÇÃO",
-                        JOptionPane.WARNING_MESSAGE);
-                listarVendasClientes();
-            } else {
-                JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        }
+        excluirVenda();
     }//GEN-LAST:event_jbExcluirActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
@@ -578,28 +566,7 @@ public class ViewPreVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfCodigoClienteKeyReleased
 
     private void jtProdutosVendaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtProdutosVendaKeyReleased
-        int linha = jtProdutosVenda.getSelectedRow();
-        DefaultTableModel modeloCadastro = (DefaultTableModel) jtProdutosVenda.getModel();
-        NumberFormat valorReal = NumberFormat.getCurrencyInstance(localeBR);
-        int quantidade = Integer.parseInt(jtProdutosVenda.getValueAt(linha, 2).toString());
-
-        try {
-            if (Enter == 0) {
-                if (quantidade > 0) {
-                    modeloCadastro.setValueAt(quantidade, linha, 2);
-                    modeloCadastro.setValueAt(valorReal.format(modelProdutos.getProdutoPreco()), linha, 3);
-                    modeloCadastro.setValueAt(valorReal.format(quantidade * modelProdutos.getProdutoPreco()), linha, 4);
-                    somaValorTotalProdutos();
-                } else if (quantidade == 0 || quantidade < 0) {
-                    modeloCadastro.removeRow(linha);
-                    somaValorTotalProdutos();
-                }
-            } else {
-                Enter = 0;
-            }
-        } catch (Exception e) {
-
-        }
+        editarQuantidadeProdutoTabela();
     }//GEN-LAST:event_jtProdutosVendaKeyReleased
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -639,7 +606,7 @@ public class ViewPreVenda extends javax.swing.JFrame {
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         if (jtPesquisar.getText().isBlank()) {
             listarVendasClientes();
-        } 
+        }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     /**
@@ -861,7 +828,7 @@ public class ViewPreVenda extends javax.swing.JFrame {
     private void salvarVenda() {
         int codigoVenda = 0;
         //listaModelVendaProdutos = new ArrayList<>();
-        
+
         try {
             // Ao não ser informado o cliente será atribuído null no banco de dados
             if (jtfCodigoCliente.getText().isBlank()) {
@@ -871,7 +838,7 @@ public class ViewPreVenda extends javax.swing.JFrame {
             }
             modelVendas.setVendaData(datas.converterDataParaDateUS(new java.util.Date(System.currentTimeMillis())));
             modelVendas.setVendaValorLiquido(FormataValorReal.retornarRealDouble(jtfValorTotal.getText()));
-            
+
             if (jtfDesconto.getText().isBlank()) {
                 modelVendas.setVendaDesconto(0.00);
                 modelVendas.setVendaValorBruto(FormataValorReal.retornarRealDouble(jtfValorTotal.getText()));
@@ -883,10 +850,9 @@ public class ViewPreVenda extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         codigoVenda = controllerVendas.salvarVendaController(modelVendas);
-        
-        
+
         if (codigoVenda > 0) {
             salvarVendasProdutos(codigoVenda);
         } else {
@@ -894,7 +860,7 @@ public class ViewPreVenda extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void salvarVendasProdutos(int codigoVenda) {
         listaModelVendaProdutos = new ArrayList<>();
         int idVenda = codigoVenda;
@@ -907,7 +873,7 @@ public class ViewPreVenda extends javax.swing.JFrame {
             modelVendaProdutos.setVendaProdutoQuantidade(Integer.parseInt(jtProdutosVenda.getValueAt(i, 2).toString()));
             listaModelVendaProdutos.add(modelVendaProdutos);
         }
-        
+
         if (controllerVendaProdutos.salvarVendasProdutosController(listaModelVendaProdutos)) {
             JOptionPane.showMessageDialog(this, "Produtos salvos com sucesso", "ATENÇÃO",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -917,12 +883,15 @@ public class ViewPreVenda extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Erro ao salvar produtos!", "ERRO",
                     JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }
-    
+
     private void adicionarProduto() {
-        if (jtfQuantidade.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Informe a quantidade", "ATENÇÃO",
+        if (jtfQuantidade.getText().isBlank() || Integer.parseInt(jtfQuantidade.getText()) <= 0) {
+            JOptionPane.showMessageDialog(this, "Quantidade informada inválida", "ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
+        } else if (jtfCodigoProduto.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Produto não informado", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
         } else {
             modelProdutos = controllerProduto.retornarProdutoController(Integer.parseInt(jtfCodigoProduto.getText()));
@@ -962,6 +931,47 @@ public class ViewPreVenda extends javax.swing.JFrame {
 
             limparCamposProduto();
             somaValorTotalProdutos();
+        }
+    }
+
+    private void editarQuantidadeProdutoTabela() {
+        int linha = jtProdutosVenda.getSelectedRow();
+        DefaultTableModel modeloCadastro = (DefaultTableModel) jtProdutosVenda.getModel();
+        NumberFormat valorReal = NumberFormat.getCurrencyInstance(localeBR);
+        int quantidade = Integer.parseInt(jtProdutosVenda.getValueAt(linha, 2).toString());
+
+        try {
+            if (Enter == 0) {
+                if (quantidade > 0) {
+                    modeloCadastro.setValueAt(quantidade, linha, 2);
+                    modeloCadastro.setValueAt(valorReal.format(modelProdutos.getProdutoPreco()), linha, 3);
+                    modeloCadastro.setValueAt(valorReal.format(quantidade * modelProdutos.getProdutoPreco()), linha, 4);
+                    somaValorTotalProdutos();
+                } else if (quantidade == 0 || quantidade < 0) {
+                    modeloCadastro.removeRow(linha);
+                    somaValorTotalProdutos();
+                }
+            } else {
+                Enter = 0;
+            }
+        } catch (Exception e) {
+
+        }
+    }
+    
+    private void excluirVenda() {
+        int linha = jtVendas.getSelectedRow();
+        int codigo = (int) jtVendas.getValueAt(linha, 0);
+        if (JOptionPane.showConfirmDialog(this, "Excluir Venda?", "Excluir",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (controllerVendas.excluirVendaController(codigo)) {
+                JOptionPane.showMessageDialog(this, "Venda excluída", "ATENÇÃO",
+                        JOptionPane.WARNING_MESSAGE);
+                listarVendasClientes();
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 

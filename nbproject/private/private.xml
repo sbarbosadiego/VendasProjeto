@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/di_an/OneDrive/Documentos/GitHub/VendasProjeto/src/DAO/DaoVenda.java</file>
+            <file>file:/C:/Users/di_an/OneDrive/Documentos/GitHub/VendasProjeto/src/model/ModelVendaProduto.java</file>
             <file>file:/C:/Users/di_an/OneDrive/Documentos/GitHub/VendasProjeto/src/DAO/DaoVendaProduto.java</file>
             <file>file:/C:/Users/di_an/OneDrive/Documentos/GitHub/VendasProjeto/src/controller/ControllerVendaProduto.java</file>
-            <file>file:/C:/Users/di_an/OneDrive/Documentos/GitHub/VendasProjeto/src/controller/ControllerVenda.java</file>
             <file>file:/C:/Users/di_an/OneDrive/Documentos/GitHub/VendasProjeto/src/view/ViewPreVenda.java</file>
         </group>
     </open-files>
