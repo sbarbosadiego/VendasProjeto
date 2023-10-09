@@ -394,21 +394,7 @@ public class ViewCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int linha = jtableCliente.getSelectedRow();
-        int codigoProduto = (int) jtableCliente.getValueAt(linha, 0);
-        if (JOptionPane.showConfirmDialog(this, "Excluir Cliente?", "Excluir",
-                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            if (controllerCliente.excluirClienteController(codigoProduto)) {
-                JOptionPane.showMessageDialog(this, "Cliente excluído", "ATENÇÃO",
-                        JOptionPane.WARNING_MESSAGE);
-                listarClientes();
-                limparCampos();
-                habilitarDesabilitarCampos(false);
-            } else {
-                JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        }
+        excluirCliente();
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -511,8 +497,8 @@ public class ViewCliente extends javax.swing.JFrame {
      * Método para salvar o cadastro de um usuário no banco de dados.
      */
     private void salvarCliente() {
-        if (jtfNome.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Campo vazio", "ATENÇÃO",
+        if (jtfNome.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Campo nome vazio", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
         } else if (jtfNome.getText().length() >= 61) {
             JOptionPane.showMessageDialog(null, "Campo Nome excede o limite de 60 caracteres!!", "ATENÇÃO",
@@ -544,7 +530,7 @@ public class ViewCliente extends javax.swing.JFrame {
      * Método para salvar a edição de um registro no banco de dados.
      */
     private void editarProduto() {
-        if (jtfNome.getText().isEmpty()) {
+        if (jtfNome.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Campo vazio", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
         } else if (jtfNome.getText().length() >= 61) {
@@ -568,6 +554,27 @@ public class ViewCliente extends javax.swing.JFrame {
                 limparCampos();
             } else {
                 JOptionPane.showMessageDialog(this, "Não foi aplicado a edição, verifique as informações", "ERRO",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    /**
+     * Método para excluir um registro de cliente.
+     */
+    private void excluirCliente() {
+        int linha = jtableCliente.getSelectedRow();
+        int codigoProduto = (int) jtableCliente.getValueAt(linha, 0);
+        if (JOptionPane.showConfirmDialog(this, "Excluir Cliente?", "Excluir",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (controllerCliente.excluirClienteController(codigoProduto)) {
+                JOptionPane.showMessageDialog(this, "Cliente excluído", "ATENÇÃO",
+                        JOptionPane.WARNING_MESSAGE);
+                listarClientes();
+                limparCampos();
+                habilitarDesabilitarCampos(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
                         JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -633,7 +640,7 @@ public class ViewCliente extends javax.swing.JFrame {
             MaskFormatter mask = new MaskFormatter("#####-###");
             mask.install(jtfCep);
         } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Não foi possível formatar campo", "ERRO",
+            JOptionPane.showMessageDialog(this, "Não foi possível formatar o campo CEP", "ERRO",
                     JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -646,7 +653,7 @@ public class ViewCliente extends javax.swing.JFrame {
             MaskFormatter mask = new MaskFormatter("(##) #####-####");
             mask.install(jtfTelefone);
         } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Não foi possível formatar campo", "ERRO",
+            JOptionPane.showMessageDialog(this, "Não foi possível formatar o campo telefone", "ERRO",
                     JOptionPane.ERROR_MESSAGE);
         }
     }

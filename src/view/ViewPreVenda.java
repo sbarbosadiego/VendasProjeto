@@ -827,12 +827,10 @@ public class ViewPreVenda extends javax.swing.JFrame {
      */
     private void salvarVenda() {
         int codigoVenda = 0;
-        //listaModelVendaProdutos = new ArrayList<>();
-
+        
         try {
-            // Ao não ser informado o cliente será atribuído null no banco de dados
             if (jtfCodigoCliente.getText().isBlank()) {
-                // Realmente nada é feito
+                // Ao não ser informado o cliente será atribuído null no banco de dados
             } else {
                 modelVendas.setCliente(Integer.parseInt(jtfCodigoCliente.getText()));
             }
@@ -860,7 +858,11 @@ public class ViewPreVenda extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
+    /**
+     * Método para salvar os produtos da pré-venda.
+     * @param codigoVenda 
+     */
     private void salvarVendasProdutos(int codigoVenda) {
         listaModelVendaProdutos = new ArrayList<>();
         int idVenda = codigoVenda;
@@ -885,7 +887,10 @@ public class ViewPreVenda extends javax.swing.JFrame {
         }
 
     }
-
+    
+    /**
+     * Método que adiciona e checa se há o mesmo produto na pré-venda.
+     */
     private void adicionarProduto() {
         if (jtfQuantidade.getText().isBlank() || Integer.parseInt(jtfQuantidade.getText()) <= 0) {
             JOptionPane.showMessageDialog(this, "Quantidade informada inválida", "ATENÇÃO",
@@ -933,7 +938,10 @@ public class ViewPreVenda extends javax.swing.JFrame {
             somaValorTotalProdutos();
         }
     }
-
+    
+    /**
+     * Método que permite a edição direta de quantidade de um produto na tabela.
+     */
     private void editarQuantidadeProdutoTabela() {
         int linha = jtProdutosVenda.getSelectedRow();
         DefaultTableModel modeloCadastro = (DefaultTableModel) jtProdutosVenda.getModel();
@@ -959,6 +967,9 @@ public class ViewPreVenda extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Método para excluir uma pré-venda.
+     */
     private void excluirVenda() {
         int linha = jtVendas.getSelectedRow();
         int codigo = (int) jtVendas.getValueAt(linha, 0);
